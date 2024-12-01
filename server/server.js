@@ -20,17 +20,15 @@ app.use(cors({ origin: "http://localhost:5173" }));
 
 
 
-
-
-
-
 //geting post req for signupdata
 app.post("/signup" , async( req , res ) => {
     const { username , password , email } = req.body;
     if( !username || !password , !email ) return res.status(400).json( {msge : "all feilds are required"});
-    console.log( username , password , email);
-
    try {
+      //check if username already exist or not
+      const alreadyEx = await UsersignupData.findOne({ username , email });
+      if( alreadyEx ) return res.status(509).json( {msge : "already exist"});
+      
       //hash the pw
       const HashedPW = await bcrypt.hash( password , 10 );
       const SaveUserData = await UsersignupData.create( {
@@ -38,14 +36,13 @@ app.post("/signup" , async( req , res ) => {
         password: HashedPW,
         email: email
       })
-      
+
       console.log(SaveUserData);
       return res.status(201).json({msge:"user Signup Data stored Success" , SaveUserData })
    } catch (error) {
     console.log(error);
     return res.status(400).json({msge:"error while storing the data"})
    }
-
 })
 
 
