@@ -16,20 +16,18 @@ const Homepage = () => {
       password,
     };
     try {
-      const response = await axios.post(" ", Signupdata, {
+      const response = await axios.post("http://localhost:3500/signup", Signupdata, {
         headers: {
           "Content-type": "application/json",
         },
       });
-
       return response.status;
-    } catch (error) {}
+    } catch (error) {
+      console.log( error,"error while sending the signupdata")
+    }
   }
-
-
-
-
   
+
   return (
     <div>
       {/* //created login form */}
