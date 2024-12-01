@@ -34,15 +34,16 @@ app.post("/signup" , async( req , res ) => {
       //hash the pw
       const HashedPW = await bcrypt.hash( password , 10 );
       const SaveUserData = await UsersignupData.create( {
-        username,
-        HashedPW,
-        email
+        username: username,
+        password: HashedPW,
+        email: email
       })
+      
       console.log(SaveUserData);
-    return res.status(201).json({msge:"user Signup Data stored Success" , SaveUserData })
+      return res.status(201).json({msge:"user Signup Data stored Success" , SaveUserData })
    } catch (error) {
     console.log(error);
-    return res.status(400).json({msge:"user Signup Data stored Success"})
+    return res.status(400).json({msge:"error while storing the data"})
    }
 
 })
