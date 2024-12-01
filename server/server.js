@@ -47,6 +47,34 @@ app.post("/signup" , async( req , res ) => {
 
 
 
+//geting post req for login
+app.post("/login" , async( req , res ) => {
+    const { email , password } = req.body;
+    if(  !password , !email ) return res.status(400).json( {msge : "all feilds are required"});
+
+   try {
+      //check if username exist or not
+      const alreadyEx = await UsersignupData.findOne({ email });
+      if( !alreadyEx ) return res.status(400).json( {msge : "not exist"});
+
+      //hash the pw
+      const HashedPW = await bcrypt.hash( password , 10 );
+      const SaveUserData = await UsersignupData.create( {
+        username: username,
+        password: HashedPW,
+        email: email
+      })
+
+      console.log(SaveUserData);
+      return res.status(201).json({msge:"user Signup Data stored Success" , SaveUserData })
+   } catch (error) {
+    console.log(error);
+    return res.status(400).json({msge:"error while storing the data"})
+   }
+})
+
+
+
 
 
 

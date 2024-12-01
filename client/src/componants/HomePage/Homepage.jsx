@@ -54,8 +54,7 @@ async function LoginRequest(e) {
       return response.status;
 
     } catch (error) {
-      alert("duplicate detailes")
-      console.log( error,"error while sending the signupdata")
+      console.log( error,"error while Login")
     }
   }
   
