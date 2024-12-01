@@ -7,6 +7,7 @@ const connectDB = require("./config/Connectdb.js");
 const cors = require("cors");
 const UsersignupData = require("./model/UsersignupData.js");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 
 //connect to DB
@@ -17,6 +18,9 @@ app.use(bodyparser.json());
 
 // Enable CORS with specified origin for frontend communication
 app.use(cors({ origin: "http://localhost:5173" }));
+
+// Secret key for JWT, stored in environment variables
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 
@@ -57,19 +61,21 @@ app.post("/login" , async( req , res ) => {
       const alreadyEx = await UsersignupData.findOne({ email });
       if( !alreadyEx ) return res.status(400).json( {msge : "not exist"});
 
-      //hash the pw
-      const HashedPW = await bcrypt.hash( password , 10 );
-      const SaveUserData = await UsersignupData.create( {
-        username: username,
-        password: HashedPW,
-        email: email
-      })
+      //check password is matched or not
+      const matchedPW = await bcrypt.compare( password , alreadyEx.password )
+      if( !matchedPW ) return res.status(400).json( {msge : "incorrect PW"});
 
-      console.log(SaveUserData);
-      return res.status(201).json({msge:"user Signup Data stored Success" , SaveUserData })
+      // now username and password is macthed then asing jwt token
+      const token = jwt.sign(
+        { id: alreadyEx._id, email: alreadyEx.email },
+        JWT_SECRET,
+        { expiresIn: "1h"}
+    )
+      return res.status(200).json({msge:"signup success" , userdetails: alreadyEx, token: token })
+
    } catch (error) {
     console.log(error);
-    return res.status(400).json({msge:"error while storing the data"})
+    return res.status(500).json({msge:"error while login"})
    }
 })
 
