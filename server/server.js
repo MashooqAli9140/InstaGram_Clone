@@ -26,6 +26,15 @@ app.post("/signup" , async( req , res ) => {
     const { username , password , email } = req.body;
     if( !username || !password , !email ) return res.status(400).json( {msge : "all feilds are required"});
 
+   try {
+      //hash the pw     
+
+   } catch (error) {
+    
+   }
+
+
+
 })
 
 
