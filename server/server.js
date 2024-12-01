@@ -8,6 +8,10 @@ const cors = require("cors");
 const UsersignupData = require("./model/UsersignupData.js");
 const bcrypt = require("bcrypt");
 
+
+//connect to DB
+connectDB();
+
 //using body parser for getting from URL body
 app.use(bodyparser.json());
 
@@ -15,8 +19,6 @@ app.use(bodyparser.json());
 app.use(cors({ origin: "http://localhost:5173" }));
 
 
-//connect to DB
-connectDB();
 
 
 
