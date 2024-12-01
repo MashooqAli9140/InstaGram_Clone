@@ -36,21 +36,19 @@ const Homepage = () => {
   }
   
 //SENDING LOGIN REQ WITH EMAIL AND PASSWORD
-async function Sendsignupdata(e) {
+async function LoginRequest(e) {
     e.preventDefault();
-    const Signupdata = {
-      username,
+    const Logindata = {
       email,
       password,
     };
     try {
-      const response = await axios.post("http://localhost:3500/signup", Signupdata, {
+      const response = await axios.post("http://localhost:3500/login", Logindata, {
         headers: {
           "Content-type": "application/json",
         },
       });
-      if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
-      setusername("");
+      // if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
       setemail("");
       setpassword("");
       return response.status;
@@ -71,7 +69,7 @@ async function Sendsignupdata(e) {
       {/* //created login form */}
       <div id="loginformdiv" style={{ display: `${openloginform}` }}>
         <h1> instagram</h1>
-        <form >
+        <form onSubmit={ (e) => LoginRequest(e) }>
           <input type="text" placeholder="email" />
           <input type="password" placeholder="password" />
           <button type="submit"> Log in</button>
