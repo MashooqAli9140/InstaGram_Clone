@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const [opensignform, setopensignupform] = useState("none");
@@ -7,6 +8,7 @@ const Homepage = () => {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const navigate = useNavigate();
 
 
 //SENDING USER SIGNUP DATA
@@ -38,6 +40,8 @@ const Homepage = () => {
 //SENDING LOGIN REQ WITH EMAIL AND PASSWORD
 async function LoginRequest(e) {
     e.preventDefault();
+    if( !email || !password ) alert("please fill all details");
+
     const Logindata = {
       email,
       password,
@@ -51,16 +55,16 @@ async function LoginRequest(e) {
       // if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
       setemail("");
       setpassword("");
+      const loginUser = response.data.userdetails.username
+      console.log( "login succes username is -->>" ,loginUser);
+      // navigate(``)
+      alert("login success");
       return response.status;
 
     } catch (error) {
       console.log( error,"error while Login")
     }
   }
-  
-
-
-
 
 
   return (
@@ -69,8 +73,8 @@ async function LoginRequest(e) {
       <div id="loginformdiv" style={{ display: `${openloginform}` }}>
         <h1> instagram</h1>
         <form onSubmit={ (e) => LoginRequest(e) }>
-          <input type="text" placeholder="email" />
-          <input type="password" placeholder="password" />
+          <input type="email" placeholder="email" onChange={ (e) => setemail(e.target.value)} value={ email } />
+          <input type="password" placeholder="password" onChange={ (e) => setpassword(e.target.value)} value={ password } />
           <button type="submit"> Log in</button>
         </form>
         <p> or </p>

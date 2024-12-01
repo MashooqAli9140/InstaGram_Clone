@@ -54,7 +54,7 @@ app.post("/signup" , async( req , res ) => {
 //geting post req for login
 app.post("/login" , async( req , res ) => {
     const { email , password } = req.body;
-    if(  !password , !email ) return res.status(400).json( {msge : "all feilds are required"});
+    if( !email , !password  ) return res.status(400).json( {msge : "all feilds are required"});
 
    try {
       //check if username exist or not
