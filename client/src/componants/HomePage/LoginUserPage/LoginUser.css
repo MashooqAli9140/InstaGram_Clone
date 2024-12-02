@@ -8,5 +8,39 @@
     max-width: 500px;
     height: 100%;
     margin: 0 auto 0;
+}
+#dashboard-Navbar{
+    background-color:rgb(0, 0, 0);
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    color: white;
+}
+#nav-right{
+    /* background-color: aqua; */
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 
+}
+#plusbtn{
+    background: none;
+    border: 1px solid rgb(208, 208, 208);
+    outline: none;
+    font-size: 12px;
+    padding: 2px 5px 2px 5px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+#heart{
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    padding: 2px 2px 2px 2px;
+    border-radius: 9px;
+    cursor: pointer;
 }
