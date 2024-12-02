@@ -6,7 +6,15 @@ const LoginUser = () => {
   return (
     <div id='dashboardBG'>
            <div id='maindashboard'>
-                 <h1> hello { loginUser }</h1>
+                 <div id='dashboard-Navbar'>
+                      <div id='navlogo'>
+                          <h1>Instagram</h1>
+                      </div>
+                      <div id='nav-right'>
+                            <button> <i class="fa-solid fa-plus"></i> </button>
+                            <button> <i class="fa-regular fa-heart"></i> </button>
+                      </div>
+                 </div>
            </div>
     </div>
   )
