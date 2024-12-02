@@ -11,6 +11,9 @@ const Homepage = () => {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [ loginlink , setloginlink ] = useState("none");
+  const [ signuplink , setsignuplink ] = useState("flex");
+
   const navigate = useNavigate();
 
   //SENDING USER SIGNUP DATA
@@ -135,12 +138,64 @@ const Homepage = () => {
             </div>
           </div>
          
-         <div id="signupaccount">
+
+        {/* //created signup form */}
+        <div id="loginformdiv" style={{ display: `${opensignform}` }}>
+            <div id="instahead">
+              <h1>instagram</h1>
+            </div>
+            <div id="instahead2">
+              <h3>Sign up to see photos and videos from your friends</h3>
+            </div>
+
+          <form onSubmit={(e) => Sendsignupdata(e)}>
+          <div id="emaildiv">
+            <input
+              type="text"
+              placeholder="username"
+              onChange={(e) => setusername(e.target.value)}
+              value={username}
+              id="emailinput"
+
+            />
+          </div>
+
+              <div id="emaildiv">
+                <input
+                  type="email"
+                  placeholder="email"
+                  onChange={(e) => setemail(e.target.value)}
+                  value={email}
+                  id="emailinput"
+                />
+              </div>
+
+              <div id="passworddiv">
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={(e) => setpassword(e.target.value)}
+                  value={password}
+                  id="passwordinput"
+                />
+              </div>
+
+              <div id="logintbndiv">
+                <button type="submit" id="signupbtn">
+                  {" "}
+                  Signup
+                </button>
+              </div>
+          </form>
+        </div>
+        
+
+        <div id="signupaccount" style={ { display:`${signuplink}`}} >
          <h5 style={{ fontWeight:"100",  }}> don't have an account ?</h5>
           <button
           id="signformopenbtn"
             onClick={(e) => {
-              setopensignupform("block"), setopenloginform("none");
+              setopensignupform("block"), setopenloginform("none") , setsignuplink("none") , setloginlink("flex");
             }}
           >
             {" "}
@@ -148,59 +203,42 @@ const Homepage = () => {
           </button>
          </div>
 
-
-        <div style={{ color:"white" , maxWidth:"100%" , textAlign:"center" , padding:"20px 10px 20px 10px"}}>
-           <h5 style={{ fontWeight:"100"}}> Get the app </h5>
-        </div>
-          
-      <div id="applink">      
-          <div id="playstorebtn">
-             <a href="/"> <img id="playstorebtnimg" src= {playstorebtn} alt="" /> </a>
-          </div>
-
-          <div id="microsoftbtn">
-          <a href="/"> <img id="microsoftbtnimg" src= {microsoftbtn} alt="" /> </a>
-          </div>
-
-       </div>
-
-
-        </div>
-
-        {/* //created signup form */}
-        <div id="loginformdiv" style={{ display: `${opensignform}` }}>
-          <h1> register</h1>
-          <form onSubmit={(e) => Sendsignupdata(e)}>
-            <input
-              type="text"
-              placeholder="username"
-              onChange={(e) => setusername(e.target.value)}
-              value={username}
-            />
-            <input
-              type="email"
-              placeholder="email"
-              onChange={(e) => setemail(e.target.value)}
-              value={email}
-            />
-            <input
-              type="password"
-              placeholder="password"
-              onChange={(e) => setpassword(e.target.value)}
-              value={password}
-            />
-            <button type="submit"> signup </button>
-          </form>
-          <p> already have an account ?</p>
+        <div id="signupaccount" style={ { display:`${loginlink}` }} >
+         <h5 style={{ fontWeight:"100",  }}> Already have an account ?</h5>
           <button
+          id="signformopenbtn"
             onClick={(e) => {
-              setopensignupform("none"), setopenloginform("block");
+              setopensignupform("none"), setopenloginform("block") , setloginlink("none") , setsignuplink("flex");
             }}
           >
             {" "}
-            Login{" "}
+            Log in{" "}
           </button>
-        </div>
+         </div>
+
+
+
+
+
+{/* 
+//// */}
+        <div style={{ color:"white" , maxWidth:"100%" , textAlign:"center" , padding:"20px 10px 20px 10px"}}>
+           <h5 style={{ fontWeight:"100"}}> Get the app </h5>
+        </div>   
+       <div id="applink">      
+           <div id="playstorebtn">
+             <a href="/"> <img id="playstorebtnimg" src= {playstorebtn} alt="" /> </a>
+           </div>
+
+           <div id="microsoftbtn">
+           <a href="/"> <img id="microsoftbtnimg" src= {microsoftbtn} alt="" /> </a>
+           </div>
+       </div>
+{/* 
+//// */}
+
+
+       </div>
       </div>
     </div>
   );
