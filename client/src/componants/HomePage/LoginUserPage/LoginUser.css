@@ -1,0 +1,12 @@
+#dashboardBG{
+    background-color: black;
+    height:100vh;
+}
+
+#maindashboard{
+    background-color: white;
+    max-width: 500px;
+    height: 100%;
+    margin: 0 auto 0;
+
+}

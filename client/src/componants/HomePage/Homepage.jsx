@@ -70,8 +70,8 @@ const Homepage = () => {
       setpassword("");
       const loginUser = response.data.userdetails.username;
       console.log("login succes username is -->>", loginUser);
-      // navigate(``)
       alert("login success");
+      navigate(`/${loginUser}`)
       return response.status;
     } catch (error) {
       console.log(error, "error while Login");
