@@ -1,0 +1,129 @@
+#signuppageBG{
+    background-color: rgb(0, 0, 0);
+    height: 100vh;
+    width: 100%;
+    padding-top: 2px;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-family: 100;
+}
+#signupOuterdiv{
+    /* background-color: aquamarine; */
+    max-width: 350px;
+    height: 400px;
+    margin: 5px auto 0;
+    padding: 10px 15px 10px 15px;   
+}
+#signupInnerdiv{
+    /* background-color: antiquewhite; */
+    max-width: 100%;
+    height: 100%;
+}
+#loginformdiv{
+    /* background-color: rgb(128, 73, 0); */
+    border: 1px solid white;
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+#instahead{
+    /* background-color: aqua; */
+    padding: 30px 10px 30px 10px;
+    text-align: center;
+    color: white;
+}
+#instahead h1{
+font-family: 'Allura', cursive;
+font-size: 36px;
+}
+
+#emaildiv{
+    /* background-color: yellowgreen; */
+    max-width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+#emailinput{
+   width: 100%;
+   padding: 10px 10px 10px 10px;
+   background: #121212;
+   outline: none;
+   border-radius: 5px;
+   border: 0.5px solid white;
+}
+#passworddiv{
+    /* background-color: rgb(93, 139, 0); */
+    max-width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+#passwordinput{
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    background: #121212;
+    border-radius: 5px;
+    outline: none;
+    border: 0.5px solid white;
+ 
+}
+#logintbndiv{
+    /* background-color: rgb(210, 255, 119); */
+    max-width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+#loginbtn{
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0095F6;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#signupaccount{
+    /* background-color: aqua; */
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 20px 10px 20px 10px;
+    color: white;
+}
+#signformopenbtn{
+    background: none;
+    color: #0095F6;
+    font-weight: 700;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+#applink{
+    /* background-color: rgb(0, 96, 64); */
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    gap: 10px;
+}
+
+#playstorebtn{
+    /* background-color: #0095F6; */
+    flex: 1.22;
+}
+#playstorebtnimg{
+    max-width: 100%;
+    object-fit: contain;
+}
+#microsoftbtn{
+    /* background-color: #0095F6; */
+    flex: 1;
+}
+#microsoftbtnimg{
+    max-width: 100%;
+    object-fit: fill;
+}

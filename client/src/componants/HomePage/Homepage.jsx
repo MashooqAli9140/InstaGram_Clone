@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Homepage.css";
+import playstorebtn from "/src/images/googleplaybtn.png"
+import microsoftbtn from "/src/images/microsoftbtn.png"
 
 const Homepage = () => {
   const [opensignform, setopensignupform] = useState("none");
@@ -10,8 +13,7 @@ const Homepage = () => {
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
 
-
-//SENDING USER SIGNUP DATA
+  //SENDING USER SIGNUP DATA
   async function Sendsignupdata(e) {
     e.preventDefault();
     const Signupdata = {
@@ -20,114 +22,185 @@ const Homepage = () => {
       password,
     };
     try {
-      const response = await axios.post("http://localhost:3500/signup", Signupdata, {
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
-      if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
+      const response = await axios.post(
+        "http://localhost:3500/signup",
+        Signupdata,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      if (response.status === 201)
+        setopensignupform("none"), setopenloginform("block");
       setusername("");
       setemail("");
       setpassword("");
       return response.status;
-
     } catch (error) {
-      alert("duplicate detailes")
-      console.log( error,"error while sending the signupdata")
+      alert("duplicate detailes");
+      console.log(error, "error while sending the signupdata");
     }
   }
-  
-//SENDING LOGIN REQ WITH EMAIL AND PASSWORD
-async function LoginRequest(e) {
+
+  //SENDING LOGIN REQ WITH EMAIL AND PASSWORD
+  async function LoginRequest(e) {
     e.preventDefault();
-    if( !email || !password ) alert("please fill all details");
+    if (!email || !password) alert("please fill all details");
 
     const Logindata = {
       email,
       password,
     };
     try {
-      const response = await axios.post("http://localhost:3500/login", Logindata, {
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:3500/login",
+        Logindata,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
       // if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
       setemail("");
       setpassword("");
-      const loginUser = response.data.userdetails.username
-      console.log( "login succes username is -->>" ,loginUser);
+      const loginUser = response.data.userdetails.username;
+      console.log("login succes username is -->>", loginUser);
       // navigate(``)
       alert("login success");
       return response.status;
-
     } catch (error) {
-      console.log( error,"error while Login")
+      console.log(error, "error while Login");
     }
   }
 
-
   return (
-    <div>
-      {/* //created login form */}
-      <div id="loginformdiv" style={{ display: `${openloginform}` }}>
-        <h1> instagram</h1>
-        <form onSubmit={ (e) => LoginRequest(e) }>
-          <input type="email" placeholder="email" onChange={ (e) => setemail(e.target.value)} value={ email } />
-          <input type="password" placeholder="password" onChange={ (e) => setpassword(e.target.value)} value={ password } />
-          <button type="submit"> Log in</button>
-        </form>
-        <p> or </p>
-        <a href="/"> forgot password ? </a>
+    <div id="signuppageBG">
+      <div id="signupOuterdiv">
+        <div id="signupInnerdiv">
+          {/* //created login form */}
+          <div id="loginformdiv" style={{ display: `${openloginform}` }}>
+            <div id="instahead">
+              <h1>instagram</h1>
+            </div>
 
-        <p> don't have an account ?</p>
-        <button onClick={(e) => { setopensignupform("block"), setopenloginform("none")}}
-        >
-          {" "}
-          Sign up{" "}
-        </button>
-        <h5> Get the app </h5>
-        <a href="/"> Get app on GPLAY </a>
-        <br />
-        <a href="/"> Get app on APP STORE </a>
-      </div>
+            <form onSubmit={(e) => LoginRequest(e)}>
+              <div id="emaildiv">
+                <input
+                  type="email"
+                  placeholder="email"
+                  onChange={(e) => setemail(e.target.value)}
+                  value={email}
+                  id="emailinput"
+                />
+              </div>
 
-      {/* //created signup form */}
-      <div id="loginformdiv" style={{ display: `${opensignform}` }}>
-        <h1> register</h1>
-        <form onSubmit ={(e) => Sendsignupdata(e)}>
-          <input
-            type="text"
-            placeholder="username"
-            onChange={(e) => setusername(e.target.value)}
-            value={username}
-          />
-          <input
-            type="email"
-            placeholder="email"
-            onChange={(e) => setemail(e.target.value)}
-            value={email}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            onChange={(e) => setpassword(e.target.value)}
-            value={password}
-          />
-          <button type="submit" >
+              <div id="passworddiv">
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={(e) => setpassword(e.target.value)}
+                  value={password}
+                  id="passwordinput"
+                />
+              </div>
+
+              <div id="logintbndiv">
+                <button type="submit" id="loginbtn">
+                  {" "}
+                  Log in
+                </button>
+              </div>
+            </form>
+
+            <div
+              style={{
+                maxWidth: "100%",
+                textAlign: "center",
+                padding: "10px 10px 10px 10px",
+              }}
+            >
+              <p style={{ color:"grey" , fontSize:'12px' , fontWeight:"500"}} > OR </p>
+            </div>
+
+            <div
+              style={{
+                maxWidth: "100%",
+                textAlign: "center",
+                padding: "30px 20px 30px 20px",
+              }}
+            >
+              <a href="/"> forgot password ? </a>
+            </div>
+          </div>
+         
+         <div id="signupaccount">
+         <h5 style={{ fontWeight:"100",  }}> don't have an account ?</h5>
+          <button
+          id="signformopenbtn"
+            onClick={(e) => {
+              setopensignupform("block"), setopenloginform("none");
+            }}
+          >
             {" "}
-            signup{" "}
+            Sign up{" "}
           </button>
-        </form>
-        <p> already have an account ?</p>
-        <button
-          onClick={(e) => {
-            setopensignupform("none"), setopenloginform("block");
-          }}
-        >
-          {" "}
-          Login{" "}
-        </button>
+         </div>
+
+
+        <div style={{ color:"white" , maxWidth:"100%" , textAlign:"center" , padding:"20px 10px 20px 10px"}}>
+           <h5 style={{ fontWeight:"100"}}> Get the app </h5>
+        </div>
+          
+      <div id="applink">      
+          <div id="playstorebtn">
+             <a href="/"> <img id="playstorebtnimg" src= {playstorebtn} alt="" /> </a>
+          </div>
+
+          <div id="microsoftbtn">
+          <a href="/"> <img id="microsoftbtnimg" src= {microsoftbtn} alt="" /> </a>
+          </div>
+
+       </div>
+
+
+        </div>
+
+        {/* //created signup form */}
+        <div id="loginformdiv" style={{ display: `${opensignform}` }}>
+          <h1> register</h1>
+          <form onSubmit={(e) => Sendsignupdata(e)}>
+            <input
+              type="text"
+              placeholder="username"
+              onChange={(e) => setusername(e.target.value)}
+              value={username}
+            />
+            <input
+              type="email"
+              placeholder="email"
+              onChange={(e) => setemail(e.target.value)}
+              value={email}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              onChange={(e) => setpassword(e.target.value)}
+              value={password}
+            />
+            <button type="submit"> signup </button>
+          </form>
+          <p> already have an account ?</p>
+          <button
+            onClick={(e) => {
+              setopensignupform("none"), setopenloginform("block");
+            }}
+          >
+            {" "}
+            Login{" "}
+          </button>
+        </div>
       </div>
     </div>
   );
