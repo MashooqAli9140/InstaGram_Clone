@@ -1,11 +1,11 @@
 #dashboardBG{
-    background-color: rgb(86, 86, 86);
+    background-color: rgb(188, 188, 188);
     /* max-height:100%; */
     padding-top: 10px;
     padding-bottom: 10px;
 }
 #maindashboard{
-    background-color: grey;
+    background-color: #121212;
     max-width: 500px;
     height: 100%;
     margin: 0 auto 0;

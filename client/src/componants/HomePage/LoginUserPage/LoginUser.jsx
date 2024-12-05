@@ -30,13 +30,15 @@ const LoginUser = () => {
     <div id='dashboardBG'>
            <div id='maindashboard'>
 
+
+          {/* //OPEN NEW POST CARD FOR UPLOAD NEW POST */}
             <div id='new-post-card' style={{ height:"100vh" , display: `${ openNewpostCard }`}}>
             <div id='new-post-nav' >
-                         <button style={{ background:"none" , outline:"none" , border:"none"}} onClick={ () => Postundo() }> <i class="fa-solid fa-arrow-left fa-2x" style={{ color:"white" }}></i> </button>
+                         <button style={{ cursor:"pointer" ,background:"none" , outline:"none" , border:"none"}} onClick={ () => Postundo() }> <i class="fa-solid fa-arrow-left fa-2x" style={{ color:"white" }}></i> </button>
                          <div>
                               <h2> New Post </h2>
                          </div>
-                         <button style={{ fontWeight:"600" ,background:"none" , outline:"none" , border:"none" , color:"#0095F6"}} > Share </button>
+                         <button style={{ cursor:"pointer" , fontWeight:"600" ,background:"none" , outline:"none" , border:"none" , color:"#0095F6"}} > Share </button>
                 </div>
                 <div id='newpost-textarea'>
                         <div id='storyprofile'>
@@ -59,9 +61,10 @@ const LoginUser = () => {
                   <h4> Advance setting </h4> 
                   <i class="fa-solid fa-arrow-right"></i>
                 </div>
-
             </div>
 
+
+          {/* //OPEN DASHBOARD WHERE WE CAN SEE OTHERS POST */}
             <div style={{ display: `${opedashboard}`}}>
             <div id='dashboard-Navbar'>
                       <div id='navlogo'>
