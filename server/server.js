@@ -6,8 +6,10 @@ const mongoose = require("mongoose");
 const connectDB = require("./config/Connectdb.js");
 const cors = require("cors");
 const UsersignupData = require("./model/UsersignupData.js");
+const newpost = require('./model/NewPostData.js')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
+
 
 
 //connect to DB
@@ -86,7 +88,7 @@ app.post("/new-post" , async( req , res ) => {
    if( !username || !newpostText || !day || !month || !year || !image ) return res.status(400).json({ msge: "some value are empty check details again"});
 
    try {
-      
+
    } catch (error) {
       
    }
