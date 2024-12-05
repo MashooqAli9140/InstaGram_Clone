@@ -80,6 +80,22 @@ app.post("/login" , async( req , res ) => {
 })
 
 
+//getting post req for new post data
+app.post("/new-post" , async( req , res ) => {
+   const { username , newpostText , day , month , year , image } = req.body;
+   if( !username || !newpostText || !day || !month || !year || !image ) return res.status(400).json({ msge: "some value are empty check details again"});
+
+   try {
+      
+   } catch (error) {
+      
+   }
+
+
+
+
+})
+
 
 
 

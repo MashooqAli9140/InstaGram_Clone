@@ -38,7 +38,7 @@ const LoginUser = () => {
       async function SendNewPost(e){
            e.preventDefault()
            try {
-               const response = await axios.post( "http://localhost:3500/signup" , formdata , {
+               const response = await axios.post( "http://localhost:3500/new-post" , formdata , {
                      headers:{
 
                      },

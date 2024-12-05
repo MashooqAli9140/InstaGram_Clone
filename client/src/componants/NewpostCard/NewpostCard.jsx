@@ -9,8 +9,6 @@ const NewpostCard = () => {
      const month = currentdate.toLocaleString( "Default" , { month: "long" });
      const year = currentdate.getFullYear();
 
-
-
   return (
     <div id='new-post-card-bg'>
         
