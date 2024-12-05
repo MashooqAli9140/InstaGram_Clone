@@ -3,12 +3,53 @@ import { useParams } from 'react-router-dom'
 import "./LoginUser.css";
 import img from "/src/images/dp.jpg";
 import NewpostCard from '../../NewpostCard/NewpostCard';
+import axios from "axios";
+
 
 const LoginUser = () => {
       const {loginUser} = useParams();
-      const [ selecetImage , setselectImage ] = useState();
       const [ opedashboard , setopenDashboard ] = useState("block");
       const [ openNewpostCard , setopenNewpostCard ] = useState("none")
+
+      //new post form details
+      const[ username , setusername ] = useState(loginUser);
+      const[ newpostText , setnewpostText ] = useState("");
+      const [ selecetImage , setselectImage ] = useState();
+      const currentdate = new Date();
+      const day = currentdate.getDate();
+      const month = currentdate.toLocaleString( "Default" , { month: "long" });
+      const year = currentdate.getFullYear();
+
+
+ /// creatting new form for new post details and send this form details to BE
+      const formdata = new FormData();
+      formdata.append( 'username' , username );
+      formdata.append( 'newpostText',newpostText);
+      formdata.append( 'day', day);
+      formdata.append( 'month' , month );
+      formdata.append( 'year' , year );
+      if(selecetImage)
+      {
+            formdata.append('image' , selecetImage ) // image added to formdata
+            console.log(" image now added in form");
+      }
+
+      //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
+      async function SendNewPost(e){
+           e.preventDefault()
+           try {
+               const response = await axios.post( "http://localhost:3500/signup" , formdata , {
+                     headers:{
+
+                     },
+               } )
+               return response.status
+           } catch (error) {
+            console.log( "error while sending new post data", error )
+           }
+     }
+
+
 
       //handling post creation undo 
       function Postundo(){
@@ -38,13 +79,13 @@ const LoginUser = () => {
                          <div>
                               <h2> New Post </h2>
                          </div>
-                         <button style={{ cursor:"pointer" , fontWeight:"600" ,background:"none" , outline:"none" , border:"none" , color:"#0095F6"}} > Share </button>
+                         <button onClick={ (e) => SendNewPost(e) } style={{ cursor:"pointer" , fontWeight:"600" ,background:"none" , outline:"none" , border:"none" , color:"#0095F6"}} > Share </button>
                 </div>
                 <div id='newpost-textarea'>
                         <div id='storyprofile'>
                              <img id='storyprofile_img' src={img} alt="profile_img" />
                         </div>
-                        <textarea name="new-post-text" id="textarea" placeholder='Type something...'></textarea>
+                        <textarea onChange={ (e) => setnewpostText(e.target.value)} name="new-post-text" id="textarea" placeholder='Type something...'> </textarea>
                 </div>
 
                 <div style={{ display: "flex" , justifyContent:"space-between" ,padding:"10px 10px 10px 10px" , background:"black" , color:"white" , fontWeight:"200", marginTop:"20px"}}>
