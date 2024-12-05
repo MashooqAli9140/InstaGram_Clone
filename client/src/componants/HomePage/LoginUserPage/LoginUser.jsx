@@ -1,14 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import "./LoginUser.css";
-import img from "/src/images/dp.jpg"
+import img from "/src/images/dp.jpg";
+import NewpostCard from '../../NewpostCard/NewpostCard';
 
 const LoginUser = () => {
       const {loginUser} = useParams();
   return (
     <div id='dashboardBG'>
            <div id='maindashboard'>
-
                  <div id='dashboard-Navbar'>
                       <div id='navlogo'>
                           <h1 style={{ fontFamily:"allura , cursive" , fontSize:"36px"}}>Instagram</h1>
@@ -28,6 +28,7 @@ const LoginUser = () => {
                               <h5 style={{ fontWeight:"100"}}> Your story </h5>
                         </div>
                  </div>
+                 <NewpostCard />
            </div>
     </div>
   )
