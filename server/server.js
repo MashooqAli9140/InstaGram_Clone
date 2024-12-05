@@ -127,7 +127,7 @@ app.post("/new-post" , upload.single("image") , async( req , res ) => {
       res.status(500).json({msge: `${error}`});
 
    }
-   
+    
 })
 
 

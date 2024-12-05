@@ -14,7 +14,7 @@ const LoginUser = () => {
       //new post form details
       const[ username , setusername ] = useState(loginUser);
       const[ newpostText , setnewpostText ] = useState("");
-      const [ selecetImage , setselectImage ] = useState();
+      const [ selecetImage , setselectImage ] = useState(null);
       const currentdate = new Date();
       const day = currentdate.getDate();
       const month = currentdate.toLocaleString( "Default" , { month: "long" });
@@ -43,7 +43,9 @@ const LoginUser = () => {
 
                      },
                } )
-               alert("new post uploaded and you can check mongodb")
+               alert("new post uploaded and you can check mongodb");
+               setnewpostText("");
+               window.location.reload();
                return response.status
            } catch (error) {
              console.log( "error while sending new post data", error )
@@ -66,7 +68,6 @@ const LoginUser = () => {
             setopenDashboard("none");
             console.log("Selected Image:", e.target.files[0]);
       }
-
       //SENDING NEW POST DETAILS TO BACKEND
 
   return (
@@ -87,7 +88,7 @@ const LoginUser = () => {
                         <div id='storyprofile'>
                              <img id='storyprofile_img' src={img} alt="profile_img" />
                         </div>
-                        <textarea onChange={ (e) => setnewpostText(e.target.value)} name="new-post-text" id="textarea" placeholder='Type something...'> </textarea>
+                        <textarea onChange={ (e) => setnewpostText(e.target.value)} value={newpostText} name="new-post-text" id="textarea" placeholder='Type something...'> </textarea>
                 </div>
 
                 <div style={{ display: "flex" , justifyContent:"space-between" ,padding:"10px 10px 10px 10px" , background:"black" , color:"white" , fontWeight:"200", marginTop:"20px"}}>
