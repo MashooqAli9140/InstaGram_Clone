@@ -8,7 +8,8 @@ const cors = require("cors");
 const UsersignupData = require("./model/UsersignupData.js");
 const newpost = require('./model/NewPostData.js')
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
 
 
 
