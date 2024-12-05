@@ -10,6 +10,7 @@ const newpost = require('./model/NewPostData.js')
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const path = require("path");
 
 
 
@@ -24,6 +25,26 @@ app.use(cors({ origin: "http://localhost:5173" }));
 
 // Secret key for JWT, stored in environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
+
+//import new post uploads folder as stactic file for showing post images
+app.use( "/newpostuploads" , express.static( path.join(__dirname , "newpostuploads" )));
+
+// Set up multer storage configuration
+const storage = multer.diskStorage({
+   destination: (req, file, cb) => {
+     // Specify the folder where images will be uploaded
+     cb(null,'newpostuploads'); // You may need to create the "uploads" folder
+   },
+   filename: (req, file, cb) => {
+     // Generate a unique file name for each uploaded file
+     cb(null, Date.now() + path.extname(file.originalname)); // e.g., 1234567890.jpg
+   },
+ });
+
+ // Create Multer instance with storage configuration
+const upload = multer({ storage: storage });
+
+
 
 
 
