@@ -4,6 +4,9 @@ import DP from "/src/images/dp.jpg";
 
 
 const NewpostCard = () => {
+      const date = new date();
+
+
   return (
     <div id='new-post-card-bg'>
          {/* // USERNAME SECTION  */}
@@ -34,6 +37,16 @@ const NewpostCard = () => {
                      <p> save post </p>
                   </div>
           </div>
+
+         {/* // caption section */}
+           <div id='caption-section'>
+              <p> username Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, cumque. Nobis et nesciunt quam, omnis commodi laboriosam similique adipisci impedit dolor quis ab quas consectetur voluptatum dolorum unde aut rem. </p>
+           </div>
+
+         {/* // time section section */}
+           <div>
+            <p> {date} </p>
+           </div>
 
     </div>
   )

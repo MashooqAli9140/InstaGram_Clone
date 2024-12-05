@@ -62,3 +62,7 @@
     gap: 10px;
     color: white;
 }
+#caption-section{
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+}
