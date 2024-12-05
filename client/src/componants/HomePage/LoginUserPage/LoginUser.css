@@ -1,8 +1,9 @@
 #dashboardBG{
     background-color: black;
-    height:100vh;
+    /* max-height:100%; */
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-
 #maindashboard{
     background-color: white;
     max-width: 500px;
