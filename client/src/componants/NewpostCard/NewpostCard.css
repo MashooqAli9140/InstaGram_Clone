@@ -1,5 +1,5 @@
 #new-post-card-bg{
-    background-color: aquamarine;
+    background-color: rgb(0, 0, 0);
     padding: 2px 2px 2px 2px;
 }
 #post-username-section{
@@ -59,7 +59,7 @@
 #like-cmnt-section{
     /* background-color: aqua; */
     display: flex;
-    gap: 10px;
+    gap: 20px;
     color: white;
 }
 #caption-section{

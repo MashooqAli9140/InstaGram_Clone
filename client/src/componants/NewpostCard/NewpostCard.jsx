@@ -4,11 +4,16 @@ import DP from "/src/images/dp.jpg";
 
 
 const NewpostCard = () => {
-      const date = new date();
+     const currentdate = new Date();
+     const day = currentdate.getDate();
+     const month = currentdate.toLocaleString( "Default" , { month: "long" });
+     const year = currentdate.getFullYear();
+
 
 
   return (
     <div id='new-post-card-bg'>
+        
          {/* // USERNAME SECTION  */}
       <div id='post-username-section'>
              <div id='post-profile'>
@@ -28,8 +33,8 @@ const NewpostCard = () => {
          {/* // LIKE , COMMENT SECTION */}
           <div id='like-btn-div'>
                   <div id='like-cmnt-section'> 
-                  <i class="fa-regular fa-heart fa-2x"></i>
-                  <i class="fa-regular fa-comment fa-2x"></i>
+                  <i class="fa-regular fa-heart fa-2x"> </i>
+                  <i class="fa-regular fa-comment fa-2x"> </i>
                   <i class="fa-solid fa-share-nodes fa-2x"></i>
                   </div>
 
@@ -40,12 +45,12 @@ const NewpostCard = () => {
 
          {/* // caption section */}
            <div id='caption-section'>
-              <p> username Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, cumque. Nobis et nesciunt quam, omnis commodi laboriosam similique adipisci impedit dolor quis ab quas consectetur voluptatum dolorum unde aut rem. </p>
+              <p style={{ color:"white"}}> <b> username </b>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, cumque. Nobis et nesciunt quam, omnis commodi laboriosam similique adipisci impedit dolor quis ab quas consectetur voluptatum dolorum unde aut rem. </p>
            </div>
 
          {/* // time section section */}
-           <div>
-            <p> {date} </p>
+           <div style={{ padding:"0px 10px 20px 10px" , color:"grey" , }}>
+               <p> {`${day} ${month} ${year}`}</p>           
            </div>
 
     </div>
