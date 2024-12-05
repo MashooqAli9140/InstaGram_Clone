@@ -105,19 +105,29 @@ app.post("/login" , async( req , res ) => {
 
 
 //getting post req for new post data
-app.post("/new-post" , async( req , res ) => {
-   const { username , newpostText , day , month , year , image } = req.body;
-   if( !username || !newpostText || !day || !month || !year || !image ) return res.status(400).json({ msge: "some value are empty check details again"});
+app.post("/new-post" , upload.single("image") , async( req , res ) => {
+   const { username , newpostText , day , month , year } = req.body;
+   const image = req.file; //access the image from req
+   if( !username || !newpostText || !day || !month || !year ) return res.status(400).json({ msge: "some value are empty check details again"});
 
    try {
+      const createNewPost = await newpost.create({
+            username: username,
+            newpostText: newpostText,
+            day: day,
+            month: month,
+            year: year,
+            image: image ? `/newpostuploads/${image.filename}` : null, //store image path if available
+      }); //save new post to db
+      console.log( createNewPost );
+      res.status(201).json({msge: "new post uploaded" , createNewPost })
 
    } catch (error) {
-      
+      console.log( error , "error while uploading new post");
+      res.status(500).json({msge: `${error}`});
+
    }
-
-
-
-
+   
 })
 
 

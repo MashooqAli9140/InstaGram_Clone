@@ -43,9 +43,11 @@ const LoginUser = () => {
 
                      },
                } )
+               alert("new post uploaded and you can check mongodb")
                return response.status
            } catch (error) {
-            console.log( "error while sending new post data", error )
+             console.log( "error while sending new post data", error )
+             alert("error while sending new post please check console")
            }
      }
 
