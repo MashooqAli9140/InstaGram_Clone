@@ -54,8 +54,8 @@
 }
 #storyprofile{
     /* background-color: aqua; */
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius:50%;
     overflow: hidden;
     display: flex;
@@ -70,8 +70,8 @@
 #yourstoryText{
     /* background-color: aqua; */
     padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
     color: white;
     font-weight: 100;
 }
