@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = new Schema();
+const Schema = mongoose.Schema;
 
 const NewPost = new Schema( {
     username:{ type: String , required: true },
@@ -11,6 +11,8 @@ const NewPost = new Schema( {
     likeCount:{ type:Number , default: 0 },
     likedby: [{ type: String }],
     comment: [{ type: String }]
-})
+},
+{ collection: 'INSTA-NEW-POST-DATA' }
+)
 
 module.exports = mongoose.model('NewPostData' , NewPost );
