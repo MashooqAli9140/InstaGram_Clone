@@ -145,6 +145,40 @@ app.get("/allpost" , async ( req , res ) => {
 })
 
 
+//getting req for post like and unlike
+app.post("/post/likedby" , async( req , res ) => {
+       const { id , username } = req.body;
+       console.log( id , username );
+       if( !id || !username ) return res.status(400).json({ msge: "id or username is not coming"});
+       
+       try {
+           //first find the post from all posts
+           const PostFound = await newpost.findById( id );
+           if( !PostFound ) return res.status(404).json({ msge: "POST NOT FOUND"});
+           
+           // second check if user already like the post or not
+           const alreadyLiked = PostFound.likedby.includes(username);
+           //if already liked then
+           if( alreadyLiked )
+           {
+              PostFound.likedby = PostFound.likedby.filter(  username => username != username );
+              PostFound.likeCount--;
+           } //IF NOT LIKES THEN ADD NEW USERNAME IN LIKEDBY ARRAY AND INCREASE LIKE COUNT
+           else{
+            PostFound.likedby.push(username);
+            PostFound.likeCount++;
+           }
+           await PostFound.save();
+           return res.status(200).json({ msge:"POST LIKE SUCCES" , likecount: PostFound.likeCount , post: PostFound })
+
+       } catch (error) {
+         console.log(error);
+         res.status(500).json({ msge: "Error updating post" });
+       }
+
+})
+
+
 PORT = process.env.PORT || 4000;
 app.listen( PORT , () => {
     console.log( `server running on ${PORT}`);
