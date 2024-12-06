@@ -18,8 +18,8 @@ const NewpostCard = () => {
           const response = await axios.get("http://localhost:3500/allpost" , {
 
           })
-          setallPosts( response.data );
-          console.log( "this is response from all posts-->" , response.data );
+          setallPosts( response.data.allPosts );
+          console.log( "this is response from all posts-->" , response.data.allPosts );
           return response.status;
       } catch (error) {
         console.log( "error while fetching all the posts" , error )

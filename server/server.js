@@ -131,6 +131,20 @@ app.post("/new-post" , upload.single("image") , async( req , res ) => {
 })
 
 
+//getting all post req and sending back all posts
+app.get("/allpost" , async ( req , res ) => {  
+   try {
+       const allPosts = await newpost.find(); // fetching all the post data
+       console.log(allPosts);
+       res.status(200).json({ msge:"all data access done" , allPosts });
+
+   } catch (error) {
+      console.log("error while fecthing the data");
+      res.status(404).json({msge:"error while fetching all the data please check route"})
+   }
+})
+
+
 
 
 
