@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./NewpostCard.css"
 import DP from "/src/images/dp.jpg";
+import axios from "axios";
 
 
 const NewpostCard = () => {
@@ -8,10 +9,36 @@ const NewpostCard = () => {
      const day = currentdate.getDate();
      const month = currentdate.toLocaleString( "Default" , { month: "long" });
      const year = currentdate.getFullYear();
+     const[ allPosts, setallPosts ] = useState([]);
+
+         //make req for getting all the post data
+     useEffect( ()=> {
+    async function GetAllPost(){
+      try {
+          const response = await axios.get("http://localhost:3500/allpost" , {
+
+          })
+          setallPosts( response.data );
+          console.log( "this is response from all posts-->" , response.data );
+          return response.status;
+      } catch (error) {
+        console.log( "error while fetching all the posts" , error )
+        return error
+      }
+}
+ GetAllPost();
+ },[])
+   
+
+
+
+
 
   return (
     <div id='new-post-card-bg'>
-        
+
+
+
          {/* // USERNAME SECTION  */}
       <div id='post-username-section'>
              <div id='post-profile'>
