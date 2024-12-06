@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./NewpostCard.css";
 import DP from "/src/images/dp.jpg";
 import axios from "axios";
+import { useParams } from 'react-router-dom'
 
 const NewpostCard = () => {
+  const { loginUser } = useParams();
   const currentdate = new Date();
   const day = currentdate.getDate();
   const month = currentdate.toLocaleString("Default", { month: "long" });
@@ -28,6 +30,31 @@ const NewpostCard = () => {
     }
     GetAllPost();
   }, []);
+
+
+
+//CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
+        async function LikebtnClicked( e , post_id , loginUser ){
+              e.preventDefault();
+              const PostLikedBY = {
+                id: post_id,
+                username: loginUser
+              }
+              try {
+                  const response = await axios.post( "http://localhost:3500/post/likedby" , PostLikedBY , {
+                    headers: {
+                        "Content-type": "application/json",
+                    }
+                  }  )
+                  console.log( response.data );
+                  alert("post like success")
+                  return response.status;
+              } catch (error) {
+                console.log(error);
+                alert("error while sending like the post req")
+              }
+        }
+
 
   return (
     <>
@@ -54,9 +81,11 @@ const NewpostCard = () => {
           {/* // LIKE , COMMENT SECTION */}
           <div id="like-btn-div">
             <div id="like-cmnt-section">
-              <i class="fa-regular fa-heart fa-2x"> </i>
-              <i class="fa-regular fa-comment fa-2x"> </i>
-              <i class="fa-solid fa-share-nodes fa-2x"></i>
+
+              <button id="like-btn" onClick={ (e) => LikebtnClicked( e , post._id , loginUser )} style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-heart fa-2x"> </i> </button>
+              <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
+              <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-solid fa-share-nodes fa-2x"></i> </button>
+               
             </div>
 
             <div>
