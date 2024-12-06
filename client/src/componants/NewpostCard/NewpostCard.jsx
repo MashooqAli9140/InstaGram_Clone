@@ -81,16 +81,18 @@ const NewpostCard = () => {
           {/* // LIKE , COMMENT SECTION */}
           <div id="like-btn-div">
             <div id="like-cmnt-section">
-
-              <button id="like-btn" onClick={ (e) => LikebtnClicked( e , post._id , loginUser )} style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-heart fa-2x"> </i> </button>
+              <button id="like-btn" onClick={ (e) => LikebtnClicked( e , post._id , loginUser )} style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-heart fa-2x" style={{ color: post.likedby.includes(loginUser) && "red" }} > </i> </button>
               <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
-              <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-solid fa-share-nodes fa-2x"></i> </button>
-               
+              <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-solid fa-share-nodes fa-2x"></i> </button>     
             </div>
 
             <div>
-              <p> save post </p>
+            <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-bookmark fa-2x"></i> </button>
             </div>
+          </div>
+          {/* // LIKE COUNT SECTION */}
+          <div id="likecount">
+              <p style={{ display: post.likeCount === 0 && "none" ,color:"white" , padding:"0px 10px 0px 10px"}}> { post.likeCount === 1 ? `${post.likeCount} like` : `${post.likeCount} likes`  }  </p>  
           </div>
 
           {/* // caption section */}
