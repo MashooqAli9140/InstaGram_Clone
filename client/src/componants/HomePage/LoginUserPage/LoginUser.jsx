@@ -137,8 +137,16 @@ const LoginUser = () => {
                         </div>
                  </div>
                  <NewpostCard />
-
+                 <div style={{ marginBottom:"20px"}}>
+                 </div>
             </div>
+            <div id='dashboard-bottom'>
+              <a href="/">  <i class="fa-solid fa-house fa-2x"></i> </a>
+              <a href="/"> <i class="fa-solid fa-magnifying-glass fa-2x"></i> </a>
+              <a href="/"> <i class="fa-solid fa-play fa-2x"></i> </a>
+              <a href="/"> <i class="fa-brands fa-facebook-messenger fa-2x"></i> </a>
+              <a href="/"> <i class="fa-regular fa-circle-user fa-2x"></i> </a>
+           </div>
 
            </div>
     </div>
