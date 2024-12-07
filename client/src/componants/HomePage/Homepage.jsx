@@ -74,6 +74,9 @@ const Homepage = () => {
       navigate(`/${loginUser}`)
       return response.status;
     } catch (error) {
+      setemail("");
+      setpassword("");
+      alert("please check details or signup again");
       console.log(error, "error while Login");
     }
   }
