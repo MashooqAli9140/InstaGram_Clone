@@ -1,12 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./CommentSection.css";
 import { useNavigate, useParams } from "react-router-dom";
 import DP from "/src/images/dp.jpg";
+import axios from "axios";
 
 
 const CommentSection = () => {
     const navigate = useNavigate();
     const { post_id , username , loginUser , caption } = useParams();
+    const[ newComment , setnewComment ] = useState("");
+
+   // SEND NEW COMMENT TO POST AND ADD IT TO DB
+    async function SendNewComment( e , post_id , commentedBy , newComment ){
+          e.preventDefault();
+          const CommentData = {
+            post_id,
+            commentedBy,
+            newComment
+          }
+
+          try {
+               const response = await axios.post( "http://localhost:3500/posts/new-comment" , CommentData , {
+                headers:{
+                  "Content-type": "application/json",
+                }
+               })
+               console.log( response.data );
+               return response.status;          
+          } catch (error) {
+            console.log(error);
+            alert("error while sending new comment to DB");
+            return error.msge;
+          }
+    }
+
+
+
 
 
 
@@ -65,13 +94,14 @@ const CommentSection = () => {
                   <img src={DP} id="postprofile-img" alt="porfile pic" />
                </div>
                       <div id='send-comment-input'>
-                              <input type="text" name="add new comment" id="add-newcmnt-input" placeholder='Add a comment...' />
-                              <button style={{ background:"none" , border:"none" , outline:"none" , color:"#538DD7"}}>
+                              <input onChange={ (e) => setnewComment( e.target.value )} type="text" name="add new comment" id="add-newcmnt-input" placeholder='Add a comment...' />
+                              <button onClick={ ( e ) => SendNewComment( e , post_id , loginUser , newComment   )} style={{ background:"none" , border:"none" , outline:"none" , color:"#538DD7" , cursor:"pointer"}}>
                               <i class="fa-regular fa-paper-plane fa-2x"></i>
                               </button>
                       </div>
             </div>
-        </div>
+        </div> {/* //ADD NEW COMMENT FORM WITH BUITTON END */}
+
 
 
 
