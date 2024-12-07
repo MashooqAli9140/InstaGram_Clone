@@ -58,6 +58,22 @@ const CommentSection = () => {
       </div> {/* //ALL COMMENTS SECTIONS END */}
 
 
+        {/* //ADD NEW COMMENT FORM WITH BUITTON START */}
+        <div id='comment-bottom'>
+            <div style={{ display:"flex", alignContent:'center' ,alignItems:"center" , gap:"10px" , width:"100%"}}>
+               <div id="post-profile">
+                  <img src={DP} id="postprofile-img" alt="porfile pic" />
+               </div>
+                      <div id='send-comment-input'>
+                              <input type="text" name="add new comment" id="add-newcmnt-input" placeholder='Add a comment...' />
+                              <button style={{ background:"none" , border:"none" , outline:"none" , color:"#538DD7"}}>
+                              <i class="fa-regular fa-paper-plane fa-2x"></i>
+                              </button>
+                      </div>
+            </div>
+        </div>
+
+
 
 
      </div>

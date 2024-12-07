@@ -12,6 +12,7 @@
     max-width: 430px;
     height: 100vh;
     margin: 0px auto 0;
+    overflow:hidden;
 }
 #comment-nav{
     position: sticky;
@@ -53,4 +54,38 @@ align-items: center;
     background-color: rgb(139, 139, 139);
     padding: 10px 10px 10px 10px;
     margin-top: 10px;
+}
+
+#comment-bottom{
+    position: sticky;
+    margin-top: 500px;
+    overflow: hidden;
+    bottom: 0;
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    border-bottom: .5px solid rgba(128, 128, 128, 0.212);
+    background-color: #000000;
+}
+#send-comment-input{
+    /* background-color: aqua; */
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+#add-newcmnt-input{
+    flex: 1;
+    padding: 10px 10px 10px 10px;
+    background: #121212;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: white;
 }
