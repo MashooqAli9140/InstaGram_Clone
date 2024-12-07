@@ -25,9 +25,9 @@ const CommentSection = () => {
             </div>
         </div>
 
-        {/* //POST PROFILE AND CAOPTION SECTION */}
-        <div id='caption-bg'>
 
+        {/* //POST PROFILE AND CAPTION SECTION START*/}
+        <div id='caption-bg'>
         <div style={{ display:"flex", alignContent:'center' ,alignItems:"center"}}>
             <div id="post-profile">
               <img src={DP} id="postprofile-img" alt="porfile pic" />
@@ -39,6 +39,24 @@ const CommentSection = () => {
             </div>
             </div>
         </div>       
+        {/* //POST PROFILE AND CAPTION SECTION END */}
+
+        {/* //ALL COMMENTS SECTIONS START */}
+      <div>
+        <div id='single-comment-bg'>
+        <div style={{ display:"flex", alignContent:'center' ,alignItems:"center"}}>
+            <div id="post-profile">
+              <img src={DP} id="postprofile-img" alt="porfile pic" />
+            </div>
+            <div id="caption-section">
+            <p style={{ color: "white" }}>
+              {" "}
+              <b> { username } </b> { caption }  </p>
+            </div>
+            </div>
+        </div>
+      </div> {/* //ALL COMMENTS SECTIONS END */}
+
 
 
 
