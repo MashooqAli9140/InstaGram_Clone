@@ -10,6 +10,8 @@ const CommentSection = () => {
   const [newComment, setnewComment] = useState("");
   const [allcomments, setAllComments] = useState([]);
   const [commentedBy, setCommentedBY] = useState([]);
+  const [ cmntLike , setcmntlike ] = useState();
+  const [ heartcolor , setheartcolor ] = useState(false);
 
   // SEND NEW COMMENT TO POST AND ADD IT TO DB
   async function SendNewComment(e, post_id, commentedBy, newComment) {
@@ -32,6 +34,8 @@ const CommentSection = () => {
       );
       console.log(response.data);
       alert("comment success ");
+      setnewComment("");
+      window.location.reload();
       return response.status;
     } catch (error) {
       console.log(error);
@@ -58,7 +62,16 @@ const CommentSection = () => {
     }
     FetchPostComments(post_id);
   }, []);
-  console.log(allcomments, commentedBy);
+
+
+  //WHEN SOMEONE LIKES THE COMMENT
+  function likecomment( e , index ){
+    e.preventDefault();
+    setcmntlike(index);
+    setheartcolor( (prev) => !prev )
+  }
+
+
   return (
     <div id="comment-bg">
       <div id="comment-dashboard">
@@ -108,7 +121,12 @@ const CommentSection = () => {
           </div>
         </div>
         {/* //POST PROFILE AND CAPTION SECTION END */}
-        {/* //ALL COMMENTS SECTIONS START */}
+
+          <div>
+             { allcomments.length < 1 ? <h3 style={{ color: "white" , textAlign:"center"}}> No comments </h3> : ""}
+          </div>
+
+        {/* //ALL COMMENTS SECTIONS START */} 
         {allcomments.map((comment, index) => (
           <div key={index}>
             <div id="single-comment-bg">
@@ -127,13 +145,17 @@ const CommentSection = () => {
                     {" "}
                     <b> {commentedBy[index]} </b> {comment}{" "}
                   </p>{" "}
-                  {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}
+                  {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}           
                 </div>
+                <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e , index ) }>
+                <i class="fa-regular fa-heart fa-1x" style={{ color: cmntLike === index && heartcolor ? " red " : "white"}}> </i> 
+                </button>
               </div>
             </div>
           </div>
         ))}
         {/* //ALL COMMENTS SECTIONS END */}
+
         {/* //ADD NEW COMMENT FORM WITH BUITTON START */}
         <div id="comment-bottom">
           <div
@@ -155,6 +177,7 @@ const CommentSection = () => {
                 name="add new comment"
                 id="add-newcmnt-input"
                 placeholder="Add a comment..."
+                value={newComment}
               />
               <button
                 onClick={(e) =>

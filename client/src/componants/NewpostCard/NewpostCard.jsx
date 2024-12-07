@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./NewpostCard.css";
 import DP from "/src/images/dp.jpg";
 import axios from "axios";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 
 const NewpostCard = () => {
   const { loginUser } = useParams();
@@ -34,83 +33,153 @@ const NewpostCard = () => {
     GetAllPost();
   }, []);
 
-
-
-//CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
-        async function LikebtnClicked( e , post_id , loginUser ){
-              e.preventDefault();
-              const PostLikedBY = {
-                id: post_id,
-                username: loginUser
-              }
-              try {
-                  const response = await axios.post( "http://localhost:3500/post/likedby" , PostLikedBY , {
-                    headers: {
-                        "Content-type": "application/json",
-                    }
-                  }  )
-                  console.log( response.data );
-                  alert("post like success")
-                  return response.status;
-              } catch (error) {
-                console.log(error);
-                alert("error while sending like the post req")
-              }
+  //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
+  async function LikebtnClicked(e, post_id, loginUser) {
+    e.preventDefault();
+    const PostLikedBY = {
+      id: post_id,
+      username: loginUser,
+    };
+    try {
+      const response = await axios.post(
+        "http://localhost:3500/post/likedby",
+        PostLikedBY,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
         }
+      );
+      console.log(response.data);
+      alert("post like success");
+      return response.status;
+    } catch (error) {
+      console.log(error);
+      alert("error while sending like the post req");
+    }
+  }
 
-        
-//when someone clicks on comment btn then this function will run 
-       async function ShowCommentSection( e , post_id , username , loginUser , caption ){
-             e.preventDefault();
-             navigate(`/${post_id}/${username}/${loginUser}/${caption}`);
-       }
-
+  //when someone clicks on comment btn then this function will run
+  async function ShowCommentSection(e, post_id, username, loginUser, caption) {
+    e.preventDefault();
+    navigate(`/${post_id}/${username}/${loginUser}/${caption}`);
+  }
 
   return (
     <>
       {allPosts.map((post) => (
         <div id="new-post-card-bg">
-
           {/* // USERNAME SECTION  */}
           <div id="post-username-section">
             <div id="post-profile">
               <img src={DP} id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
-              <p> { post.username } </p>
+              <p> {post.username} </p>
               <h2> --- </h2>
             </div>
           </div>
 
           {/* // IMAGE SECTION */}
           <div id="post-img-div">
-          {/* //always put BE server port like BE server running on 3500 */}
-            <img src={`http://localhost:3500${post.image}`} id="post-img" alt="post-img" /> 
+            {/* //always put BE server port like BE server running on 3500 */}
+            <img
+              src={`http://localhost:3500${post.image}`}
+              id="post-img"
+              alt="post-img"
+            />
           </div>
 
           {/* // LIKE , COMMENT SECTION */}
           <div id="like-btn-div">
             <div id="like-cmnt-section">
-              
-              <button id="like-btn" onClick={ (e) => LikebtnClicked( e , post._id , loginUser )} style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-heart fa-2x" style={{ color: post.likedby.includes(loginUser) && "red" }} > </i> </button>
-              <button onClick={ (e) => ShowCommentSection( e , post._id , post.username , loginUser , post.newpostText ) } style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
-              <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-solid fa-share-nodes fa-2x"></i> </button>     
+              <button
+                id="like-btn"
+                onClick={(e) => LikebtnClicked(e, post._id, loginUser)}
+                style={{
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  color: "white",
+                }}
+              >
+                {" "}
+                <i
+                  class="fa-regular fa-heart fa-2x"
+                  style={{ color: post.likedby.includes(loginUser) && "red" }}
+                >
+                  {" "}
+                </i>{" "}
+              </button>
+              <button
+                onClick={(e) =>
+                  ShowCommentSection(
+                    e,
+                    post._id,
+                    post.username,
+                    loginUser,
+                    post.newpostText
+                  )
+                }
+                style={{
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  color: "white",
+                }}
+              >
+                {" "}
+                <i class="fa-regular fa-comment fa-2x"> </i>{" "}
+              </button>
+              <button
+                style={{
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  color: "white",
+                }}
+              >
+                {" "}
+                <i class="fa-solid fa-share-nodes fa-2x"></i>{" "}
+              </button>
             </div>
 
             <div>
-            <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-bookmark fa-2x"></i> </button>
+              <button
+                style={{
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                  color: "white",
+                }}
+              >
+                {" "}
+                <i class="fa-regular fa-bookmark fa-2x"></i>{" "}
+              </button>
             </div>
           </div>
           {/* // LIKE COUNT SECTION */}
           <div id="likecount">
-              <p style={{ display: post.likeCount === 0 && "none" ,color:"white" , padding:"0px 10px 0px 10px"}}> { post.likeCount === 1 ? `${post.likeCount} like` : `${post.likeCount} likes`  }  </p>  
+            <p
+              style={{
+                display: post.likeCount === 0 && "none",
+                color: "white",
+                padding: "0px 10px 0px 10px",
+              }}
+            >
+              {" "}
+              {post.likeCount === 1
+                ? `${post.likeCount} like`
+                : `${post.likeCount} likes`}{" "}
+            </p>
           </div>
 
           {/* // caption section */}
           <div id="caption-section">
             <p style={{ color: "white" }}>
               {" "}
-              <b> { post.username } </b> { post.newpostText }  </p>
+              <b> {post.username} </b> {post.newpostText}{" "}
+            </p>
           </div>
 
           {/* // time section section */}
