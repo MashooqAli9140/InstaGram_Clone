@@ -60,9 +60,9 @@ const NewpostCard = () => {
 
         
 //when someone clicks on comment btn then this function will run 
-       async function ShowCommentSection( e , post_id , username , loginUser ){
+       async function ShowCommentSection( e , post_id , username , loginUser , caption ){
              e.preventDefault();
-             navigate(`/${post_id}/${username}/${loginUser}`);
+             navigate(`/${post_id}/${username}/${loginUser}/${caption}`);
        }
 
 
@@ -93,7 +93,7 @@ const NewpostCard = () => {
             <div id="like-cmnt-section">
               
               <button id="like-btn" onClick={ (e) => LikebtnClicked( e , post._id , loginUser )} style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-heart fa-2x" style={{ color: post.likedby.includes(loginUser) && "red" }} > </i> </button>
-              <button onClick={ (e) => ShowCommentSection( e , post._id , post.username , loginUser ) } style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
+              <button onClick={ (e) => ShowCommentSection( e , post._id , post.username , loginUser , post.newpostText ) } style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
               <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-solid fa-share-nodes fa-2x"></i> </button>     
             </div>
 

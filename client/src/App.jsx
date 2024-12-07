@@ -12,7 +12,7 @@ function App() {
           <Routes>
              <Route path="/" element={<Homepage />} />
              <Route path="/:loginUser" element={<LoginUser />} />
-             <Route path="/:post_id/:username/:loginUser" element={<CommentSection />} />
+             <Route path="/:post_id/:username/:loginUser/:caption" element={<CommentSection />} />
           </Routes>
    </BrowserRouter>
    )
