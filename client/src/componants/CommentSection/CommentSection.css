@@ -1,0 +1,15 @@
+#comment-bg{
+    background-color: rgb(188, 188, 188);
+    max-height:100%;
+    padding-top: 10px; 
+    padding-bottom: 10px;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+}
+
+#comment-dashboard{
+    background-color: #121212;
+    max-width: 430px;
+    height: 100%;
+    margin: 0px auto 0;
+}

@@ -57,13 +57,13 @@ const NewpostCard = () => {
                 alert("error while sending like the post req")
               }
         }
+
+        
 //when someone clicks on comment btn then this function will run 
        async function ShowCommentSection( e , post_id , username , loginUser ){
              e.preventDefault();
              navigate(`/${post_id}/${username}/${loginUser}`);
        }
-
-
 
 
   return (

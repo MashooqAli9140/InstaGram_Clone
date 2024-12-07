@@ -73,8 +73,7 @@ const LoginUser = () => {
   return (
     <div id='dashboardBG'>
            <div id='maindashboard'>
-
-
+            
           {/* //OPEN NEW POST CARD FOR UPLOAD NEW POST */}
             <div id='new-post-card' style={{ height:"100vh" , display: `${ openNewpostCard }`}}>
             <div id='new-post-nav' >
