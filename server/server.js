@@ -179,7 +179,7 @@ app.post("/post/likedby" , async( req , res ) => {
 })
 
 //GETTING ADD NEW COMMENT REQ
-app.post("/new-comment" , async( req , res ) => {
+app.post("/posts/new-comment" , async( req , res ) => {
    const { post_id , commentedBy , newComment } = req.body;
    if( !post_id || !commentedBy , !newComment ) return res.status(400).json({ msge: "something missing please check , id or newcomment"});
   
@@ -196,7 +196,7 @@ app.post("/new-comment" , async( req , res ) => {
    } catch (error) {
      return res.status(500).json({ msge: "something went wrong when from BE" });
    }
-   
+
 })
 
 

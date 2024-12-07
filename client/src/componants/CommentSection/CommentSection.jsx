@@ -26,10 +26,11 @@ const CommentSection = () => {
                 }
                })
                console.log( response.data );
+               alert("comment success ")
                return response.status;          
           } catch (error) {
             console.log(error);
-            alert("error while sending new comment to DB");
+            alert("Failed")
             return error.msge;
           }
     }
