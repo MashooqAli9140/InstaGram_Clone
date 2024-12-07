@@ -199,6 +199,19 @@ app.post("/posts/new-comment" , async( req , res ) => {
 
 })
 
+//getting req for post comment
+app.get("/posts/:id" , async( req , res ) => {
+   const { id } = req.params;
+   if( !id ) return res.status(404).json({"msge": "error while fetching the comments because post id is not found"});
+   console.log( id );
+   try {
+       const FindPost = await newpost.findById(id); // finding the post by id
+       return res.status(200).json({"msge":"post founded for showing comments" , post:FindPost });
+   } catch (error) {
+      return res.status(400).json({msge: "error while fetching the comments", error });
+   }
+})
+
 
 
 
