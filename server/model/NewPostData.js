@@ -10,7 +10,8 @@ const NewPost = new Schema( {
     image: { type:String },
     likeCount:{ type:Number , default: 0 },
     likedby: [{ type: String }],
-    comment: [{ type: String }]
+    comment: [{ type: String }],
+    commentedBy:[{ type: String }]
 },
 { collection: 'INSTA-NEW-POST-DATA' }
 )

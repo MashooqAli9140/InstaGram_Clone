@@ -173,10 +173,34 @@ app.post("/post/likedby" , async( req , res ) => {
 
        } catch (error) {
          console.log(error);
-         res.status(500).json({ msge: "Error updating post" });
+         return res.status(500).json({ msge: "Error updating post" });
        }
 
 })
+
+//GETTING ADD NEW COMMENT REQ
+app.post("/new-comment" , async( req , res ) => {
+   const { post_id , commentedBy , newComment } = req.body;
+   if( !post_id || !commentedBy , !newComment ) return res.status(400).json({ msge: "something missing please check , id or newcomment"});
+  
+   try {
+   //first find post in which we want to add comment
+   const FindPost = await newpost.findById(post_id);
+   if( !FindPost ) return res.status(404).json({ msge: "Post not found"});
+   //IF POST IS FOUND THEN ADD NEW COMMENT TO POST COMMENT ARRAY
+   FindPost.comment.push(newComment);
+   FindPost.commentedBy.push(commentedBy);
+   await FindPost.save();   //AFTER PUSHING THE NEW COMMENT THEN SAVE 
+
+   return res.status(200).json({ msge:"NEW COMMENT ADDED SUCCESS", POST: FindPost })
+   } catch (error) {
+     return res.status(500).json({ msge: "something went wrong when from BE" });
+   }
+   
+})
+
+
+
 
 
 PORT = process.env.PORT || 4000;
