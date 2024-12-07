@@ -1,6 +1,7 @@
 import React from 'react'
 import "./CommentSection.css";
 import { useNavigate, useParams } from "react-router-dom";
+import DP from "/src/images/dp.jpg";
 
 
 const CommentSection = () => {
@@ -24,15 +25,24 @@ const CommentSection = () => {
             </div>
         </div>
 
-        {/* //POST PROFILE AND CAOPTION SECTION */}       
-          <div id="caption-section">
+        {/* //POST PROFILE AND CAOPTION SECTION */}
+        <div id='caption-bg'>
+
+        <div style={{ display:"flex", alignContent:'center' ,alignItems:"center"}}>
+            <div id="post-profile">
+              <img src={DP} id="postprofile-img" alt="porfile pic" />
+            </div>
+            <div id="caption-section">
             <p style={{ color: "white" }}>
               {" "}
               <b> { username } </b> { caption }  </p>
-          </div>
+            </div>
+            </div>
+        </div>       
+
+
 
      </div>
-
     </div>
   )
 }
