@@ -3,6 +3,8 @@ import "./NewpostCard.css";
 import DP from "/src/images/dp.jpg";
 import axios from "axios";
 import { useParams } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+
 
 const NewpostCard = () => {
   const { loginUser } = useParams();
@@ -11,6 +13,7 @@ const NewpostCard = () => {
   const month = currentdate.toLocaleString("Default", { month: "long" });
   const year = currentdate.getFullYear();
   const [allPosts, setallPosts] = useState([]);
+  const navigate = useNavigate();
 
   //make req for getting all the post data
   useEffect(() => {
@@ -54,6 +57,13 @@ const NewpostCard = () => {
                 alert("error while sending like the post req")
               }
         }
+//when someone clicks on comment btn then this function will run 
+       async function ShowCommentSection( e , post_id , username , loginUser ){
+             e.preventDefault();
+             navigate(`/${post_id}/${username}/${loginUser}`);
+       }
+
+
 
 
   return (
@@ -81,8 +91,9 @@ const NewpostCard = () => {
           {/* // LIKE , COMMENT SECTION */}
           <div id="like-btn-div">
             <div id="like-cmnt-section">
+              
               <button id="like-btn" onClick={ (e) => LikebtnClicked( e , post._id , loginUser )} style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-heart fa-2x" style={{ color: post.likedby.includes(loginUser) && "red" }} > </i> </button>
-              <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
+              <button onClick={ (e) => ShowCommentSection( e , post._id , post.username , loginUser ) } style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-regular fa-comment fa-2x"> </i> </button>
               <button style={{ cursor:"pointer" , background:"none" , border:"none" , color:"white"}}> <i class="fa-solid fa-share-nodes fa-2x"></i> </button>     
             </div>
 
