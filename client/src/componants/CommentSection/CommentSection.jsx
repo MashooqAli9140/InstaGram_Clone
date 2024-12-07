@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./CommentSection.css";
 import { useNavigate, useParams } from "react-router-dom";
 import DP from "/src/images/dp.jpg";
@@ -34,6 +34,26 @@ const CommentSection = () => {
             return error.msge;
           }
     }
+
+    useEffect( ( ) => {
+
+    // FETCHING THE COMMENT BY POST ID
+    async function FetchPostComments( e , post_id ){
+          e.preventDefault(); 
+      try {
+        const response = await axios.get( `http://localhost:3500/posts/:${post_id}`, {
+
+        })
+        console.log( "all comments data-->" , response.data );
+        return response.status;          
+   } catch (error) {
+     console.log(error);
+     return error.msge;
+   }
+}
+   FetchPostComments();
+    },[])
+
 
 
 
