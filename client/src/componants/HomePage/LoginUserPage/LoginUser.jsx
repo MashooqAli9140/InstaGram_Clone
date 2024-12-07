@@ -73,7 +73,7 @@ const LoginUser = () => {
   return (
     <div id='dashboardBG'>
            <div id='maindashboard'>
-            
+
           {/* //OPEN NEW POST CARD FOR UPLOAD NEW POST */}
             <div id='new-post-card' style={{ height:"100vh" , display: `${ openNewpostCard }`}}>
             <div id='new-post-nav' >
@@ -136,7 +136,9 @@ const LoginUser = () => {
                         </div>
                  </div>
                  <NewpostCard />
-                 <div style={{ marginBottom:"20px"}}>
+                 <div style={{ marginBottom:"60px"}}>
+                  <br />
+                  <br />
                  </div>
             </div>
             <div id='dashboard-bottom'>
