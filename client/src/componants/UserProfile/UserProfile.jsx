@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState , useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import "./UserProfile.css";
 import axios from "axios";
@@ -6,6 +6,31 @@ import axios from "axios";
 
 const UserProfile = () => {
       const { username , myname } = useParams();
+      const [ userDetails , setuserDetails ] = useState([]);
+
+
+      //GETT USER DETAILS
+useEffect(() => {
+        async function GetSingleUser() {
+          try {
+            const response = await axios.get( `http://localhost:3500/single-user/${username}` , {
+
+            } );
+
+            console.log(
+              "this is response from all posts-->",
+              response.data
+            );
+            return response.status;
+          } catch (error) {
+            console.log("error while fetching single user details", error);
+            return error;
+          }
+        }
+        GetSingleUser();
+      
+ }, []);
+
 
 
 
