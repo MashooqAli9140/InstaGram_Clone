@@ -64,6 +64,30 @@ const NewpostCard = () => {
     e.preventDefault();
     navigate(`/${post_id}/${username}/${loginUser}/${caption}`);
   }
+  
+// WHEN SOMEONE CLICK ON FOLLOW BTN THEN SEND FOLLOW REQ
+ async function SendFollowrequest( e , post_username , myusername ){
+       e.preventDefault();
+
+       try {
+          const response = await axios.post( `http://localhost:3500/follow-req/${post_username}/${myusername}`, {
+            headers: {
+              "Content-type": "application/json",
+            },
+          })
+          console.log( "response after follow-->" , response.data );
+          return response.status;
+       } catch (error) {
+        console.log("error while follow");
+        return error.msge;
+       }
+ } 
+
+
+
+
+
+
 
   return (
     <>
@@ -78,7 +102,7 @@ const NewpostCard = () => {
               <div style={{ flex:"1"}}>
               <p> {post.username} </p>
               </div>
-              <button id="followbtn"> Follow </button>
+              <button id="followbtn" onClick={ (e) => SendFollowrequest( e, post.username , loginUser )}> Follow </button>
               {/* <button id="unfollowbtn"> following </button> */}
               <h2> --- </h2>
             </div>
