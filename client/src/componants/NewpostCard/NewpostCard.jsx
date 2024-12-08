@@ -75,7 +75,11 @@ const NewpostCard = () => {
               <img src={DP} id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
+              <div style={{ flex:"1"}}>
               <p> {post.username} </p>
+              </div>
+              <button id="followbtn"> Follow </button>
+              {/* <button id="unfollowbtn"> following </button> */}
               <h2> --- </h2>
             </div>
           </div>
