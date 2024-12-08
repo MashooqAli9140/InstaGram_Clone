@@ -220,17 +220,22 @@ app.post("/follow-req/:post_username/:myusername" , async ( req, res ) => {
     try {
    //LET'S FIND USER WHICH WE WANT TO FOLLOW
     const finduser = await UsersignupData.findOne( { username : post_username } );
-    if( !finduser )return res.status(404).json({"msge":"username not found"});
+    const finduser_1 = await newpost.findOne( { username : post_username });
+    if( !finduser ) return res.status(404).json({"msge":"username not found"});
+    if( !finduser_1 )return res.status(404).json({"msge":"username not found"});
+
     //NOW IF USER IS FOUND THEN ADD FOLLOWER NAME IN FOLLOWEDBY ARRAY
     finduser.followby.push(myusername);
+    finduser_1.followby.push(myusername);
     finduser.save();
+    finduser_1.save();
     console.log( "find username is  this-->" , finduser );
-    return res.status(200).json({"msge":"follow req success"});
+    return res.status(200).json({"msge":"follow req success", finduser , finduser_1 });
 
     } catch (error) {
       return res.status(400).json({msge:"something went wrong when proccessing follow req by BE" , error });
     }
-    
+
    })
 
 

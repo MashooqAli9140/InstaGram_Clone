@@ -5,13 +5,14 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-const NewpostCard = () => {
+  const NewpostCard = () => {
   const { loginUser } = useParams();
   const currentdate = new Date();
   const day = currentdate.getDate();
   const month = currentdate.toLocaleString("Default", { month: "long" });
   const year = currentdate.getFullYear();
   const [allPosts, setallPosts] = useState([]);
+  // const [ followby , setfollowby ] = useState([])
   const navigate = useNavigate();
 
   //make req for getting all the post data
@@ -31,6 +32,7 @@ const NewpostCard = () => {
       }
     }
     GetAllPost();
+  
   }, []);
 
   //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
@@ -68,24 +70,20 @@ const NewpostCard = () => {
 // WHEN SOMEONE CLICK ON FOLLOW BTN THEN SEND FOLLOW REQ
  async function SendFollowrequest( e , post_username , myusername ){
        e.preventDefault();
-
        try {
           const response = await axios.post( `http://localhost:3500/follow-req/${post_username}/${myusername}`, {
             headers: {
               "Content-type": "application/json",
             },
           })
-          console.log( "response after follow-->" , response.data );
+          console.log( "response after follow-->" , response.data.finduser.followby);
+          // setfollowby(response.data.finduser.followby);
           return response.status;
        } catch (error) {
         console.log("error while follow");
         return error.msge;
        }
  } 
-
-
-
-
 
 
 
@@ -102,8 +100,17 @@ const NewpostCard = () => {
               <div style={{ flex:"1"}}>
               <p> {post.username} </p>
               </div>
-              <button id="followbtn" onClick={ (e) => SendFollowrequest( e, post.username , loginUser )}> Follow </button>
+             
+              <button
+              id="followbtn"
+              onClick={(e) => SendFollowrequest(e, post.username, loginUser)}
+              >
+                Follow
+              {/* {post.followby.includes(loginUser) ? "Unfollow" : "Follow"} */}
+              </button>
+ 
               {/* <button id="unfollowbtn"> following </button> */}
+
               <h2> --- </h2>
             </div>
           </div>
