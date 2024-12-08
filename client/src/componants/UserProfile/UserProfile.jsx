@@ -1,6 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
-import "./UserProfile.css"
+import "./UserProfile.css";
+import axios from "axios";
+
 
 const UserProfile = () => {
       const { username , myname } = useParams();
@@ -11,14 +13,16 @@ const UserProfile = () => {
 // WHEN SOMEONE CLICK ON FOLLOW BTN THEN SEND FOLLOW REQ
  async function SendFollowrequest( e , username , myname ){
     e.preventDefault();
+    console.log( username , myname )
+    const data = {
+          username,
+          myname
+    }
     try {
-       const response = await axios.post( `http://localhost:3500/follow-req/${username}/${myname}`, {
-         headers: {
-           "Content-type": "application/json",
-         },
+       const response = await axios.post(" http://localhost:3500/follow-req" , data ,  {
+
        })
-       console.log( "response after follow-->" , response.data.finduser.followby);
-       // setfollowby(response.data.finduser.followby);
+       console.log( "response after follow-->" , response.data.finduser);
        return response.status;
     } catch (error) {
      console.log("error while follow");

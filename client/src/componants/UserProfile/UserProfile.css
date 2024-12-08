@@ -16,3 +16,16 @@ padding: 5px 5px 5px 5px;
     padding: 10px 5px 10px 5px;
     color: white;
 }
+#followbtn{
+    background-color: #0095F6;
+    background: linear-gradient( 43deg , #54bbff , #227bff , #0055ff);
+    padding: 7px 20px 7px 20px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    outline: none;
+
+}
