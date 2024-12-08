@@ -236,9 +236,21 @@ app.post("/follow-req" , async ( req, res ) => {
    //LET'S FIND USER WHICH WE WANT TO FOLLOW
     const finduser = await UsersignupData.findOne( { username: username } );
     if( !finduser ) return res.status(404).json({"msge":"username not found"});
-    //NOW IF USER IS FOUND THEN ADD FOLLOWER NAME IN FOLLOWEDBY ARRAY
-    finduser.followby.push(myname);
-    finduser.save();
+     
+    //IF USER IS ALREADY FOLLOW THEN
+     const alreadyfollow = finduser.followby.includes(myname);
+
+     //already follow is true then
+     if( alreadyfollow )
+     {
+          finduser.followby = finduser.followby.filter( user =>  user != myname );
+          finduser.save();
+     }
+     else{
+          //NOW IF USER IS FOUND THEN ADD FOLLOWER NAME IN FOLLOWEDBY ARRAY
+          finduser.followby.push(myname);
+          finduser.save();
+     }
     console.log( "find username is  this-->" , finduser );
     return res.status(200).json({"msge":"follow req success", finduser});
 
