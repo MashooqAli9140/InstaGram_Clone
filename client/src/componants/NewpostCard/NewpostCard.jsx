@@ -91,7 +91,7 @@ import { useNavigate } from "react-router-dom";
           <div id="post-img-div">
             {/* //always put BE server port like BE server running on 3500 */}
             <img
-              src={`http://localhost:3500${post.image}`}
+              src= {`http://localhost:3500${post.image}`}
               id="post-img"
               alt="post-img"
             />

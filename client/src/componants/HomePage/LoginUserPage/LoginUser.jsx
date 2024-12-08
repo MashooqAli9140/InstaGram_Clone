@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./LoginUser.css";
 import img from "/src/images/dp.jpg";
@@ -10,6 +10,7 @@ const LoginUser = () => {
   const [opedashboard, setopenDashboard] = useState("block");
   const [openNewpostCard, setopenNewpostCard] = useState("none");
   const [pro_picture, set_pro_picture] = useState(null);
+  const [ userProfile ,setuserprofile ] = useState("");
 
   //new post form details
   const [username, setusername] = useState(loginUser);
@@ -32,10 +33,30 @@ const LoginUser = () => {
     console.log(" image now added in form");
   }
 
+  //GETT USER DETAILS
+    useEffect(() => {
+      async function GetSingleUser() {
+
+        try {
+          const response = await axios.get(
+            `http://localhost:3500/single-user/${username}`);
+          console.log(
+            "this is response from single userdata-->",
+            response.data
+          );
+          setuserprofile( response.data.SingleUser.image );
+          return response.status;
+        } catch (error) {
+          console.log("error while fetching single user details", error);
+          return error;
+        }
+      }
+      GetSingleUser();
+    }, [username]);
 
 
 
-  
+
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
   async function SendNewPost(e) {
@@ -248,19 +269,21 @@ const LoginUser = () => {
           <div id="storydiv">
             <div id="storyprofilediv">
               <div id="storyprofile">
-                <img id="storyprofile_img" src={img} alt="profile_img" />
+                <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
               </div>
             </div>
             <div id="yourstoryText">
               <h5 style={{ fontWeight: "100" }}> Your story </h5>
             </div>
           </div>
+
+          {/* //ADD NEW PROFILE PICTURE START */}
           <div
             style={{
+              display: userProfile ? "none" : "flex",
               padding: "10px 10px 10px 10px",
               background: "grey",
               marginTop: "30px",
-              display: "flex",
               justifyContent: "center",
             }}
           >
@@ -291,6 +314,8 @@ const LoginUser = () => {
               </div>
             </label>
           </div>
+{/* //ADD NEW PROFILE PICTURE START */}
+
 
           <NewpostCard />
           <div style={{ marginBottom: "60px" }}>

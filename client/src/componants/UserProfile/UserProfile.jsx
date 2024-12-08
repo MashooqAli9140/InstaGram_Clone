@@ -12,7 +12,6 @@ const UserProfile = () => {
 
   //GETT USER DETAILS
   useEffect(() => {
-
     async function GetSingleUser() {
       try {
         const response = await axios.get(
