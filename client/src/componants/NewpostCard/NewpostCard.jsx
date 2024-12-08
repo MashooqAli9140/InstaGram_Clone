@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
   const month = currentdate.toLocaleString("Default", { month: "long" });
   const year = currentdate.getFullYear();
   const [allPosts, setallPosts] = useState([]);
-  // const [ followby , setfollowby ] = useState([])
   const navigate = useNavigate();
 
   //make req for getting all the post data
@@ -67,23 +66,7 @@ import { useNavigate } from "react-router-dom";
     navigate(`/${post_id}/${username}/${loginUser}/${caption}`);
   }
   
-// WHEN SOMEONE CLICK ON FOLLOW BTN THEN SEND FOLLOW REQ
- async function SendFollowrequest( e , post_username , myusername ){
-       e.preventDefault();
-       try {
-          const response = await axios.post( `http://localhost:3500/follow-req/${post_username}/${myusername}`, {
-            headers: {
-              "Content-type": "application/json",
-            },
-          })
-          console.log( "response after follow-->" , response.data.finduser.followby);
-          // setfollowby(response.data.finduser.followby);
-          return response.status;
-       } catch (error) {
-        console.log("error while follow");
-        return error.msge;
-       }
- } 
+
 
 
 
@@ -98,18 +81,8 @@ import { useNavigate } from "react-router-dom";
             </div>
             <div id="post-username-editbtn">
               <div style={{ flex:"1"}}>
-              <p> <Link to= { `/user-profile-page/${post.username}` } > {post.username} </Link>  </p>
+              <p> <Link to= { `/user-profile-page/${post.username}/${loginUser}` } > {post.username} </Link>  </p>
               </div>
-
-              <button
-              id="followbtn"
-              onClick={(e) => SendFollowrequest(e, post.username, loginUser)}
-              >
-                Follow
-              {/* {post.followby.includes(loginUser) ? "Unfollow" : "Follow"} */}
-              </button>
- 
-
               <h2> --- </h2>
             </div>
           </div>

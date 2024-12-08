@@ -14,7 +14,7 @@ function App() {
              <Route path="/" element={<Homepage />} />
              <Route path="/:loginUser" element={<LoginUser />} />
              <Route path="/:post_id/:username/:loginUser/:caption" element={<CommentSection />} />
-             <Route path= "user-profile-page/:username" element={<UserProfile />} />
+             <Route path= "user-profile-page/:username/:myname" element={<UserProfile />} />
 
           </Routes>
    </BrowserRouter>
