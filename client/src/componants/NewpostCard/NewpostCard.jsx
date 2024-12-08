@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./NewpostCard.css";
 import DP from "/src/images/dp.jpg";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
   const NewpostCard = () => {
@@ -98,9 +98,9 @@ import { useNavigate } from "react-router-dom";
             </div>
             <div id="post-username-editbtn">
               <div style={{ flex:"1"}}>
-              <p> {post.username} </p>
+              <p> <Link to= { `/user-profile-page/${post.username}` } > {post.username} </Link>  </p>
               </div>
-             
+
               <button
               id="followbtn"
               onClick={(e) => SendFollowrequest(e, post.username, loginUser)}
@@ -109,7 +109,6 @@ import { useNavigate } from "react-router-dom";
               {/* {post.followby.includes(loginUser) ? "Unfollow" : "Follow"} */}
               </button>
  
-              {/* <button id="unfollowbtn"> following </button> */}
 
               <h2> --- </h2>
             </div>
