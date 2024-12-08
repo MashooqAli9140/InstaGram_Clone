@@ -10,6 +10,7 @@ const LoginUser = () => {
       const {loginUser} = useParams();
       const [ opedashboard , setopenDashboard ] = useState("block");
       const [ openNewpostCard , setopenNewpostCard ] = useState("none")
+      const [ pro_picture , set_pro_picture ] = useState(null);
 
       //new post form details
       const[ username , setusername ] = useState(loginUser);
@@ -68,12 +69,47 @@ const LoginUser = () => {
             setopenDashboard("none");
             console.log("Selected Image:", e.target.files[0]);
       }
-      //SENDING NEW POST DETAILS TO BACKEND
+
+      //SENDING PROFILE PICTURE
+      async function Sendprofilepicture( loginUser ){
+            
+        const profileFormdata = new FormData();
+              profileFormdata.append("loginUser",loginUser);
+              if( pro_picture )
+              {
+                formdata.append('image' , pro_picture ) 
+              }
+
+             try {
+                const response =  await axios.post( "http://localhost:3500/add-profile-picture" , formdata , {
+                  headers:{
+
+                  },
+            })
+             alert("image updated success");
+             window.location.reload();
+             return response.status
+             } catch (error) {
+              console.log( "error while changing profile picture", error )
+              alert("error while changing new post")
+             }
+      }
+  
+      //HANDLING PROFILE PICTURE SELECTION
+      function handleProfilepicture( e ){
+        e.preventDefault();
+        set_pro_picture( e.target.files[0] );
+        Sendprofilepicture( loginUser );
+        
+      }
+
+
+
+
 
   return (
     <div id='dashboardBG'>
            <div id='maindashboard'>
-
           {/* //OPEN NEW POST CARD FOR UPLOAD NEW POST */}
             <div id='new-post-card' style={{ height:"100vh" , display: `${ openNewpostCard }`}}>
             <div id='new-post-nav' >
@@ -107,6 +143,7 @@ const LoginUser = () => {
             </div>
 
 
+
           {/* //OPEN DASHBOARD WHERE WE CAN SEE OTHERS POST */}
             <div style={{ display: `${opedashboard}`}}>
             <div id='dashboard-Navbar'>
@@ -115,7 +152,7 @@ const LoginUser = () => {
                       </div>
                       <div id='nav-right'>
 
-                            <input type="file" accept='image/*' id='plusbtn' style={{ display:"none"}} onChange={ (e) =>  handleImagechange(e) } />
+                            <input type="file" accept='image/*' id='plusbtn' style={{ display:"none"}} onChange={ (e) =>  handleImagechange( e , loginUser ) } />
                             <label htmlFor="plusbtn" style={{ cursor:"pointer"}}>
                               <div id='plusbtn'>
                                   <i class="fa-solid fa-plus fa-2x" style={{ color:"white"}}></i> 
@@ -134,13 +171,26 @@ const LoginUser = () => {
                         <div id='yourstoryText'>
                               <h5 style={{ fontWeight:"100"}}> Your story </h5>
                         </div>
-                 </div>
+              </div>
+                 <div style={{ padding:"10px 10px 10px 10px", background:"grey", marginTop:"30px" , display:"flex", justifyContent:"center"}}>
+                <input type="file" accept='image/*' id='plusbtn' style={{ display:"none" }} onChange={ (e) =>  handleProfilepicture(e) } />
+               <label htmlFor="plusbtn" style={{ cursor:"pointer"}}>
+                <div style={{ display:"flex", justifyContent:"center", alignItems:"center" , gap:"10px"}} >
+                     <h3 style={{ color:"white"}}> Please add profile picture </h3>
+                     <i class="fa-solid fa-plus fa-2x" style={{ color:"white"}}> </i> 
+                </div>
+              </label>
+              </div>
+
                  <NewpostCard />
                  <div style={{ marginBottom:"60px"}}>
                   <br />
                   <br />
                  </div>
             </div>
+
+
+
             <div id='dashboard-bottom'>
               <a href="/">  <i class="fa-solid fa-house fa-2x"></i> </a>
               <a href="/"> <i class="fa-solid fa-magnifying-glass fa-2x"></i> </a>
