@@ -5,6 +5,8 @@
     font-family: 'poppins',sans-serif;
     /* background-color: black; */
 }
-/* body{
-    background-color: black;
-} */
+body{
+    background-color: rgb(255, 255, 255);
+    padding-left: 20px ;
+    padding-right: 20px;
+}
