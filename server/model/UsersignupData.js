@@ -6,6 +6,7 @@ const Signupdata = new Schema( {
       password: { type: String , required: true},
       email: { type: String , required: true},
       followby: [{ type: String }],
+      image: { type:String }
  },
  {
     collection: "SIGNUP_USER_DATA"

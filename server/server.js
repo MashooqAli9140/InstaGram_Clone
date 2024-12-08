@@ -40,9 +40,33 @@ const storage = multer.diskStorage({
      cb(null, Date.now() + path.extname(file.originalname)); // e.g., 1234567890.jpg
    },
  });
-
  // Create Multer instance with storage configuration
-const upload = multer({ storage: storage });
+ const upload = multer({ storage: storage });
+
+
+
+ //import new post uploads folder as stactic file for showing post images
+app.use( "/newProfileuploads" , express.static( path.join(__dirname , "newProfileuploads" )));
+
+// Set up multer storage configuration
+const storage_1 = multer.diskStorage({
+   destination: (req, file, cb) => {
+     // Specify the folder where images will be uploaded
+     cb(null,'newProfileuploads'); // You may need to create the "uploads" folder
+   },
+   filename: (req, file, cb) => {
+     // Generate a unique file name for each uploaded file
+     cb(null, Date.now() + path.extname(file.originalname)); // e.g., 1234567890.jpg
+   },
+ });
+  // Create Multer instance with storage configuration
+  const upload_1 = multer({ storage: storage_1 });
+
+
+
+
+
+
 
 
 
@@ -126,9 +150,36 @@ app.post("/new-post" , upload.single("image") , async( req , res ) => {
       console.log( error , "error while uploading new post");
       res.status(500).json({msge: `${error}`});
 
-   }
-    
+   } 
 })
+
+
+//getting post req for ADD NEW PROFILE PICTURE
+app.post("/add-profile-picture" , upload_1.single("image") , async( req , res ) => {
+   const { username } = req.body;
+   const image = req.file; //access the image from req
+   console.log( "images is coming --> " , image );
+   if( !username ) return res.status(400).json({ msge: "active username is not coming"});
+   if( !image ) return res.status(400).json({ msge: "active image is not coming"});
+
+
+   try {
+      //first find the user 
+      const finduser = await UsersignupData.findOne( { username });
+      if( !finduser ) return res.status(404).json({ msge: " user is not found for adding new profile picture"});
+        
+      //now save the selected image in user data
+      finduser.image = image ? `/newProfileuploads/${image.filename}` : null, //store image path if available 
+      await finduser.save();
+      res.status(201).json({msge: "new post uploaded" , finduser })
+
+   } catch (error) {
+      console.log( error , "error while uploading profile picture");
+      res.status(500).json({msge: `${error}`});
+
+   } 
+})
+
 
 
 //getting all post req and sending back all posts
