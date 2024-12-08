@@ -144,6 +144,21 @@ app.get("/allpost" , async ( req , res ) => {
    }
 })
 
+//getting single user profile req and sending back profile details
+app.get("/single-user/:username" , async ( req , res ) => {
+      const { username } = req.params;
+      if( !username ) return res.status(404).json( { "msge" : "username is not coming not able to load user details" })
+   try {
+       const SingleUser = await UsersignupData.findOne( { username: username } ); // fetching single user data
+       console.log(SingleUser);
+       res.status(200).json({ msge:"single user data access done" , SingleUser });
+
+   } catch (error) {
+      console.log("error while fecthing the data");
+      res.status(404).json({msge:"error while fetching single user data" })
+   }
+})
+
 
 //getting req for post like and unlike
 app.post("/post/likedby" , async( req , res ) => {
