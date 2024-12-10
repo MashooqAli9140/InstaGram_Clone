@@ -34,18 +34,20 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
-// Use helmet to set security headers
-app.use(helmet());
 
-// Customize the Content-Security-Policy header
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'"], // Allow resources from the same origin
-    fontSrc: ["'self'", "https://fonts.gstatic.com", "https://fonts.googleapis.com", "data:"], // Allow fonts from Google Fonts and data URIs
-    styleSrc: ["'self'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"], // Allow styles from Google Fonts and Font Awesome
-    scriptSrc: ["'self'", "https://cdnjs.cloudflare.com"], // Allow scripts from the same origin and Font Awesome CDN
-  }
-}));
+// Set security headers
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      fontSrc: [
+        "'self'",
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+      ],
+    },
+  })
+);
 
 
 
