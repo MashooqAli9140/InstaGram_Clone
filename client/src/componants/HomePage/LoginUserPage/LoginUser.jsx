@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./LoginUser.css";
 import img from "/src/images/dp.jpg";
@@ -10,8 +10,8 @@ const LoginUser = () => {
   const [opedashboard, setopenDashboard] = useState("block");
   const [openNewpostCard, setopenNewpostCard] = useState("none");
   const [pro_picture, set_pro_picture] = useState(null);
-  const [ userProfile ,setuserprofile ] = useState("");
-  const [ addprofilebtn , setaddprofilebtn ] = useState(true)
+  const [userProfile, setuserprofile] = useState("");
+  const [addprofilebtn, setaddprofilebtn] = useState(true);
 
   //new post form details
   const [username, setusername] = useState(loginUser);
@@ -29,36 +29,26 @@ const LoginUser = () => {
   formdata.append("day", day);
   formdata.append("month", month);
   formdata.append("year", year);
-  formdata.append("userProfile", userProfile );
+  formdata.append("userProfile", userProfile);
   if (selecetImage) {
     formdata.append("image", selecetImage); // image added to formdata
-    console.log(" image now added in form");
   }
 
   //GETT USER DETAILS
-    useEffect(() => {
-      async function GetSingleUser() {
-
-        try {
-          const response = await axios.get(
-            `http://localhost:3500/single-user/${username}`);
-          console.log(
-            "this is response from single userdata-->",
-            response.data
-          );
-          setuserprofile( response.data.SingleUser.image );
-          return response.status;
-        } catch (error) {
-          console.log("error while fetching single user details", error);
-          return error;
-        }
+  useEffect(() => {
+    async function GetSingleUser() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3500/single-user/${username}`
+        );
+        setuserprofile(response.data.SingleUser.image);
+        return response.status;
+      } catch (error) {
+        return error;
       }
-      GetSingleUser();
-    }, [username]);
-
-
-
-
+    }
+    GetSingleUser();
+  }, [username]);
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
   async function SendNewPost(e) {
@@ -71,12 +61,11 @@ const LoginUser = () => {
           headers: {},
         }
       );
-      alert("new post uploaded and you can check mongodb");
+      alert("new post uploaded");
       setnewpostText("");
       window.location.reload();
       return response.status;
     } catch (error) {
-      console.log("error while sending new post data", error);
       alert("error while sending new post please check console");
     }
   }
@@ -92,17 +81,13 @@ const LoginUser = () => {
     setselectImage(e.target.files[0]);
     setopenNewpostCard("block");
     setopenDashboard("none");
-    console.log("Selected Image:", e.target.files[0]);
   }
-
 
   //HANDLING PROFILE PICTURE SELECTION
   function handleProfilepicture(e) {
     set_pro_picture(e.target.files[0]);
-    setaddprofilebtn( prev => !prev );
-    console.log("Selected Image:", e.target.files[0]);
+    setaddprofilebtn((prev) => !prev);
   }
-
 
   //SENDING PROFILE PICTURE
   async function Sendprofilepicture(e, loginUser) {
@@ -126,10 +111,9 @@ const LoginUser = () => {
       );
       alert("image updated success");
       window.location.reload();
-      setprofilepicdone( false );
+      setprofilepicdone(false);
       return response.status;
     } catch (error) {
-      console.log("error while changing profile picture", error);
       alert("error while changing new pic");
     }
   }
@@ -273,7 +257,13 @@ const LoginUser = () => {
           <div id="storydiv">
             <div id="storyprofilediv">
               <div id="storyprofile">
-                <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
+                <img
+                  id="storyprofile_img"
+                  src={
+                    userProfile ? `http://localhost:3500${userProfile}` : img
+                  }
+                  alt="profile_img"
+                />
               </div>
             </div>
             <div id="yourstoryText">
@@ -311,14 +301,27 @@ const LoginUser = () => {
                 <i class="fa-solid fa-plus fa-2x" style={{ color: "white" }}>
                   {" "}
                 </i>
-                <button style={{ cursor: addprofilebtn ? "not-allowed" : "pointer" , borderRadius:"10px", fontWeight:"700", background: addprofilebtn ? "black" : "#0095F6", padding:"10px 10px 10px 10px" , color:"white", border:"none", outline:"none"  }}  disabled={addprofilebtn} onClick={(e) => Sendprofilepicture(e, loginUser)}>
+                <button
+                  style={{
+                    cursor: addprofilebtn ? "not-allowed" : "pointer",
+                    borderRadius: "10px",
+                    fontWeight: "700",
+                    background: addprofilebtn ? "black" : "#0095F6",
+                    padding: "10px 10px 10px 10px",
+                    color: "white",
+                    border: "none",
+                    outline: "none",
+                  }}
+                  disabled={addprofilebtn}
+                  onClick={(e) => Sendprofilepicture(e, loginUser)}
+                >
                   {" "}
                   Add Picture{" "}
                 </button>
               </div>
             </label>
           </div>
-{/* //ADD NEW PROFILE PICTURE END */}
+          {/* //ADD NEW PROFILE PICTURE END */}
           <NewpostCard />
           <br />
           <div style={{ marginBottom: "60px" }}>
@@ -345,8 +348,12 @@ const LoginUser = () => {
             <i class="fa-brands fa-facebook-messenger fa-2x"></i>{" "}
           </a>
           <Link to={`/edit-profile/${loginUser}`}>
-            <div style={{ border: "2px solid white"}} id="storyprofile">
-                <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
+            <div style={{ border: "2px solid white" }} id="storyprofile">
+              <img
+                id="storyprofile_img"
+                src={userProfile ? `http://localhost:3500${userProfile}` : img}
+                alt="profile_img"
+              />
             </div>
           </Link>
         </div>

@@ -32,13 +32,11 @@ const CommentSection = () => {
           },
         }
       );
-      console.log(response.data);
       alert("comment success ");
       setnewComment("");
       window.location.reload();
       return response.status;
     } catch (error) {
-      console.log(error);
       alert("Failed");
       return error.msge;
     }
@@ -56,7 +54,6 @@ const CommentSection = () => {
         setCommentedBY(response.data.post.commentedBy);
         return response.status;
       } catch (error) {
-        console.log(error);
         return error.msge;
       }
     }

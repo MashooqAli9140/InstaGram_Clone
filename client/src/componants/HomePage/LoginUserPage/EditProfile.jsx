@@ -20,13 +20,10 @@ const LoginUser = () => {
         const response = await axios.get(
           `http://localhost:3500/single-user/${username}`
         );
-        console.log("this is response from single userdata-->", response.data);
         setuserprofile(response.data.SingleUser.image);
-        console.log(response.data.SingleUser);
         setsingleUserData(response.data.SingleUser);
         return response.status;
       } catch (error) {
-        console.log("error while fetching single user details", error);
         return error;
       }
     }
@@ -38,7 +35,6 @@ const LoginUser = () => {
     e.preventDefault();
     set_pro_picture(e.target.files[0]);
     alert("image selected");
-    console.log("Selected Image success:", e.target.files[0]);
   }
 
   //SENDING PROFILE PICTURE
@@ -68,7 +64,6 @@ const LoginUser = () => {
       setprofilepicdone(true);
       return response.status;
     } catch (error) {
-      console.log("error while changing profile picture", error);
       alert("error while changing new pic");
     }
   }

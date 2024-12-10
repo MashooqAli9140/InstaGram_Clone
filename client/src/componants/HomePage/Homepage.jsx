@@ -1,4 +1,3 @@
-// Import necessary dependencies and assets
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,6 @@ import playstorebtn from "/src/images/googleplaybtn.png";
 import microsoftbtn from "/src/images/microsoftbtn.png";
 
 const Homepage = () => {
-  // State for controlling forms and inputs
   const [opensignform, setopensignupform] = useState("none");
   const [openloginform, setopenloginform] = useState("block");
   const [username, setusername] = useState("");
@@ -18,56 +16,65 @@ const Homepage = () => {
 
   const navigate = useNavigate();
 
-  // Function to handle user signup request
+  //SENDING USER SIGNUP DATA
   async function Sendsignupdata(e) {
     e.preventDefault();
+    const Signupdata = {
+      username,
+      email,
+      password,
+    };
     try {
       const response = await axios.post(
         "http://localhost:3500/signup",
-        { username, email, password },
-        { headers: { "Content-type": "application/json" } }
+        Signupdata,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
       );
-
-      if (response.status === 201) {
-        setopensignupform("none");
-        setopenloginform("block");
-      }
-
+      if (response.status === 201)
+        setopensignupform("none"), setopenloginform("block");
       setusername("");
       setemail("");
       setpassword("");
+      return response.status;
     } catch (error) {
-      alert("Duplicate details");
-      console.log("Error while sending the signup data:", error);
+      alert("duplicate detailes");
     }
   }
 
-  // Function to handle user login request
+  //SENDING LOGIN REQ WITH EMAIL AND PASSWORD
   async function LoginRequest(e) {
     e.preventDefault();
-    if (!email || !password) {
-      alert("Please fill all details");
-      return;
-    }
+    if (!email || !password) alert("please fill all details");
 
+    const Logindata = {
+      email,
+      password,
+    };
     try {
       const response = await axios.post(
         "http://localhost:3500/login",
-        { email, password },
-        { headers: { "Content-type": "application/json" } }
+        Logindata,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
       );
-
+      // if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
       setemail("");
       setpassword("");
-
       const loginUser = response.data.userdetails.username;
-      alert("Login success");
+      alert("login success");
       navigate(`/${loginUser}`);
+      return response.status;
     } catch (error) {
       setemail("");
       setpassword("");
-      alert("Please check details or sign up again");
-      console.log("Error while logging in:", error);
+      alert("please check details or signup again");
     }
   }
 
@@ -75,106 +82,177 @@ const Homepage = () => {
     <div id="signuppageBG">
       <div id="signupOuterdiv">
         <div id="signupInnerdiv">
-          {/* Login Form */}
-          <div id="loginformdiv" style={{ display: openloginform }}>
-            <h1 id="instahead">instagram</h1>
+          {/* //created login form */}
+          <div id="loginformdiv" style={{ display: `${openloginform}` }}>
+            <div id="instahead">
+              <h1>instagram</h1>
+            </div>
 
-            <form onSubmit={LoginRequest}>
-              <input
-                type="email"
-                placeholder="email"
-                onChange={(e) => setemail(e.target.value)}
-                value={email}
-                id="emailinput"
-              />
-              <input
-                type="password"
-                placeholder="password"
-                onChange={(e) => setpassword(e.target.value)}
-                value={password}
-                id="passwordinput"
-                minLength={8}
-              />
-              <button type="submit" id="loginbtn">Log in</button>
+            <form onSubmit={(e) => LoginRequest(e)}>
+              <div id="emaildiv">
+                <input
+                  type="email"
+                  placeholder="email"
+                  onChange={(e) => setemail(e.target.value)}
+                  value={email}
+                  id="emailinput"
+                />
+              </div>
+
+              <div id="passworddiv">
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={(e) => setpassword(e.target.value)}
+                  value={password}
+                  id="passwordinput"
+                  minLength={8}
+                />
+              </div>
+
+              <div id="logintbndiv">
+                <button type="submit" id="loginbtn">
+                  {" "}
+                  Log in
+                </button>
+              </div>
             </form>
 
-            <p style={{ color: "grey", fontSize: "12px", fontWeight: "500" }}>OR</p>
-            <a href="/">Forgot password?</a>
-          </div>
-
-          {/* Signup Form */}
-          <div id="loginformdiv" style={{ display: opensignform }}>
-            <h1 id="instahead">instagram</h1>
-            <h3 id="instahead2">Sign up to see photos and videos from your friends</h3>
-
-            <form onSubmit={Sendsignupdata}>
-              <input
-                type="text"
-                placeholder="username"
-                onChange={(e) => setusername(e.target.value)}
-                value={username}
-                id="emailinput"
-              />
-              <input
-                type="email"
-                placeholder="email"
-                onChange={(e) => setemail(e.target.value)}
-                value={email}
-                id="emailinput"
-              />
-              <input
-                type="password"
-                placeholder="password"
-                onChange={(e) => setpassword(e.target.value)}
-                value={password}
-                id="passwordinput"
-                minLength={8}
-              />
-              <button type="submit" id="signupbtn">Signup</button>
-            </form>
-          </div>
-
-          {/* Toggle Between Login and Signup Forms */}
-          <div id="signupaccount" style={{ display: signuplink }}>
-            <h5>Don't have an account?</h5>
-            <button
-              id="signformopenbtn"
-              onClick={() => {
-                setopensignupform("block");
-                setopenloginform("none");
-                setsignuplink("none");
-                setloginlink("flex");
+            <div
+              style={{
+                maxWidth: "100%",
+                textAlign: "center",
+                padding: "10px 10px 10px 10px",
               }}
             >
-              Sign up
+              <p style={{ color: "grey", fontSize: "12px", fontWeight: "500" }}>
+                {" "}
+                OR{" "}
+              </p>
+            </div>
+
+            <div
+              style={{
+                maxWidth: "100%",
+                textAlign: "center",
+                padding: "30px 20px 30px 20px",
+              }}
+            >
+              <a href="/"> forgot password ? </a>
+            </div>
+          </div>
+
+          {/* //created signup form */}
+          <div id="loginformdiv" style={{ display: `${opensignform}` }}>
+            <div id="instahead">
+              <h1>instagram</h1>
+            </div>
+            <div id="instahead2">
+              <h3>Sign up to see photos and videos from your friends</h3>
+            </div>
+
+            <form onSubmit={(e) => Sendsignupdata(e)}>
+              <div id="emaildiv">
+                <input
+                  type="text"
+                  placeholder="username"
+                  onChange={(e) => setusername(e.target.value)}
+                  value={username}
+                  id="emailinput"
+                />
+              </div>
+
+              <div id="emaildiv">
+                <input
+                  type="email"
+                  placeholder="email"
+                  onChange={(e) => setemail(e.target.value)}
+                  value={email}
+                  id="emailinput"
+                />
+              </div>
+
+              <div id="passworddiv">
+                <input
+                  type="password"
+                  placeholder="password"
+                  onChange={(e) => setpassword(e.target.value)}
+                  value={password}
+                  id="passwordinput"
+                  minLength={8}
+                />
+              </div>
+
+              <div id="logintbndiv">
+                <button type="submit" id="signupbtn">
+                  {" "}
+                  Signup
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div id="signupaccount" style={{ display: `${signuplink}` }}>
+            <h5 style={{ fontWeight: "100" }}> don't have an account ?</h5>
+            <button
+              id="signformopenbtn"
+              onClick={(e) => {
+                setopensignupform("block"),
+                  setopenloginform("none"),
+                  setsignuplink("none"),
+                  setloginlink("flex");
+              }}
+            >
+              {" "}
+              Sign up{" "}
             </button>
           </div>
 
-          <div id="signupaccount" style={{ display: loginlink }}>
-            <h5>Already have an account?</h5>
+          <div id="signupaccount" style={{ display: `${loginlink}` }}>
+            <h5 style={{ fontWeight: "100" }}> Already have an account ?</h5>
             <button
               id="signformopenbtn"
-              onClick={() => {
-                setopensignupform("none");
-                setopenloginform("block");
-                setloginlink("none");
-                setsignuplink("flex");
+              onClick={(e) => {
+                setopensignupform("none"),
+                  setopenloginform("block"),
+                  setloginlink("none"),
+                  setsignuplink("flex");
               }}
             >
-              Log in
+              {" "}
+              Log in{" "}
             </button>
           </div>
 
-          {/* App Download Links */}
-          <h5 style={{ color: "white", textAlign: "center", padding: "20px" }}>Get the app</h5>
+          {/* 
+//// */}
+          <div
+            style={{
+              color: "white",
+              maxWidth: "100%",
+              textAlign: "center",
+              padding: "20px 10px 20px 10px",
+            }}
+          >
+            <h5 style={{ fontWeight: "100" }}> Get the app </h5>
+          </div>
           <div id="applink">
-            <a href="/">
-              <img id="playstorebtnimg" src={playstorebtn} alt="Google Play" />
-            </a>
-            <a href="/">
-              <img id="microsoftbtnimg" src={microsoftbtn} alt="Microsoft Store" />
-            </a>
+            <div id="playstorebtn">
+              <a href="/">
+                {" "}
+                <img id="playstorebtnimg" src={playstorebtn} alt="" />{" "}
+              </a>
+            </div>
+
+            <div id="microsoftbtn">
+              <a href="/">
+                {" "}
+                <img id="microsoftbtnimg" src={microsoftbtn} alt="" />{" "}
+              </a>
+            </div>
           </div>
+          {/* 
+//// */}
         </div>
       </div>
     </div>
