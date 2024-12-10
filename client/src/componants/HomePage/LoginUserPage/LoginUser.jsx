@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./LoginUser.css";
 import img from "/src/images/dp.jpg";
 import NewpostCard from "../../NewpostCard/NewpostCard";
@@ -345,11 +345,11 @@ const LoginUser = () => {
             {" "}
             <i class="fa-brands fa-facebook-messenger fa-2x"></i>{" "}
           </a>
-          <a href="/">
+          <Link to={`/edit-profile/${loginUser}`}>
             <div style={{ border: "1px solid white"}} id="storyprofile">
                 <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </div>
