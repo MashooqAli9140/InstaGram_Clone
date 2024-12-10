@@ -26,7 +26,7 @@ const Homepage = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3500/signup",
+        "https://instagram-clone-by-faiz.onrender.com/signup",
         Signupdata,
         {
           headers: {
@@ -56,7 +56,7 @@ const Homepage = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3500/login",
+        "https://instagram-clone-by-faiz.onrender.com/login",
         Logindata,
         {
           headers: {

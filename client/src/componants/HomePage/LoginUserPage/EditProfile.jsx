@@ -18,7 +18,7 @@ const LoginUser = () => {
     async function GetSingleUser() {
       try {
         const response = await axios.get(
-          `http://localhost:3500/single-user/${username}`
+          `https://instagram-clone-by-faiz.onrender.com/${username}`
         );
         setuserprofile(response.data.SingleUser.image);
         setsingleUserData(response.data.SingleUser);
@@ -53,7 +53,7 @@ const LoginUser = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3500/add-profile-picture",
+        "https://instagram-clone-by-faiz.onrender.com/add-profile-picture",
         profileFormdata,
         {
           headers: {},
@@ -113,7 +113,7 @@ const LoginUser = () => {
                 <img
                   id="storyprofile_img"
                   src={
-                    userProfile ? `http://localhost:3500${userProfile}` : img
+                    userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}` : img
                   }
                   alt="profile_img"
                 />

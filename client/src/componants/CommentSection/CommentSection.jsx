@@ -24,7 +24,7 @@ const CommentSection = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3500/posts/new-comment",
+        "https://instagram-clone-by-faiz.onrender.com/posts/new-comment",
         CommentData,
         {
           headers: {
@@ -47,7 +47,7 @@ const CommentSection = () => {
     async function FetchPostComments(id) {
       try {
         const response = await axios.get(
-          `http://localhost:3500/posts/${id}`,
+          `https://instagram-clone-by-faiz.onrender.com/posts/${id}`,
           {}
         );
         setAllComments(response.data.post.comment);

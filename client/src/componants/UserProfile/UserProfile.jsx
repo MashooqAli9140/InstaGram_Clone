@@ -15,7 +15,7 @@ const UserProfile = () => {
     async function GetSingleUser() {
       try {
         const response = await axios.get(
-          `http://localhost:3500/single-user/${username}`);
+          `https://instagram-clone-by-faiz.onrender.comsingle-user/${username}`);
         console.log(
           "this is response from single userdata-->",
           response.data.SingleUser.followby
@@ -42,7 +42,7 @@ const UserProfile = () => {
     };
     try {
       const response = await axios.post(
-        " http://localhost:3500/follow-req",data,{
+        "https://instagram-clone-by-faiz.onrender.com/follow-req",data,{
 
         }
       );

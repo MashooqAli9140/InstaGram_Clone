@@ -39,7 +39,7 @@ const LoginUser = () => {
     async function GetSingleUser() {
       try {
         const response = await axios.get(
-          `http://localhost:3500/single-user/${username}`
+          `https://instagram-clone-by-faiz.onrender.com/single-user/${username}`
         );
         setuserprofile(response.data.SingleUser.image);
         return response.status;
@@ -55,7 +55,7 @@ const LoginUser = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3500/new-post",
+        "https://instagram-clone-by-faiz.onrender.com/new-post",
         formdata,
         {
           headers: {},
@@ -103,7 +103,7 @@ const LoginUser = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3500/add-profile-picture",
+        "https://instagram-clone-by-faiz.onrender.com/add-profile-picture",
         profileFormdata,
         {
           headers: {},
@@ -260,7 +260,7 @@ const LoginUser = () => {
                 <img
                   id="storyprofile_img"
                   src={
-                    userProfile ? `http://localhost:3500${userProfile}` : img
+                    userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}` : img
                   }
                   alt="profile_img"
                 />
@@ -351,7 +351,7 @@ const LoginUser = () => {
             <div style={{ border: "2px solid white" }} id="storyprofile">
               <img
                 id="storyprofile_img"
-                src={userProfile ? `http://localhost:3500${userProfile}` : img}
+                src={userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}` : img}
                 alt="profile_img"
               />
             </div>
