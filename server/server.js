@@ -25,6 +25,7 @@ app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
 // Secret key for JWT, stored in environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
 
+
 // Serve static files from the `dist` directory
 app.use(express.static(path.join(__dirname, "dist" )));
 
