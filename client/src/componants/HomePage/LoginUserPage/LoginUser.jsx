@@ -30,6 +30,7 @@ const LoginUser = () => {
   formdata.append("day", day);
   formdata.append("month", month);
   formdata.append("year", year);
+  formdata.append("userProfile", userProfile );
   if (selecetImage) {
     formdata.append("image", selecetImage); // image added to formdata
     console.log(" image now added in form");
