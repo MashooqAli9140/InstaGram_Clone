@@ -40,13 +40,12 @@ app.use(helmet());
 // Customize the Content-Security-Policy header
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'"],
-    fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"], // Allow fonts from Google Fonts and data URIs
-    styleSrc: ["'self'", "https://fonts.googleapis.com"],
-    scriptSrc: ["'self'"],
+    defaultSrc: ["'self'"], // Allow resources from the same origin
+    fontSrc: ["'self'", "https://fonts.gstatic.com", "https://fonts.googleapis.com", "data:"], // Allow fonts from Google Fonts and data URIs
+    styleSrc: ["'self'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com"], // Allow styles from Google Fonts and Font Awesome
+    scriptSrc: ["'self'", "https://cdnjs.cloudflare.com"], // Allow scripts from the same origin and Font Awesome CDN
   }
 }));
-
 
 
 
