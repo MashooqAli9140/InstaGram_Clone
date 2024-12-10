@@ -11,6 +11,8 @@ const LoginUser = () => {
   const [openNewpostCard, setopenNewpostCard] = useState("none");
   const [pro_picture, set_pro_picture] = useState(null);
   const [ userProfile ,setuserprofile ] = useState("");
+  const [ addprofilebtn , setaddprofilebtn ] = useState(true)
+  const [ profilepicdone , setprofilepicdone ] = useState( false )
 
   //new post form details
   const [username, setusername] = useState(loginUser);
@@ -97,6 +99,7 @@ const LoginUser = () => {
   //HANDLING PROFILE PICTURE SELECTION
   function handleProfilepicture(e) {
     set_pro_picture(e.target.files[0]);
+    setaddprofilebtn( prev => !prev );
     console.log("Selected Image:", e.target.files[0]);
   }
 
@@ -123,6 +126,7 @@ const LoginUser = () => {
       );
       alert("image updated success");
       window.location.reload();
+      setprofilepicdone(true);
       return response.status;
     } catch (error) {
       console.log("error while changing profile picture", error);
@@ -280,7 +284,7 @@ const LoginUser = () => {
           {/* //ADD NEW PROFILE PICTURE START */}
           <div
             style={{
-              display: userProfile ? "none" : "flex",
+              display: !setprofilepicdone || !pro_picture ? "none" : "flex",
               padding: "10px 10px 10px 10px",
               background: "grey",
               marginTop: "30px",
@@ -307,7 +311,7 @@ const LoginUser = () => {
                 <i class="fa-solid fa-plus fa-2x" style={{ color: "white" }}>
                   {" "}
                 </i>
-                <button onClick={(e) => Sendprofilepicture(e, loginUser)}>
+                <button style={{ cursor: addprofilebtn ? "not-allowed" : "pointer" , borderRadius:"10px", fontWeight:"700", background: addprofilebtn ? "black" : "#0095F6", padding:"10px 10px 10px 10px" , color:"white", border:"none", outline:"none"  }}  disabled={addprofilebtn} onClick={(e) => Sendprofilepicture(e, loginUser)}>
                   {" "}
                   Add Picture{" "}
                 </button>
