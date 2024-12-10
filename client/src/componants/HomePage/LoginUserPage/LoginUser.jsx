@@ -284,7 +284,7 @@ const LoginUser = () => {
           {/* //ADD NEW PROFILE PICTURE START */}
           <div
             style={{
-              display: !setprofilepicdone || !pro_picture ? "none" : "flex",
+              display: setprofilepicdone ? "none" : "flex",
               padding: "10px 10px 10px 10px",
               background: "grey",
               marginTop: "30px",
@@ -318,7 +318,7 @@ const LoginUser = () => {
               </div>
             </label>
           </div>
-{/* //ADD NEW PROFILE PICTURE START */}
+{/* //ADD NEW PROFILE PICTURE END */}
 
 
           <NewpostCard />
