@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "server", "dist")));
 
 
 // sending index.html file for all routes
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
