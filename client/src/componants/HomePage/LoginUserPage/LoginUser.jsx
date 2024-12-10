@@ -320,9 +320,8 @@ const LoginUser = () => {
             </label>
           </div>
 {/* //ADD NEW PROFILE PICTURE END */}
-
-
           <NewpostCard />
+          <br />
           <div style={{ marginBottom: "60px" }}>
             <br />
             <br />
