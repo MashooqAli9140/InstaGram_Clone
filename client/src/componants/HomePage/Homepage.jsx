@@ -109,6 +109,7 @@ const Homepage = () => {
                   onChange={(e) => setpassword(e.target.value)}
                   value={password}
                   id="passwordinput"
+                  minLength={8}
                 />
               </div>
 
@@ -181,6 +182,7 @@ const Homepage = () => {
                   onChange={(e) => setpassword(e.target.value)}
                   value={password}
                   id="passwordinput"
+                  minLength={8}
                 />
               </div>
 
