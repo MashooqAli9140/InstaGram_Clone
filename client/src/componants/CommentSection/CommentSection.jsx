@@ -100,6 +100,8 @@ const CommentSection = () => {
             ></i>
           </div>
         </div>
+
+        
         {/* //POST PROFILE AND CAPTION SECTION START*/}
         <div id="caption-bg">
           <div

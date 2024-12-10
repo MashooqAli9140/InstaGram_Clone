@@ -346,7 +346,7 @@ const LoginUser = () => {
             <i class="fa-brands fa-facebook-messenger fa-2x"></i>{" "}
           </a>
           <Link to={`/edit-profile/${loginUser}`}>
-            <div style={{ border: "1px solid white"}} id="storyprofile">
+            <div style={{ border: "2px solid white"}} id="storyprofile">
                 <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
             </div>
           </Link>
