@@ -19,13 +19,13 @@ connectDB();
 app.use(bodyparser.json());
 
 // Enable CORS with specified origin for frontend communication
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
 
 // Secret key for JWT, stored in environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Serve the React frontend
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "dist")));
 
 //import new post uploads folder as stactic file for showing post images
 app.use(
