@@ -25,7 +25,7 @@ app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Serve static files from the `dist` directory
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "server", "dist")));
 
 
 // sending index.html file for all routes
@@ -33,7 +33,18 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
+// Use helmet to set security headers
+app.use(helmet());
 
+// Customize the Content-Security-Policy header
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"], // Allow fonts from Google Fonts and data URIs
+    styleSrc: ["'self'", "https://fonts.googleapis.com"],
+    scriptSrc: ["'self'"],
+  }
+}));
 
 
 
