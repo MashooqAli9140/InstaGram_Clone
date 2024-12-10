@@ -346,8 +346,9 @@ const LoginUser = () => {
             <i class="fa-brands fa-facebook-messenger fa-2x"></i>{" "}
           </a>
           <a href="/">
-            {" "}
-            <i class="fa-regular fa-circle-user fa-2x"></i>{" "}
+            <div style={{ border: "1px solid white"}} id="storyprofile">
+                <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
+            </div>
           </a>
         </div>
       </div>
