@@ -21,12 +21,10 @@ const Homepage = () => {
   // Function to handle user signup request
   async function Sendsignupdata(e) {
     e.preventDefault();
-    const Signupdata = { username, email, password };
-
     try {
       const response = await axios.post(
-        "https://your-production-url/signup",
-        Signupdata,
+        "http://localhost:3500/signup",
+        { username, email, password },
         { headers: { "Content-type": "application/json" } }
       );
 
@@ -40,6 +38,7 @@ const Homepage = () => {
       setpassword("");
     } catch (error) {
       alert("Duplicate details");
+      console.log("Error while sending the signup data:", error);
     }
   }
 
@@ -51,12 +50,10 @@ const Homepage = () => {
       return;
     }
 
-    const Logindata = { email, password };
-
     try {
       const response = await axios.post(
-        "https://your-production-url/login",
-        Logindata,
+        "http://localhost:3500/login",
+        { email, password },
         { headers: { "Content-type": "application/json" } }
       );
 
@@ -70,6 +67,7 @@ const Homepage = () => {
       setemail("");
       setpassword("");
       alert("Please check details or sign up again");
+      console.log("Error while logging in:", error);
     }
   }
 
@@ -79,101 +77,66 @@ const Homepage = () => {
         <div id="signupInnerdiv">
           {/* Login Form */}
           <div id="loginformdiv" style={{ display: openloginform }}>
-            <div id="instahead">
-              <h1>instagram</h1>
-            </div>
+            <h1 id="instahead">instagram</h1>
 
             <form onSubmit={LoginRequest}>
-              <div id="emaildiv">
-                <input
-                  type="email"
-                  placeholder="email"
-                  onChange={(e) => setemail(e.target.value)}
-                  value={email}
-                  id="emailinput"
-                />
-              </div>
-
-              <div id="passworddiv">
-                <input
-                  type="password"
-                  placeholder="password"
-                  onChange={(e) => setpassword(e.target.value)}
-                  value={password}
-                  id="passwordinput"
-                  minLength={8}
-                />
-              </div>
-
-              <div id="logintbndiv">
-                <button type="submit" id="loginbtn">
-                  Log in
-                </button>
-              </div>
+              <input
+                type="email"
+                placeholder="email"
+                onChange={(e) => setemail(e.target.value)}
+                value={email}
+                id="emailinput"
+              />
+              <input
+                type="password"
+                placeholder="password"
+                onChange={(e) => setpassword(e.target.value)}
+                value={password}
+                id="passwordinput"
+                minLength={8}
+              />
+              <button type="submit" id="loginbtn">Log in</button>
             </form>
 
-            <div style={{ maxWidth: "100%", textAlign: "center", padding: "10px" }}>
-              <p style={{ color: "grey", fontSize: "12px", fontWeight: "500" }}>OR</p>
-            </div>
-
-            <div style={{ maxWidth: "100%", textAlign: "center", padding: "30px" }}>
-              <a href="/">Forgot password?</a>
-            </div>
+            <p style={{ color: "grey", fontSize: "12px", fontWeight: "500" }}>OR</p>
+            <a href="/">Forgot password?</a>
           </div>
 
           {/* Signup Form */}
           <div id="loginformdiv" style={{ display: opensignform }}>
-            <div id="instahead">
-              <h1>instagram</h1>
-            </div>
-
-            <div id="instahead2">
-              <h3>Sign up to see photos and videos from your friends</h3>
-            </div>
+            <h1 id="instahead">instagram</h1>
+            <h3 id="instahead2">Sign up to see photos and videos from your friends</h3>
 
             <form onSubmit={Sendsignupdata}>
-              <div id="emaildiv">
-                <input
-                  type="text"
-                  placeholder="username"
-                  onChange={(e) => setusername(e.target.value)}
-                  value={username}
-                  id="emailinput"
-                />
-              </div>
-
-              <div id="emaildiv">
-                <input
-                  type="email"
-                  placeholder="email"
-                  onChange={(e) => setemail(e.target.value)}
-                  value={email}
-                  id="emailinput"
-                />
-              </div>
-
-              <div id="passworddiv">
-                <input
-                  type="password"
-                  placeholder="password"
-                  onChange={(e) => setpassword(e.target.value)}
-                  value={password}
-                  id="passwordinput"
-                  minLength={8}
-                />
-              </div>
-
-              <div id="logintbndiv">
-                <button type="submit" id="signupbtn">
-                  Signup
-                </button>
-              </div>
+              <input
+                type="text"
+                placeholder="username"
+                onChange={(e) => setusername(e.target.value)}
+                value={username}
+                id="emailinput"
+              />
+              <input
+                type="email"
+                placeholder="email"
+                onChange={(e) => setemail(e.target.value)}
+                value={email}
+                id="emailinput"
+              />
+              <input
+                type="password"
+                placeholder="password"
+                onChange={(e) => setpassword(e.target.value)}
+                value={password}
+                id="passwordinput"
+                minLength={8}
+              />
+              <button type="submit" id="signupbtn">Signup</button>
             </form>
           </div>
 
           {/* Toggle Between Login and Signup Forms */}
           <div id="signupaccount" style={{ display: signuplink }}>
-            <h5 style={{ fontWeight: "100" }}>Don't have an account?</h5>
+            <h5>Don't have an account?</h5>
             <button
               id="signformopenbtn"
               onClick={() => {
@@ -188,7 +151,7 @@ const Homepage = () => {
           </div>
 
           <div id="signupaccount" style={{ display: loginlink }}>
-            <h5 style={{ fontWeight: "100" }}>Already have an account?</h5>
+            <h5>Already have an account?</h5>
             <button
               id="signformopenbtn"
               onClick={() => {
@@ -203,22 +166,14 @@ const Homepage = () => {
           </div>
 
           {/* App Download Links */}
-          <div style={{ color: "white", maxWidth: "100%", textAlign: "center", padding: "20px" }}>
-            <h5 style={{ fontWeight: "100" }}>Get the app</h5>
-          </div>
-
+          <h5 style={{ color: "white", textAlign: "center", padding: "20px" }}>Get the app</h5>
           <div id="applink">
-            <div id="playstorebtn">
-              <a href="/">
-                <img id="playstorebtnimg" src={playstorebtn} alt="Google Play" />
-              </a>
-            </div>
-
-            <div id="microsoftbtn">
-              <a href="/">
-                <img id="microsoftbtnimg" src={microsoftbtn} alt="Microsoft Store" />
-              </a>
-            </div>
+            <a href="/">
+              <img id="playstorebtnimg" src={playstorebtn} alt="Google Play" />
+            </a>
+            <a href="/">
+              <img id="microsoftbtnimg" src={microsoftbtn} alt="Microsoft Store" />
+            </a>
           </div>
         </div>
       </div>
