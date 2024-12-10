@@ -13,6 +13,7 @@ const NewPost = new Schema( {
     comment: [{ type: String }],
     commentedBy:[{ type: String }],
     followby: [{ type: String }],
+    image: { type:String }
 },
 { collection: 'INSTA-NEW-POST-DATA' }
 )
