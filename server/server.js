@@ -26,7 +26,7 @@ app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Serve static files from the `dist` directory
-app.use(express.static(path.join(__dirname, "server", "dist")));
+app.use(express.static(path.join(__dirname, "dist" )));
 
 
 // sending index.html file for all routes
