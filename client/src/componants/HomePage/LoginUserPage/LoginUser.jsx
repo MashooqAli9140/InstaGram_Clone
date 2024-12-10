@@ -12,7 +12,6 @@ const LoginUser = () => {
   const [pro_picture, set_pro_picture] = useState(null);
   const [ userProfile ,setuserprofile ] = useState("");
   const [ addprofilebtn , setaddprofilebtn ] = useState(true)
-  const [ profilepicdone , setprofilepicdone ] = useState( false )
 
   //new post form details
   const [username, setusername] = useState(loginUser);
@@ -127,7 +126,7 @@ const LoginUser = () => {
       );
       alert("image updated success");
       window.location.reload();
-      setprofilepicdone(true);
+      setprofilepicdone( false );
       return response.status;
     } catch (error) {
       console.log("error while changing profile picture", error);
@@ -285,7 +284,7 @@ const LoginUser = () => {
           {/* //ADD NEW PROFILE PICTURE START */}
           <div
             style={{
-              display: setprofilepicdone ? "none" : "flex",
+              display: pro_picture ? "flex" : "none",
               padding: "10px 10px 10px 10px",
               background: "grey",
               marginTop: "30px",
