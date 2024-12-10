@@ -1,60 +1,51 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./LoginUser.css";
 import img from "/src/images/dp.jpg";
-import NewpostCard from "../../NewpostCard/NewpostCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const LoginUser = () => {
   const { username } = useParams();
   const [pro_picture, set_pro_picture] = useState(null);
-  const [ userProfile ,setuserprofile ] = useState("");
-  const [ addprofilebtn , setaddprofilebtn ] = useState(true)
-  const [ profilepicdone , setprofilepicdone ] = useState( false )
+  const [userProfile, setuserprofile] = useState("");
+  const [profilepicdone, setprofilepicdone] = useState(false);
+  const [singleUserData, setsingleUserData] = useState();
   const navigate = useNavigate();
 
-  //new post form details
-  const [newpostText, setnewpostText] = useState("");
-  const [selecetImage, setselectImage] = useState(null);
-  const currentdate = new Date();
-
   //GETT USER DETAILS
-    useEffect(() => {
-      async function GetSingleUser() {
-
-        try {
-          const response = await axios.get(
-            `http://localhost:3500/single-user/${username}`);
-          console.log(
-            "this is response from single userdata-->",
-            response.data
-          );
-          setuserprofile( response.data.SingleUser.image );
-          return response.status;
-        } catch (error) {
-          console.log("error while fetching single user details", error);
-          return error;
-        }
+  useEffect(() => {
+    async function GetSingleUser() {
+      try {
+        const response = await axios.get(
+          `http://localhost:3500/single-user/${username}`
+        );
+        console.log("this is response from single userdata-->", response.data);
+        setuserprofile(response.data.SingleUser.image);
+        console.log(response.data.SingleUser);
+        setsingleUserData(response.data.SingleUser);
+        return response.status;
+      } catch (error) {
+        console.log("error while fetching single user details", error);
+        return error;
       }
-      GetSingleUser();
-    }, [username]);
-
+    }
+    GetSingleUser();
+  }, [username]);
 
   //HANDLING PROFILE PICTURE SELECTION
   function handleProfilepicture(e) {
     e.preventDefault();
     set_pro_picture(e.target.files[0]);
-    alert("image selected")
+    alert("image selected");
     console.log("Selected Image success:", e.target.files[0]);
   }
 
-
   //SENDING PROFILE PICTURE
-  async function Sendprofilepicture( e, username ) {
+  async function Sendprofilepicture(e, username) {
     e.preventDefault();
-    if(!pro_picture) return alert("please select Profile picture")
-    
+    if (!pro_picture) return alert("please select Profile picture");
+
     const profileFormdata = new FormData();
     profileFormdata.append("username", username);
     if (pro_picture) {
@@ -85,9 +76,8 @@ const LoginUser = () => {
   return (
     <div id="dashboardBG">
       <div id="maindashboard">
-
-            {/* //EDIT NAVABR START*/}
-            <div id="comment-nav">
+        {/* //EDIT NAVABR START*/}
+        <div id="comment-nav">
           <button
             style={{
               background: "none",
@@ -111,49 +101,162 @@ const LoginUser = () => {
             ></i>
           </div>
         </div>
-            {/* //EDIT NAVABR END*/}
+        {/* //EDIT NAVABR END*/}
 
-
-        <div style={{ padding:"10px 10px 10px 10px"}}>    
-            <div style={{ display:"flex", borderRadius:"20px", gap:"20px" , backgroundColor:"grey" , padding:"10px 10px 10px 10px "}}>
-
+        <div style={{ padding: "10px 10px 10px 10px" }}>
+          <div
+            style={{
+              display: "flex",
+              borderRadius: "20px",
+              gap: "20px",
+              backgroundColor: "grey",
+              padding: "10px 10px 10px 10px ",
+            }}
+          >
             <div>
-             <div id="storyprofile">
-                <img id="storyprofile_img" src= { userProfile ? `http://localhost:3500${userProfile}` : img } alt="profile_img" />
+              <div id="storyprofile">
+                <img
+                  id="storyprofile_img"
+                  src={
+                    userProfile ? `http://localhost:3500${userProfile}` : img
+                  }
+                  alt="profile_img"
+                />
               </div>
             </div>
 
-            <div style={{ flex:"1", display:"flex", justifyContent:"space-between", alignItems:"center", gap:'10px', padding:"10px 10px 10px 10px"}}>
-                 <h3 style={{color:"white"}}> { username    }  </h3>
-            <input
-              type="file"
-              accept="image/*"
-              id="plusbtn_1"
-              style={{ display: "none" }}
-              onChange={(e) => handleProfilepicture(e)}
-            />
-            <label htmlFor="plusbtn_1" style={{ cursor: "pointer" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-              <i class="fa-solid fa-plus fa-2x" style={{ color: "white" }}>
-                  {" "}
-              </i>
-              <button onClick={ (e) => Sendprofilepicture(e , username)} style={{ cursor:"pointer" , background:"#178CF6", color:"white", fontWeight:"600" ,padding:"10px 10px 10px 10px " , borderRadius:"20px" , border:"none" ,outline:"none"}}> Change profile </button>
-              </div>
-            </label>
-
+            <div
+              style={{
+                flex: "1",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                gap: "10px",
+                padding: "10px 10px 10px 10px",
+              }}
+            >
+              <h3 style={{ color: "white" }}> {username} </h3>
+              <input
+                type="file"
+                accept="image/*"
+                id="plusbtn_1"
+                style={{ display: "none" }}
+                onChange={(e) => handleProfilepicture(e)}
+              />
+              <label htmlFor="plusbtn_1" style={{ cursor: "pointer" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <i class="fa-solid fa-plus fa-2x" style={{ color: "white" }}>
+                    {" "}
+                  </i>
+                  <button
+                    onClick={(e) => Sendprofilepicture(e, username)}
+                    style={{
+                      cursor: "pointer",
+                      background: "#178CF6",
+                      color: "white",
+                      fontWeight: "600",
+                      padding: "10px 10px 10px 10px ",
+                      borderRadius: "20px",
+                      border: "none",
+                      outline: "none",
+                    }}
+                  >
+                    {" "}
+                    Change profile{" "}
+                  </button>
+                </div>
+              </label>
             </div>
-            </div>
+          </div>
         </div>
- 
 
+        <div
+          style={{
+            width: "100%",
+            padding: "10px 10px 10px 10px",
+            textAlign: "left",
+            position: "sticky",
+            bottom: "0",
+          }}
+        >
+          <label
+            style={{ display: "block", color: "white" }}
+            htmlFor="username"
+          >
+            {" "}
+            Username{" "}
+          </label>
+          <input
+            style={{
+              padding: "10px 10px 10px 10px",
+              marginBottom: "20px",
+              fontSize: "20px",
+              width: "100%",
+              background: "none",
+              border: "1px solid grey",
+              color: "white",
+            }}
+            type="text"
+            id="username"
+            value={singleUserData && singleUserData.username}
+            readOnly
+          />
 
+          <label
+            style={{ display: "block", color: "white" }}
+            htmlFor="username"
+          >
+            {" "}
+            Email{" "}
+          </label>
+          <input
+            style={{
+              padding: "10px 10px 10px 10px",
+              fontSize: "20px",
+              width: "100%",
+              background: "none",
+              border: "1px solid grey",
+              color: "white",
+            }}
+            type="text"
+            id="username"
+            value={singleUserData && singleUserData.email}
+            readOnly
+          />
+        </div>
+
+        <div
+          style={{
+            width: "100%",
+            padding: "10px 10px 10px 10px",
+            textAlign: "center",
+            position: "sticky",
+            bottom: "0",
+          }}
+        >
+          <a href="/">
+            <button
+              style={{
+                border: "2px solid white",
+                cursor: "pointer",
+                backgroundColor: "black",
+                color: "white",
+                fontWeight: 700,
+                width: "100%",
+                padding: "10px 10px 10px 10px",
+              }}
+            >
+              Log out
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   );
