@@ -25,7 +25,7 @@ const Homepage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3500/signup",
+        "https://your-production-url/signup",
         Signupdata,
         { headers: { "Content-type": "application/json" } }
       );
@@ -38,10 +38,8 @@ const Homepage = () => {
       setusername("");
       setemail("");
       setpassword("");
-      return response.status;
     } catch (error) {
       alert("Duplicate details");
-      console.log(error, "Error while sending the signup data");
     }
   }
 
@@ -57,7 +55,7 @@ const Homepage = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3500/login",
+        "https://your-production-url/login",
         Logindata,
         { headers: { "Content-type": "application/json" } }
       );
@@ -66,15 +64,12 @@ const Homepage = () => {
       setpassword("");
 
       const loginUser = response.data.userdetails.username;
-      console.log("Login success, username is -->", loginUser);
       alert("Login success");
       navigate(`/${loginUser}`);
-      return response.status;
     } catch (error) {
       setemail("");
       setpassword("");
       alert("Please check details or sign up again");
-      console.log(error, "Error while logging in");
     }
   }
 
