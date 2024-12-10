@@ -77,7 +77,7 @@ import { useNavigate } from "react-router-dom";
           {/* // USERNAME SECTION  */}
           <div id="post-username-section">
             <div id="post-profile">
-              <img src={DP} id="postprofile-img" alt="porfile pic" />
+              <img src= { userProfile ? `http://localhost:3500${userProfile}` : DP } id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
               <div style={{ flex:"1"}}>
