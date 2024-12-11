@@ -30,19 +30,40 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(express.static(path.join(__dirname, "dist" )));
 
 
+// // Set security headers
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       fontSrc: [
+//         "'self'",
+//         "https://fonts.googleapis.com",
+//         "https://fonts.gstatic.com",
+//       ],
+//     },
+//   })
+// );
 // Set security headers
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: ["'self'"], // Restricts default sources
       fontSrc: [
         "'self'",
-        "https://fonts.googleapis.com",
-        "https://fonts.gstatic.com",
+        "https://fonts.googleapis.com", // For Google Fonts
+        "https://fonts.gstatic.com", // For Google Fonts
+        "https://cdnjs.cloudflare.com", // For Font Awesome fonts
+      ],
+      styleSrc: [
+        "'self'",
+        "'unsafe-inline'", // Needed for inline styles in some cases
+        "https://fonts.googleapis.com", // For Google Fonts styles
+        "https://cdnjs.cloudflare.com", // For Font Awesome CSS
       ],
     },
   })
 );
+
 
 
 
