@@ -8,6 +8,14 @@
     padding-right: 10px; */
 /* } */ 
 
+#loading-screen{
+    background-color: white;
+    width: 390px;
+    max-width: 390px;
+    margin: 20px auto 0;
+    color: black;
+    font-weight: 700;
+}
 #maindashboard{
     background-color: #121212;
     max-width: 390px;

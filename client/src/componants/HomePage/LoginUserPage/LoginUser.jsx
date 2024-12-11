@@ -12,6 +12,7 @@ const LoginUser = () => {
   const [pro_picture, set_pro_picture] = useState(null);
   const [userProfile, setuserprofile] = useState("");
   const [addprofilebtn, setaddprofilebtn] = useState(true);
+  const [loading, setLoading] = useState(true); // Loading state
 
   //new post form details
   const [username, setusername] = useState(loginUser);
@@ -34,23 +35,40 @@ const LoginUser = () => {
     formdata.append("image", selecetImage); // image added to formdata
   }
 
-  //GETT USER DETAILS
+ 
+// Fetch user details
   useEffect(() => {
     async function GetSingleUser() {
       try {
+        setLoading(true); // Set loading to true before fetching
         const response = await axios.get(
-          `https://instagram-clone-by-faiz.onrender.com/single-user/${username}`
+          `https://instagram-clone-by-faiz.onrender.com/single-user/${loginUser}`
         );
         if (response.data?.SingleUser?.image) {
           setuserprofile(response.data.SingleUser.image);
         }
-        return response.status;
       } catch (error) {
-        return error;
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     }
     GetSingleUser();
-  }, [username]);
+  }, [loginUser]);
+
+  if (loading) {
+    return (
+      <div id="loading-screen">
+        <h2>Loading...</h2>
+        {/* Optional: Add a spinner or loading animation here */}
+      </div>
+    );
+  }
+
+
+
+
+
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
   async function SendNewPost(e) {
@@ -123,8 +141,6 @@ const LoginUser = () => {
   return (
 
     <div id="dashboardBG">
-
-      { userProfile ? 
 
       <div id="maindashboard">
         {/* //OPEN NEW POST CARD FOR UPLOAD NEW POST */}
@@ -364,9 +380,7 @@ const LoginUser = () => {
           </Link>
         </div>
       </div>
-      :
-      <h3 style={{ color:"white"}}>Loading</h3>
-      }
+   
     </div>
   );
 };
