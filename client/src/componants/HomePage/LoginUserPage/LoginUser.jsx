@@ -331,19 +331,19 @@ const LoginUser = () => {
         </div>
 
         <div id="dashboard-bottom">
-          <a href="/">
+          <a href="">
             {" "}
             <i class="fa-solid fa-house fa-2x"></i>{" "}
           </a>
-          <a href="/">
+          <a href="">
             {" "}
             <i class="fa-solid fa-magnifying-glass fa-2x"></i>{" "}
           </a>
-          <a href="/">
+          <a href="">
             {" "}
             <i class="fa-solid fa-play fa-2x"></i>{" "}
           </a>
-          <a href="/">
+          <a href="">
             {" "}
             <i class="fa-brands fa-facebook-messenger fa-2x"></i>{" "}
           </a>
