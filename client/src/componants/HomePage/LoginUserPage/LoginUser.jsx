@@ -121,7 +121,11 @@ const LoginUser = () => {
   }
 
   return (
+
     <div id="dashboardBG">
+
+      { userProfile ? 
+
       <div id="maindashboard">
         {/* //OPEN NEW POST CARD FOR UPLOAD NEW POST */}
         <div
@@ -360,6 +364,9 @@ const LoginUser = () => {
           </Link>
         </div>
       </div>
+      :
+      <h3>Loading</h3>
+      }
     </div>
   );
 };
