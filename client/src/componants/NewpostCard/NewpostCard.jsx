@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
   const NewpostCard = () => {
   const { loginUser } = useParams();
   const [allPosts, setallPosts] = useState([]);
-  const [activelike , setactivelike ] = useState(false);
+  // const [activelike , setactivelike ] = useState(false);
   const navigate = useNavigate();
 
   //make req for getting all the post data
@@ -23,7 +23,6 @@ import { useNavigate } from "react-router-dom";
         );
         return response.status;
       } catch (error) {
-        console.log("error while fetching all the posts", error);
         return error;
       }
     }
@@ -34,8 +33,8 @@ import { useNavigate } from "react-router-dom";
   //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
   async function LikebtnClicked(e, post_id, loginUser) {
     e.preventDefault();
-    setactivelike( prev => !prev )
 
+    
 
     const PostLikedBY = {
       id: post_id,
@@ -65,10 +64,6 @@ import { useNavigate } from "react-router-dom";
     e.preventDefault();
     navigate(`/${post_id}/${username}/${loginUser}/${caption}`);
   }
-  
-
-
-
 
   return (
     <>
@@ -77,7 +72,7 @@ import { useNavigate } from "react-router-dom";
           {/* // USERNAME SECTION  */}
           <div id="post-username-section">
             <div id="post-profile">
-              <img src= { post.userProfile ? `https://instagram-clone-by-faiz.onrender.com${post.userProfile}` : DP } id="postprofile-img" alt="porfile pic" />
+              <img src= { post.userProfile && `https://instagram-clone-by-faiz.onrender.com${post.userProfile}`} id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
               <div style={{ flex:"1"}}>
@@ -113,7 +108,7 @@ import { useNavigate } from "react-router-dom";
                 {" "}
                 <i
                   class="fa-regular fa-heart fa-2x"
-                  style={{ color: post.likedby.includes(loginUser) || LikebtnClicked && "red" }}
+                  style={{ color: post.likedby.includes(loginUser) && "red" }}
                 >
                   {" "}
                 </i>{" "}
