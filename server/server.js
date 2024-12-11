@@ -29,6 +29,11 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // Serve static files from the `dist` directory
 app.use(express.static(path.join(__dirname, "dist" )));
 
+// sending index.html file for all routes
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+});
+
 
 // // Set security headers
 // app.use(
@@ -374,10 +379,7 @@ app.post("/follow-req", async (req, res) => {
   }
 });
 
-// sending index.html file for all routes
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
-});
+
 
 
 PORT = process.env.PORT || 4000;
