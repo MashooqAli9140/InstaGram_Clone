@@ -244,7 +244,7 @@ app.get("/single-user/:username", async (req, res) => {
   try {
     const SingleUser = await UsersignupData.findOne({ username: username }); // fetching single user data
     console.log(SingleUser);
-    res.status(200).json({ msge: "single user data access done", SingleUser });
+    res.status(200).json({ msge: "single user data access done", SingleUser});
   } catch (error) {
     console.log("error while fecthing the data");
     res.status(404).json({ msge: "error while fetching single user data" });
