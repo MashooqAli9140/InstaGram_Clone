@@ -41,7 +41,9 @@ const LoginUser = () => {
         const response = await axios.get(
           `https://instagram-clone-by-faiz.onrender.com/single-user/${username}`
         );
-        setuserprofile(response.data.SingleUser.image);
+        if (response.data?.SingleUser?.image) {
+          setuserprofile(response.data.SingleUser.image);
+        }
         return response.status;
       } catch (error) {
         return error;
@@ -260,7 +262,7 @@ const LoginUser = () => {
                 <img
                   loading="lazy"
                   id="storyprofile_img"
-                  src={`https://instagram-clone-by-faiz.onrender.com${userProfile}?t=${Date.now()}`}
+                  src={ userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}?t=${Date.now() }` : `https://instagram-clone-by-faiz.onrender.com${userProfile}?t=${Date.now()  }` }
                   alt="profile_img"
                 />
               </div>
