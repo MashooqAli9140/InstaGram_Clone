@@ -165,60 +165,81 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//getting post req for new post data
+// Getting POST request for new post data
 app.post("/new-post", upload.single("image"), async (req, res) => {
   const { username, newpostText, day, month, year, userProfile } = req.body;
-  const image = req.file; //access the image from req
-  if (!username || !newpostText || !day || !month || !year)
-    return res
-      .status(400)
-      .json({ msge: "some value are empty check details again" });
+  const image = req.file; // Access the image from req
+
+  // Validation for required fields
+  if (!username || !newpostText || !day || !month || !year) {
+    return res.status(400).json({ msge: "Some values are empty, check details again" });
+  }
 
   try {
+    // Handle the user profile image if provided
+    const profileImage = userProfile ? `/newProfileuploads/${userProfile}` : null;
+
+    // Save new post to DB
     const createNewPost = await newpost.create({
       username: username,
       newpostText: newpostText,
       day: day,
       month: month,
       year: year,
-      image: image ? `/newpostuploads/${image.filename}` : null, //store image path if available
-      userProfile: userProfile,
-    }); //save new post to db
+      image: image ? `/newpostuploads/${image.filename}` : null, // Store image path if available
+      userProfile: profileImage, // Store profile image path if available
+    });
+
     console.log(createNewPost);
-    res.status(201).json({ msge: "new post uploaded", createNewPost });
+    res.status(201).json({ msge: "New post uploaded successfully", createNewPost });
   } catch (error) {
-    console.log(error, "error while uploading new post");
-    res.status(500).json({ msge: `${error}` });
+    console.error("Error while uploading new post:", error);
+    res.status(500).json({ msge: "Server error: " + error.message });
   }
 });
 
-//getting post req for ADD NEW PROFILE PICTURE
+
+// Getting POST request for adding new profile picture
 app.post("/add-profile-picture", upload_1.single("image"), async (req, res) => {
   const { username } = req.body;
-  const image = req.file; //access the image from req
-  console.log("images is coming --> ", image);
-  if (!username)
-    return res.status(400).json({ msge: "active username is not coming" });
-  if (!image)
-    return res.status(400).json({ msge: "active image is not coming" });
+  const image = req.file; // Access the image from req
+
+  // Log image information (for debugging)
+  console.log("Image is coming -->", image);
+
+  // Validation
+  if (!username) {
+    return res.status(400).json({ msge: "Active username is not provided" });
+  }
+  if (!image) {
+    return res.status(400).json({ msge: "Active image is not provided" });
+  }
 
   try {
-    //first find the user
+    // Find the user in the database
     const finduser = await UsersignupData.findOne({ username });
-    if (!finduser)
-      return res
-        .status(404)
-        .json({ msge: " user is not found for adding new profile picture" });
+    if (!finduser) {
+      return res.status(404).json({ msge: "User not found for adding profile picture" });
+    }
 
-    //now save the selected image in user data
-    (finduser.image = image ? `/newProfileuploads/${image.filename}` : null), //store image path if available
-      await finduser.save();
-    res.status(201).json({ msge: "new post uploaded", finduser });
+    // Save the profile image path to the user's data
+    finduser.image = `/newProfileuploads/${image.filename}`; // Store the image path if available
+
+    // Save the user data with updated profile image
+    await finduser.save();
+
+    // Send response with updated user data
+    res.status(201).json({ msge: "Profile picture updated successfully", finduser });
   } catch (error) {
-    console.log(error, "error while uploading profile picture");
-    res.status(500).json({ msge: `${error}` });
+    console.error("Error while uploading profile picture:", error);
+    res.status(500).json({ msge: "Server error: " + error.message });
   }
 });
+
+
+
+
+
 
 //getting all post req and sending back all posts
 app.get("/allpost", async (req, res) => {
