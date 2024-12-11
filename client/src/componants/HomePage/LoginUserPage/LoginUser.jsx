@@ -184,9 +184,7 @@ const LoginUser = () => {
           </div>
           <div id="newpost-textarea">
             <div id="storyprofile">
-              {/* <img loading="lazy" id="storyprofile_img" src={ `https://instagram-clone-by-faiz.onrender.com${userProfile}` } alt="profile_img" /> */}
-              <img id="storyprofile_img" src={ userProfile } alt="profile_img" />
-              {console.log( userProfile )}
+              <img loading="lazy" id="storyprofile_img" src={ !userProfile ? img :  `https://instagram-clone-by-faiz.onrender.com${userProfile}` } alt="profile_img" />
             </div>
             <textarea
               onChange={(e) => setnewpostText(e.target.value)}
@@ -284,7 +282,7 @@ const LoginUser = () => {
                 <img
                   loading="lazy"
                   id="storyprofile_img"
-                  src={ userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}?t=${Date.now() }` : `https://instagram-clone-by-faiz.onrender.com${userProfile}?t=${Date.now()  }` }
+                  src={ userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}?t=${Date.now() }` : img }
                   alt="profile_img"
                 />
               </div>
@@ -375,7 +373,7 @@ const LoginUser = () => {
               <img
                 loading="lazy"
                 id="storyprofile_img"
-                src={`https://instagram-clone-by-faiz.onrender.com${userProfile}`}
+                src={ !userProfile ? img : `https://instagram-clone-by-faiz.onrender.com${userProfile}`}
                 alt="profile_img"
               />
             </div>
