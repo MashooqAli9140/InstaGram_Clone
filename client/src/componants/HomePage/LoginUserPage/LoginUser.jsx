@@ -65,6 +65,7 @@ const LoginUser = () => {
     );
   }
 
+  console.log("this is user profile updation after loading-->" , userProfile );
 
 
 
@@ -185,6 +186,7 @@ const LoginUser = () => {
           <div id="newpost-textarea">
             <div id="storyprofile">
               <img loading="lazy" id="storyprofile_img" src={ `https://instagram-clone-by-faiz.onrender.com${userProfile}` } alt="profile_img" />
+              {console.log( "this is response from image profile-->" `https://instagram-clone-by-faiz.onrender.com${userProfile}` )}
             </div>
             <textarea
               onChange={(e) => setnewpostText(e.target.value)}
