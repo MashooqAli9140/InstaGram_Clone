@@ -86,7 +86,7 @@ import { useNavigate } from "react-router-dom";
           <div id="post-img-div">
             {/* //always put BE server port like BE server running on 3500 */}
             <img
-              src= {`https://instagram-clone-by-faiz.onrender.com${post.image}`}
+              src={ post.image && `${post.image}`}
               id="post-img"
               alt="post-img"
             />
