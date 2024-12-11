@@ -72,7 +72,7 @@ import { useNavigate } from "react-router-dom";
           {/* // USERNAME SECTION  */}
           <div id="post-username-section">
             <div id="post-profile">
-              <img src= { post.userProfile && `${post.userProfile}`} id="postprofile-img" alt="porfile pic" />
+              <img src= { post.userProfile && `https://instagram-clone-by-faiz.onrender.com${userProfile}`} id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
               <div style={{ flex:"1"}}>
@@ -86,7 +86,7 @@ import { useNavigate } from "react-router-dom";
           <div id="post-img-div">
             {/* //always put BE server port like BE server running on 3500 */}
             <img
-              src={ post.image && `${post.image}`}
+              src={ post.image && `https://instagram-clone-by-faiz.onrender.com${post.image}`}
               id="post-img"
               alt="post-img"
             />
