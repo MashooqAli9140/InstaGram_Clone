@@ -7,11 +7,8 @@ import { useNavigate } from "react-router-dom";
 
   const NewpostCard = () => {
   const { loginUser } = useParams();
-  const currentdate = new Date();
-  const day = currentdate.getDate();
-  const month = currentdate.toLocaleString("Default", { month: "long" });
-  const year = currentdate.getFullYear();
   const [allPosts, setallPosts] = useState([]);
+  const [activelike , setactivelike ] = useState(false);
   const navigate = useNavigate();
 
   //make req for getting all the post data
@@ -37,6 +34,9 @@ import { useNavigate } from "react-router-dom";
   //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
   async function LikebtnClicked(e, post_id, loginUser) {
     e.preventDefault();
+    setactivelike( prev => !prev )
+
+
     const PostLikedBY = {
       id: post_id,
       username: loginUser,
@@ -113,7 +113,7 @@ import { useNavigate } from "react-router-dom";
                 {" "}
                 <i
                   class="fa-regular fa-heart fa-2x"
-                  style={{ color: post.likedby.includes(loginUser) && "red" }}
+                  style={{ color: post.likedby.includes(loginUser) || LikebtnClicked && "red" }}
                 >
                   {" "}
                 </i>{" "}
