@@ -44,9 +44,9 @@ const LoginUser = () => {
         const response = await axios.get(
           `https://instagram-clone-by-faiz.onrender.com/single-user/${loginUser}`
         );
-        if (response.data?.SingleUser?.image) {
-          setuserprofile(response.data.SingleUser.image);
-        }
+
+        setuserprofile(response.data.SingleUser.image);
+        return response.status;
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
