@@ -18,7 +18,7 @@ const LoginUser = () => {
     async function GetSingleUser() {
       try {
         const response = await axios.get(
-          `https://instagram-clone-by-faiz.onrender.com/${username}`
+          `https://instagram-clone-by-faiz.onrender.com/single-user/${username}`
         );
         setuserprofile(response.data.SingleUser.image);
         setsingleUserData(response.data.SingleUser);
