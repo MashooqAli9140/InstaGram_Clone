@@ -1,3 +1,11 @@
+#loading-screen{
+    background-color: white;
+    width: 390px;
+    max-width: 390px;
+    margin: 20px auto 0;
+    color: black;
+    font-weight: 700;
+}
 #new-post-card-bg{
     background-color: rgb(0, 0, 0);
     padding: 2px 2px 2px 2px;

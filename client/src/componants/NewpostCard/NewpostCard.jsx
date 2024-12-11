@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
   const NewpostCard = () => {
   const { loginUser } = useParams();
   const [allPosts, setallPosts] = useState([]);
-  // const [activelike , setactivelike ] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true); // Loading state
 
   //make req for getting all the post data
   useEffect(() => {
@@ -25,10 +25,24 @@ import { useNavigate } from "react-router-dom";
       } catch (error) {
         return error;
       }
+      finally {
+        setLoading(false); // Set loading to false after fetching
+      }
     }
     GetAllPost();
   
   }, []);
+
+  if (loading) {
+    return (
+      <div id="loading-screen">
+        <h2>Loading...</h2>
+        {/* Optional: Add a spinner or loading animation here */}
+      </div>
+    );
+  }
+
+
 
   //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
   async function LikebtnClicked(e, post_id, loginUser) {
