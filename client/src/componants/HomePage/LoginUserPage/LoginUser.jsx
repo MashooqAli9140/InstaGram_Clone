@@ -162,7 +162,7 @@ const LoginUser = () => {
           </div>
           <div id="newpost-textarea">
             <div id="storyprofile">
-              <img id="storyprofile_img" src={img} alt="profile_img" />
+              <img id="storyprofile_img" src={ `https://instagram-clone-by-faiz.onrender.com${userProfile}` } alt="profile_img" />
             </div>
             <textarea
               onChange={(e) => setnewpostText(e.target.value)}
