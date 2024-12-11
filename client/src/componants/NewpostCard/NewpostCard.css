@@ -1,6 +1,7 @@
 #new-post-card-bg{
     background-color: rgb(0, 0, 0);
     padding: 2px 2px 2px 2px;
+    border-bottom: 2px solid grey;
 }
 #post-username-section{
     background-color:black;
@@ -19,6 +20,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 2px solid white;
 }
 #postprofile-img{
     width: 100%;
@@ -43,6 +45,7 @@
     justify-content: center;
     justify-items: center;
     overflow: hidden;
+    border: 1px solid white;
 }
 #post-img{
     width: 100%;
