@@ -167,7 +167,7 @@ app.post("/login", async (req, res) => {
 
 // Getting POST request for new post data
 app.post("/new-post", upload.single("image"), async (req, res) => {
-  const { username, newpostText, day, month, year, userProfile } = req.body;
+  const { username, newpostText, day, month, year } = req.body;
   const image = req.file; // Access the image from req
 
   // Validation for required fields
@@ -176,8 +176,8 @@ app.post("/new-post", upload.single("image"), async (req, res) => {
   }
 
   try {
-    // Handle the user profile image if provided
-    const profileImage = userProfile ? `/newProfileuploads/${userProfile}` : null;
+    // // Handle the user profile image if provided
+    // const profileImage = userProfile ? `/newProfileuploads/${userProfile}` : null;
 
     // Save new post to DB
     const createNewPost = await newpost.create({
@@ -187,7 +187,7 @@ app.post("/new-post", upload.single("image"), async (req, res) => {
       month: month,
       year: year,
       image: image ? `/newpostuploads/${image.filename}` : null, // Store image path if available
-      userProfile: profileImage, // Store profile image path if available
+      // userProfile: profileImage, // Store profile image path if available
     });
 
     console.log(createNewPost);
