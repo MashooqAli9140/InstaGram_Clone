@@ -21,7 +21,7 @@ app.use(bodyparser.json());
 
 
 // Allow all origins
-app.use(cors());
+app.use('/images', cors(), express.static('newpostuploads'));
 // // Enable CORS with specified origin for frontend communication
 // app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
 
