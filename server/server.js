@@ -19,8 +19,21 @@ connectDB();
 //using body parser for getting from URL body
 app.use(bodyparser.json());
 
-// Enable CORS with specified origin for frontend communication
-app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
+
+// Allow all origins
+app.use(cors());
+// // Enable CORS with specified origin for frontend communication
+// app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
+
+
+
+
+
+
+
+
+
+
 
 // Secret key for JWT, stored in environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
