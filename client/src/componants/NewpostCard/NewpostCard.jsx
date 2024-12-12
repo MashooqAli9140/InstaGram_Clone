@@ -45,10 +45,10 @@ import { useNavigate } from "react-router-dom";
 
 
   //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
-  async function LikebtnClicked(e, post_id, loginUser) {
+  async function LikebtnClicked(e, post_id, loginUser , GetAllPost ) {
     e.preventDefault();
 
-    
+    GetAllPost()
 
     const PostLikedBY = {
       id: post_id,
@@ -111,7 +111,7 @@ import { useNavigate } from "react-router-dom";
             <div id="like-cmnt-section">
               <button
                 id="like-btn"
-                onClick={(e) => LikebtnClicked(e, post._id, loginUser)}
+                onClick={(e) => LikebtnClicked(e, post._id, loginUser , GetAllPost )}
                 style={{
                   cursor: "pointer",
                   background: "none",
