@@ -86,7 +86,7 @@ import { useNavigate } from "react-router-dom";
           {/* // USERNAME SECTION  */}
           <div id="post-username-section">
             <div id="post-profile">
-              <img src= { post.userProfile ? `https://instagram-clone-by-faiz.onrender.com${post.userProfile}` : DP } id="postprofile-img" alt="porfile pic" />
+              <img src= { DP } id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
               <div style={{ flex:"1"}}>

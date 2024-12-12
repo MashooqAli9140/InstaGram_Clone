@@ -60,9 +60,9 @@ const LoginUser = () => {
   formdata.append("day", day);
   formdata.append("month", month);
   formdata.append("year", year);
-  if (userProfile) {
-    formdata.append("userProfile", userProfile); // image added to formdata
-  }
+  // if (userProfile) {
+  //   formdata.append("userProfile", userProfile); // image added to formdata
+  // }
   console.log("userprofile data-->" , userProfile );
   if (selecetImage) {
     formdata.append("image", selecetImage); // image added to formdata
