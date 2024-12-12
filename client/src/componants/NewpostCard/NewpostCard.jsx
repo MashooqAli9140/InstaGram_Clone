@@ -11,6 +11,37 @@ import { useNavigate } from "react-router-dom";
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true); // Loading state
 
+
+  //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
+  async function LikebtnClicked(e, post_id, loginUser ) {
+    e.preventDefault();
+
+
+    const PostLikedBY = {
+      id: post_id,
+      username: loginUser,
+    };
+    try {
+      const response = await axios.post(
+        "https://instagram-clone-by-faiz.onrender.com/post/likedby",
+        PostLikedBY,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      alert("post like success");
+      return response.status;
+    } catch (error) {
+      console.log(error);
+      alert("error while sending like the post req");
+    }
+  }
+
+
+
   //make req for getting all the post data
   useEffect(() => {
     async function GetAllPost() {
@@ -44,34 +75,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-  //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
-  async function LikebtnClicked(e, post_id, loginUser , GetAllPost ) {
-    e.preventDefault();
 
-    GetAllPost()
-
-    const PostLikedBY = {
-      id: post_id,
-      username: loginUser,
-    };
-    try {
-      const response = await axios.post(
-        "https://instagram-clone-by-faiz.onrender.com/post/likedby",
-        PostLikedBY,
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
-      alert("post like success");
-      return response.status;
-    } catch (error) {
-      console.log(error);
-      alert("error while sending like the post req");
-    }
-  }
 
   //when someone clicks on comment btn then this function will run
   async function ShowCommentSection(e, post_id, username, loginUser, caption) {
@@ -111,7 +115,7 @@ import { useNavigate } from "react-router-dom";
             <div id="like-cmnt-section">
               <button
                 id="like-btn"
-                onClick={(e) => LikebtnClicked(e, post._id, loginUser , GetAllPost )}
+                onClick={(e) => LikebtnClicked(e, post._id, loginUser  )}
                 style={{
                   cursor: "pointer",
                   background: "none",
