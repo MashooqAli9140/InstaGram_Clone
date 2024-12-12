@@ -23,19 +23,6 @@ const LoginUser = () => {
   const month = currentdate.toLocaleString("Default", { month: "long" });
   const year = currentdate.getFullYear();
 
-  /// creatting new form for new post details and send this form details to BE
-  const formdata = new FormData();
-  formdata.append("username", username);
-  formdata.append("newpostText", newpostText);
-  formdata.append("day", day);
-  formdata.append("month", month);
-  formdata.append("year", year);
-  formdata.append("userProfile", userProfile);
-  if (selecetImage) {
-    formdata.append("image", selecetImage); // image added to formdata
-  }
-
- 
 // Fetch user details
   useEffect(() => {
     async function GetSingleUser() {
@@ -66,6 +53,20 @@ const LoginUser = () => {
 
   console.log("this is user profile updation after loading-->" , userProfile );
 
+  /// creatting new form for new post details and send this form details to BE
+  const formdata = new FormData();
+  formdata.append("username", username);
+  formdata.append("newpostText", newpostText);
+  formdata.append("day", day);
+  formdata.append("month", month);
+  formdata.append("year", year);
+  if (userProfile) {
+    formdata.append("userProfile", userProfile); // image added to formdata
+  }
+  console.log("userprofile data-->" , userProfile );
+  if (selecetImage) {
+    formdata.append("image", selecetImage); // image added to formdata
+  }
 
 
 
