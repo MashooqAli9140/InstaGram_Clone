@@ -62,7 +62,7 @@ import { useNavigate } from "react-router-dom";
     }
     GetAllPost();
   
-  }, []);
+  }, [LikebtnClicked]);
 
   if (loading) {
     return (
