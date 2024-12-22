@@ -13,6 +13,7 @@ const Homepage = () => {
   const [password, setpassword] = useState("");
   const [loginlink, setloginlink] = useState("none");
   const [signuplink, setsignuplink] = useState("flex");
+  const [signupdone , setsignupdone] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,10 +36,12 @@ const Homepage = () => {
         }
       );
       if (response.status === 201)
-        setopensignupform("none"), setopenloginform("block");
+      setopensignupform("none"), setopenloginform("block");
       setusername("");
       setemail("");
       setpassword("");
+      setsignupdone(true);
+      setTimeout( () => setsignupdone(false) , 3000 );
       return response.status;
     } catch (error) {
       alert("duplicate detailes");
@@ -86,6 +89,9 @@ const Homepage = () => {
           <div id="loginformdiv" style={{ display: `${openloginform}` }}>
             <div id="instahead">
               <h1>instagram</h1>
+            </div>
+            <div id="instahead" style={{ display: signupdone ? "block" : "none" }}>
+              <h3> Sign up done <i class="fa-solid fa-check fa-2x" style={{ color:"green"}}></i> </h3>
             </div>
 
             <form onSubmit={(e) => LoginRequest(e)}>
