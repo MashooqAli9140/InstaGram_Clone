@@ -14,7 +14,7 @@ const Homepage = () => {
   const [loginlink, setloginlink] = useState("none");
   const [signuplink, setsignuplink] = useState("flex");
   const [signupdone , setsignupdone] = useState(false);
-  const [ loading , setLoading ] = useState(false);
+  const [ loading , setLoading ] = useState(true);
 
   const navigate = useNavigate();
 
@@ -54,12 +54,10 @@ const Homepage = () => {
     e.preventDefault();
     if(loading)
       {
-       return (
-         <div id="loading-screen">
+        <div id="loading-screen">
          <h2> Login request sent...</h2>
          {/* Optional: Add a spinner or loading animation here */}
        </div>
-       )
       }
     if (!email || !password) alert("please fill all details");
 
@@ -78,7 +76,6 @@ const Homepage = () => {
         }
       );
       // if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
-      setLoading(true)
       setemail("");
       setpassword("");
       const loginUser = response.data.userdetails.username;
