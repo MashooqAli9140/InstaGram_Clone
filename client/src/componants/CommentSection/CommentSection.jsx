@@ -97,10 +97,10 @@ const CommentSection = () => {
   // }
 
   //WHEN SOMEONE LIKES THE COMMENT
- async function likecomment( e , likedcommentindex , loginUser ){
+ async function likecomment( e , likedcommentindex , loginUser , post_id ){
     e.preventDefault();
     try {
-      const response = await axios.post( `https://instagram-clone-by-faiz.onrender.com/posts/new-comment/${likedcommentindex}/${loginUser}`,
+      const response = await axios.post( `https://instagram-clone-by-faiz.onrender.com/posts/new-comment/${likedcommentindex}/${loginUser}/${post_id}`,
         {
           headers: {
             "Content-type": "application/json",
@@ -193,7 +193,7 @@ const CommentSection = () => {
                   </p>{" "}
                   {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}           
                 </div>
-                <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e , index , loginUser ) }>
+                <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e , index , loginUser , post_id ) }>
                 <i class="fa-regular fa-heart fa-1x" style={{ color: cmntLike === index && heartcolor ? " red " : "white"}}> </i> 
                 </button>
               </div>
