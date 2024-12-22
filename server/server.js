@@ -368,9 +368,12 @@ app.post("/posts/new-comment/:likedcommentindex/:loginUser/:post_id", async (req
     const alreadyLiked = FindPost.commentlikeby.includes(loginUser);
         //if already liked then
         if (alreadyLiked) {
-          FindPost.commentlikeby = FindPost.commentlikeby.filter(
-            (username) => username != loginUser
-          );
+          if( FindPost.commentlikeby.length === 1  )
+          {
+            FindPost.commentlikeby = FindPost.commentlikeby.filter(
+              (username) => username != loginUser
+            );
+          }
           FindPost.commentlikeby = FindPost.commentlikeby.filter(
             (index) => index != likedcommentindex
           );
