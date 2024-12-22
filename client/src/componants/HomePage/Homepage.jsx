@@ -14,7 +14,7 @@ const Homepage = () => {
   const [loginlink, setloginlink] = useState("none");
   const [signuplink, setsignuplink] = useState("flex");
   const [signupdone , setsignupdone] = useState(false);
-  const [ loading , setLoading ] = useState(true);
+  const [ loading , setLoading ] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,6 +78,7 @@ const Homepage = () => {
         }
       );
       // if( response.status === 201 ) setopensignupform("none") , setopenloginform("block");
+      setLoading(true)
       setemail("");
       setpassword("");
       const loginUser = response.data.userdetails.username;
@@ -93,7 +94,7 @@ const Homepage = () => {
       setLoading(false);
     }
   }
-  
+
   return (
     <div id="signuppageBG">
       <div id="signupOuterdiv">
