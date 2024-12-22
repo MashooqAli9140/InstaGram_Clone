@@ -21,7 +21,7 @@ const CommentSection = () => {
     async function GetSingleUser() {
       try {
         const response = await axios.get(
-          `https://instagram-clone-by-faiz.onrender.com/single-user/${username}`
+          `https://instagram-clone-by-faiz.onrender.com/single-user/${loginUser}`
         );
         setuserprofile(response.data.SingleUser.image);
         setsingleUserData(response.data.SingleUser);
