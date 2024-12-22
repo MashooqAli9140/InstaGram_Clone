@@ -90,7 +90,7 @@ const Homepage = () => {
             <div id="instahead">
               <h1>instagram</h1>
             </div>
-            <div id="instahead" style={{  display: signupdone ? "flex" : "none" , alignContent:'center', alignItems:"center" }}>
+            <div id="instahead" style={{  display: signupdone ? "flex" : "none" , justifyContent:"center", alignContent:'center', alignItems:"center" }}>
               <h2> Sign up done <i class="fa-solid fa-check fa-2x" style={{ color:"green"}}></i> </h2>
             </div>
 
