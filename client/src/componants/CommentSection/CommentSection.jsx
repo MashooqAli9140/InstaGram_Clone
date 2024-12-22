@@ -10,7 +10,7 @@ const CommentSection = () => {
   const [newComment, setnewComment] = useState("");
   const [allcomments, setAllComments] = useState([]);
   const [commentedBy, setCommentedBY] = useState([]);
-  const [ cmntLike , setcmntlike ] = useState();
+  const [ cmntLike , setcmntlike ] = useState([]);
   const [ heartcolor , setheartcolor ] = useState(false);
   const [singleUserData, setsingleUserData] = useState();
   const [userProfile, setuserprofile] = useState("");
@@ -80,6 +80,7 @@ const CommentSection = () => {
         );
         setAllComments(response.data.post.comment);
         setCommentedBY(response.data.post.commentedBy);
+        setcmntlike(response.data.post.commentlikeby)
         return response.status;
       } catch (error) {
         return error.msge;
@@ -194,7 +195,7 @@ const CommentSection = () => {
                   {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}           
                 </div>
                 <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e , index , loginUser , post_id ) }>
-                <i class="fa-regular fa-heart fa-1x" style={{ color: cmntLike === index && heartcolor ? " red " : "white"}}> </i> 
+                <i class="fa-regular fa-heart fa-1x" style={{ color: cmntLike.includes(loginUser) &&  cmntLike.includes(index) ? "red" : "white" }}> </i> 
                 </button>
               </div>
             </div>
