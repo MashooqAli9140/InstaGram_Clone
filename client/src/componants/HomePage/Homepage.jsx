@@ -14,6 +14,7 @@ const Homepage = () => {
   const [loginlink, setloginlink] = useState("none");
   const [signuplink, setsignuplink] = useState("flex");
   const [signupdone , setsignupdone] = useState(false);
+  const [ loading , setLoading ] = useState(true);
 
   const navigate = useNavigate();
 
@@ -51,6 +52,15 @@ const Homepage = () => {
   //SENDING LOGIN REQ WITH EMAIL AND PASSWORD
   async function LoginRequest(e) {
     e.preventDefault();
+    if(loading)
+      {
+       return (
+         <div id="loading-screen">
+         <h2> Login request sent...</h2>
+         {/* Optional: Add a spinner or loading animation here */}
+       </div>
+       )
+      }
     if (!email || !password) alert("please fill all details");
 
     const Logindata = {
@@ -79,8 +89,11 @@ const Homepage = () => {
       setpassword("");
       alert("please check details or signup again");
     }
+    finally{
+      setLoading(false);
+    }
   }
-
+  
   return (
     <div id="signuppageBG">
       <div id="signupOuterdiv">
