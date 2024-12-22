@@ -12,6 +12,34 @@ const CommentSection = () => {
   const [commentedBy, setCommentedBY] = useState([]);
   const [ cmntLike , setcmntlike ] = useState();
   const [ heartcolor , setheartcolor ] = useState(false);
+  const [singleUserData, setsingleUserData] = useState();
+  const [userProfile, setuserprofile] = useState("");
+
+
+  //GETT USER DETAILS
+  useEffect(() => {
+    async function GetSingleUser() {
+      try {
+        const response = await axios.get(
+          `https://instagram-clone-by-faiz.onrender.com/single-user/${username}`
+        );
+        setuserprofile(response.data.SingleUser.image);
+        setsingleUserData(response.data.SingleUser);
+        return response.status;
+      } catch (error) {
+        return error;
+      }
+    }
+    GetSingleUser();
+  }, [username]);
+
+
+
+
+
+
+
+
 
   // SEND NEW COMMENT TO POST AND ADD IT TO DB
   async function SendNewComment(e, post_id, commentedBy, newComment) {
@@ -109,7 +137,7 @@ const CommentSection = () => {
             }}
           >
             <div id="post-profile">
-              <img src={DP} id="postprofile-img" alt="porfile pic" />
+              <img src={ userProfile ? `https://instagram-clone-by-faiz.onrender.com${userProfile}` : DP} id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="caption-section">
               <p style={{ color: "white" }}>
