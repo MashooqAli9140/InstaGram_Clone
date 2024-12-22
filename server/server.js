@@ -349,6 +349,36 @@ app.post("/posts/new-comment", async (req, res) => {
   }
 });
 
+//GETTING COMMENT LIKE REQ
+app.post("/posts/new-comment/:likedcommentindex/:loginUser/:post_id", async (req, res) => {
+  const { post_id, likedcommentindex, loginUser } = req.params;
+  if ((!post_id || !likedcommentindex, !loginUser))
+    return res
+      .status(400)
+      .json({ msge: "something missing please check , id or index of cmnt" });
+
+  try {
+    //first find post in which we want to add like to cmnt
+    const FindPost = await newpost.findById(post_id);
+    if (!FindPost) return res.status(404).json({ msge: "Post not found" });
+    //IF POST IS FOUND THEN ADD NEW COMMENT TO POST COMMENT ARRAY
+    FindPost.commentlikeby.push(loginUser);
+    FindPost.commentlikeby.push(likedcommentindex);
+    await FindPost.save(); //AFTER PUSHING THE NEW like THEN SAVE
+
+    return res
+      .status(200)
+      .json({ msge: "cmnt like succes and added to db", POST: FindPost });
+  } catch (error) {
+    return res.status(500).json({ msge: "something went wrong when from BE" });
+  }
+});
+
+
+
+
+
+
 //getting req for post comment
 app.get("/posts/:id", async (req, res) => {
   const { id } = req.params;
