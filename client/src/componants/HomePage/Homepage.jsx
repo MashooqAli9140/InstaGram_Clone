@@ -200,7 +200,10 @@ const Homepage = () => {
                 setopensignupform("block"),
                   setopenloginform("none"),
                   setsignuplink("none"),
-                  setloginlink("flex");
+                  setloginlink("flex"),
+                  setusername(""),
+                  setemail(""),
+                  setpassword("");
               }}
             >
               {" "}
@@ -217,6 +220,9 @@ const Homepage = () => {
                   setopenloginform("block"),
                   setloginlink("none"),
                   setsignuplink("flex");
+                  setusername(""),
+                  setemail(""),
+                  setpassword("");
               }}
             >
               {" "}
