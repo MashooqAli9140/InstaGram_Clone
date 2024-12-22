@@ -90,8 +90,8 @@ const Homepage = () => {
             <div id="instahead">
               <h1>instagram</h1>
             </div>
-            <div id="instahead" style={{ display: signupdone ? "block" : "none" }}>
-              <h3> Sign up done <i class="fa-solid fa-check fa-2x" style={{ color:"green"}}></i> </h3>
+            <div id="instahead" style={{  display: signupdone ? "flex" : "none" , alignContent:'center', alignItems:"center" }}>
+              <h2> Sign up done <i class="fa-solid fa-check fa-2x" style={{ color:"green"}}></i> </h2>
             </div>
 
             <form onSubmit={(e) => LoginRequest(e)}>
