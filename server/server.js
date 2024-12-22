@@ -372,11 +372,10 @@ app.post("/posts/new-comment/:likedcommentindex/:loginUser/:post_id", async (req
             (index) => index != likedcommentindex
           );
         } //IF NOT LIKES THEN ADD NEW USERNAME IN LIKEDBY ARRAY AND INCREASE LIKE COUNT
-        else {
          //IF POST IS FOUND THEN ADD NEW COMMENT like TO commentlikeby
          FindPost.commentlikeby.push(loginUser);
          FindPost.commentlikeby.push(likedcommentindex);
-        }
+  
         await FindPost.save(); //AFTER PUSHING THE NEW like THEN SAVE
 
     return res
