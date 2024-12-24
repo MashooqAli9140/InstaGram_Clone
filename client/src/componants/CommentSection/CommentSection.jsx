@@ -33,7 +33,7 @@ const CommentSection = () => {
       }
     }
     GetSingleUser();
-  }, [singleUserData]);
+  }, []);
 
 console.log( "these are liked comments", likedcomments )
 
@@ -89,7 +89,7 @@ console.log( "these are liked comments", likedcomments )
       }
     }
     FetchPostComments(post_id);
-  }, []);
+  }, [singleUserData]);
 
 
   // //WHEN SOMEONE LIKES THE COMMENT
@@ -109,7 +109,6 @@ console.log( "these are liked comments", likedcomments )
             "Content-type": "application/json",
           },
         })
-        alert( "comment liked");
         return response.status
     } catch (error) {
       console.log(error , "error while liking the cmnt");
@@ -197,7 +196,12 @@ console.log( "these are liked comments", likedcomments )
                   {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}           
                 </div>
                 <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e, comment , loginUser ) }>
-                <i class="fa-regular fa-heart fa-1x" style={{ color: likedcomments.includes(comment) ? "red" : "white" }}> </i> 
+                <i class="fa-regular fa-heart fa-1x"
+                style={{
+
+                transform:likedcomments.includes(comment) ? "scale(1.2)" : "scale(1)",
+                color: likedcomments.includes(comment) ? "red" : "white" }}> </i> 
+                
                 </button>
               </div>
             </div>
