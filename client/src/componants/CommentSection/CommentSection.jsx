@@ -91,14 +91,7 @@ console.log( "these are liked comments", likedcomments )
     FetchPostComments(post_id);
   }, [singleUserData]);
 
-
-  // //WHEN SOMEONE LIKES THE COMMENT
-  // function likecomment( e , index ){
-  //   e.preventDefault();
-  //   setcmntlike(index);
-  //   setheartcolor( (prev) => !prev )
-  // }
-
+  
   //WHEN SOMEONE LIKES THE COMMENT
  async function likecomment( e , comment , loginUser ){
     e.preventDefault();
