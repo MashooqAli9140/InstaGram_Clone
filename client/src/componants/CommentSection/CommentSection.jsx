@@ -14,6 +14,7 @@ const CommentSection = () => {
   const [ heartcolor , setheartcolor ] = useState(false);
   const [singleUserData, setsingleUserData] = useState();
   const [userProfile, setuserprofile] = useState("");
+  const likedComments = singleUserData.likedcomments;
 
 
   //GETT USER DETAILS
@@ -195,7 +196,7 @@ const CommentSection = () => {
                   {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}           
                 </div>
                 <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e, comment , loginUser ) }>
-                <i class="fa-regular fa-heart fa-1x" style={{ color: cmntLike.includes(loginUser) &&  cmntLike.includes(index) ? "red" : "white" }}> </i> 
+                <i class="fa-regular fa-heart fa-1x" style={{ color: likedComments.includes(comment) ? "red" : "white" }}> </i> 
                 </button>
               </div>
             </div>
