@@ -370,8 +370,10 @@ app.post("/add-liked-comment-/:comment/:loginUser", async (req, res) => {
           FindUser.likedcomments = FindUser.likedcomments.filter(
             (comment) => comment != comment
           );
+        }
+        else{
+          FindUser.likedcomments.push(comment);
         } 
-        FindUser.likedcomments.push(comment);
         await FindUser.save(); //AFTER PUSHING THE NEW like THEN SAVE
 
     return res
