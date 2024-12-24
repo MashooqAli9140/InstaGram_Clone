@@ -368,7 +368,7 @@ app.post("/add-liked-comment-/:comment/:loginUser", async (req, res) => {
         //if already liked then
         if (alreadyLiked) {
           FindUser.likedcomments = FindUser.likedcomments.filter(
-            (comment) => comment != comment
+            ( likedcomment ) => likedcomment  !== comment
           );
         }
         else{
