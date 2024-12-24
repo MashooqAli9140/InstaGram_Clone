@@ -364,22 +364,19 @@ app.post("/posts/new-comment/:comment/:loginUser", async (req, res) => {
     
     
     // second check if user already like the post or not
-    const alreadyLiked = FindUser.commentlikeby.includes(loginUser);
+    const alreadyLiked = FindUser.likedcomments.includes(comment);
         //if already liked then
         if (alreadyLiked) {
-          FindPost.commentlikeby = FindPost.commentlikeby.filter(
-            (index) => index != likedcommentindex
+          FindUser.likedcomments = FindUser.likedcomments.filter(
+            (comment) => comment != comment
           );
-        } //IF NOT LIKES THEN ADD NEW USERNAME IN LIKEDBY ARRAY AND INCREASE LIKE COUNT
-         //IF POST IS FOUND THEN ADD NEW COMMENT like TO commentlikeby
-         FindPost.commentlikeby.push(loginUser);
-         FindPost.commentlikeby.push(likedcommentindex);
-  
-        await FindPost.save(); //AFTER PUSHING THE NEW like THEN SAVE
+        } 
+        FindUser.likedcomments.push(comment);
+        await FindUser.save(); //AFTER PUSHING THE NEW like THEN SAVE
 
     return res
       .status(200)
-      .json({ msge: "cmnt like succes and added to db", POST: FindPost });
+      .json({ msge: "cmnt like succes and added to db", userdata: FindUser });
   } catch (error) {
     return res.status(500).json({ msge: "something went wrong when from BE" });
   }
