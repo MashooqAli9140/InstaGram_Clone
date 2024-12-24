@@ -350,22 +350,21 @@ app.post("/posts/new-comment", async (req, res) => {
 });
 
 //GETTING COMMENT LIKE REQ
-app.post("/posts/new-comment/:likedcommentindex/:loginUser/:post_id", async (req, res) => {
-  const { post_id, likedcommentindex, loginUser } = req.params;
-  if ((!post_id || !likedcommentindex, !loginUser))
+app.post("/posts/new-comment/:comment/:loginUser", async (req, res) => {
+  const { comment, loginUser } = req.params;
+  if (( !comment, !loginUser))
     return res
       .status(400)
-      .json({ msge: "something missing please check , id or index of cmnt" });
+      .json({ msge: "something missing please check , cmnt or userid" });
 
   try {
-    //first find post in which we want to add like to cmnt
-    const FindPost = await newpost.findById(post_id);
-    if (!FindPost) return res.status(404).json({ msge: "Post not found" });
-
-    //if comment is already like then remove same user and index from comment like by array
+    //first find user who liked the cmnt
+    const FindUser = await UsersignupData.findOne({ username: loginUser }); // fetching single user data
+    if (!FindUser) return res.status(404).json({ msge: "user not found for saving cmnt" });
+    
     
     // second check if user already like the post or not
-    const alreadyLiked = FindPost.commentlikeby.includes(loginUser);
+    const alreadyLiked = FindUser.commentlikeby.includes(loginUser);
         //if already liked then
         if (alreadyLiked) {
           FindPost.commentlikeby = FindPost.commentlikeby.filter(
