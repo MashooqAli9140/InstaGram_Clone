@@ -32,7 +32,7 @@ const CommentSection = () => {
       }
     }
     GetSingleUser();
-  }, [username]);
+  }, [singleUserData]);
 
 
 
