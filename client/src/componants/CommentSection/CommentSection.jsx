@@ -27,9 +27,8 @@ const CommentSection = () => {
         setuserprofile(response.data.SingleUser.image);
         setsingleUserData(response.data.SingleUser);
         setlikedcomments(response.data.SingleUser.likedcomments);
-        return response.status;
       } catch (error) {
-        return error;
+        console.error("Failed to fetch user details:", error);
       }
     }
     GetSingleUser();
@@ -82,7 +81,7 @@ const CommentSection = () => {
       }
     }
     FetchPostComments(post_id);
-  }, []);
+  }, [likecomment] );
 
   
   //WHEN SOMEONE LIKES THE COMMENT
