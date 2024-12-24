@@ -14,7 +14,7 @@ const CommentSection = () => {
   const [ heartcolor , setheartcolor ] = useState(false);
   const [singleUserData, setsingleUserData] = useState();
   const [userProfile, setuserprofile] = useState("");
-  const likedComments = singleUserData.likedcomments;
+  const [ likedcomments , setlikedcomments] = useState([]); 
 
 
   //GETT USER DETAILS
@@ -26,6 +26,7 @@ const CommentSection = () => {
         );
         setuserprofile(response.data.SingleUser.image);
         setsingleUserData(response.data.SingleUser);
+        setlikedcomments(response.data.SingleUser.likedcomments);
         return response.status;
       } catch (error) {
         return error;
@@ -34,7 +35,7 @@ const CommentSection = () => {
     GetSingleUser();
   }, [singleUserData]);
 
-
+console.log( "these are liked comments", likedcomments )
 
 
 
@@ -196,7 +197,7 @@ const CommentSection = () => {
                   {/* USING INDEX FOR GETTING CORRECT USERNAME FROM COMMENTEDBY ARRAY*/}           
                 </div>
                 <button style={{ background:"none", border:"none", outline:"none"}} onClick={ ( e ) => likecomment( e, comment , loginUser ) }>
-                <i class="fa-regular fa-heart fa-1x" style={{ color: likedComments.includes(comment) ? "red" : "white" }}> </i> 
+                <i class="fa-regular fa-heart fa-1x" style={{ color: likedcomments.includes(comment) ? "red" : "white" }}> </i> 
                 </button>
               </div>
             </div>
