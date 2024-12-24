@@ -5,17 +5,15 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-  const NewpostCard = () => {
+const NewpostCard = () => {
   const { loginUser } = useParams();
   const [allPosts, setallPosts] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true); // Loading state
 
-
   //CREATE FUNCTION FOR LIKE BTN WHEN SOMEONE CLICKS ON POST LIKE BTN
-  async function LikebtnClicked(e, post_id, loginUser ) {
+  async function LikebtnClicked(e, post_id, loginUser) {
     e.preventDefault();
-
 
     const PostLikedBY = {
       id: post_id,
@@ -40,13 +38,14 @@ import { useNavigate } from "react-router-dom";
     }
   }
 
-
-
   //make req for getting all the post data
   useEffect(() => {
     async function GetAllPost() {
       try {
-        const response = await axios.get("https://instagram-clone-by-faiz.onrender.com/allpost", {});
+        const response = await axios.get(
+          "https://instagram-clone-by-faiz.onrender.com/allpost",
+          {}
+        );
         setallPosts(response.data.allPosts);
         console.log(
           "this is response from all posts-->",
@@ -55,13 +54,11 @@ import { useNavigate } from "react-router-dom";
         return response.status;
       } catch (error) {
         return error;
-      }
-      finally {
+      } finally {
         setLoading(false); // Set loading to false after fetching
       }
     }
     GetAllPost();
-  
   }, [LikebtnClicked]);
 
   if (loading) {
@@ -72,10 +69,6 @@ import { useNavigate } from "react-router-dom";
       </div>
     );
   }
-
-
-
-
 
   //when someone clicks on comment btn then this function will run
   async function ShowCommentSection(e, post_id, username, loginUser, caption) {
@@ -90,11 +83,17 @@ import { useNavigate } from "react-router-dom";
           {/* // USERNAME SECTION  */}
           <div id="post-username-section">
             <div id="post-profile">
-              <img src= { DP } id="postprofile-img" alt="porfile pic" />
+              <img src={DP} id="postprofile-img" alt="porfile pic" />
             </div>
             <div id="post-username-editbtn">
-              <div style={{ flex:"1"}}>
-              <p> <Link to= { `/user-profile-page/${post.username}/${loginUser}` } > {post.username} </Link>  </p>
+              <div style={{ flex: "1" }}>
+                <p>
+                  {" "}
+                  <Link to={`/user-profile-page/${post.username}/${loginUser}`}>
+                    {" "}
+                    {post.username}{" "}
+                  </Link>{" "}
+                </p>
               </div>
               <h2> --- </h2>
             </div>
@@ -104,7 +103,11 @@ import { useNavigate } from "react-router-dom";
           <div id="post-img-div">
             {/* //always put BE server port like BE server running on 3500 */}
             <img
-              src={ post.image ? `https://instagram-clone-by-faiz.onrender.com${post.image}` : DP }
+              src={
+                post.image
+                  ? `https://instagram-clone-by-faiz.onrender.com${post.image}`
+                  : DP
+              }
               id="post-img"
               alt="post-img"
             />
@@ -115,7 +118,7 @@ import { useNavigate } from "react-router-dom";
             <div id="like-cmnt-section">
               <button
                 id="like-btn"
-                onClick={(e) => LikebtnClicked(e, post._id, loginUser  )}
+                onClick={(e) => LikebtnClicked(e, post._id, loginUser)}
                 style={{
                   cursor: "pointer",
                   background: "none",
