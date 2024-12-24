@@ -33,14 +33,7 @@ const CommentSection = () => {
       }
     }
     GetSingleUser();
-  }, []);
-
-console.log( "these are liked comments", likedcomments )
-
-
-
-
-
+  }, [singleUserData]);
 
 
   // SEND NEW COMMENT TO POST AND ADD IT TO DB
@@ -89,7 +82,7 @@ console.log( "these are liked comments", likedcomments )
       }
     }
     FetchPostComments(post_id);
-  }, [singleUserData]);
+  }, []);
 
   
   //WHEN SOMEONE LIKES THE COMMENT
