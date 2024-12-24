@@ -81,8 +81,7 @@ const CommentSection = () => {
       }
     }
     FetchPostComments(post_id);
-    likecomment();
-  }, [] );
+  }, [likedcomments] );
 
   
   //WHEN SOMEONE LIKES THE COMMENT
