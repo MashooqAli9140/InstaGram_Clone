@@ -361,7 +361,7 @@ const LoginUser = () => {
             {" "}
             <i class="fa-solid fa-magnifying-glass fa-2x"></i>{" "}
           </a>
-          <a href="">
+          <a href= { `/reels/${loginUser}`}>
             {" "}
             <i class="fa-solid fa-play fa-2x"></i>{" "}
           </a>
