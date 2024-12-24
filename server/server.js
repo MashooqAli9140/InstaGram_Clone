@@ -350,7 +350,7 @@ app.post("/posts/new-comment", async (req, res) => {
 });
 
 //GETTING COMMENT LIKE REQ
-app.post("/posts/new-comment/:comment/:loginUser", async (req, res) => {
+app.post("/add-liked-comment-/:comment/:loginUser", async (req, res) => {
   const { comment, loginUser } = req.params;
   if (( !comment, !loginUser))
     return res
