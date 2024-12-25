@@ -95,7 +95,7 @@ const NewpostCard = () => {
                   </Link>{" "}
                 </p>
               </div>
-              <div style={{ display: post.username === loginUser ? "block" : "none" }}> <a href= { `/edit-post/${post._id}` } > edit </a> </div>
+              <div style={{ display: post.username === loginUser ? "block" : "none" }}> <a href= { `/edit-post/${post.newpostText}/${post._id}` } > edit </a> </div>
             </div>
           </div>
 
