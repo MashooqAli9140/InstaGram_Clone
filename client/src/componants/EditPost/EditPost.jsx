@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const EditPost = () => {
   const { posttext , id } = useParams();
-  const [newpostText, setnewpostText] = useState("posttext"); 
+  const [newpostText, setnewpostText] = useState(posttext); 
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
   async function SendNewPost(e) {
