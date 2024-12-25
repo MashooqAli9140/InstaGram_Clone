@@ -27,14 +27,6 @@ app.use('/images', cors(), express.static('newpostuploads'));
 
 
 
-
-
-
-
-
-
-
-
 // Secret key for JWT, stored in environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
 
