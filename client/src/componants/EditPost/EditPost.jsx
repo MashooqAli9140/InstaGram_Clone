@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react';
 
 const EditPost = () => {
   const [newpostText, setnewpostText] = useState("");
@@ -24,7 +25,7 @@ const EditPost = () => {
     }
   }
 
-  
+
   return (
     <div>
               <div
