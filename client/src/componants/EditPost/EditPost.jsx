@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 const EditPost = () => {
   const [newpostText, setnewpostText] = useState(""); 
   const { posttext , id } = useParams();
-  setnewpostText(posttext);
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
   async function SendNewPost(e) {
@@ -74,7 +73,7 @@ const EditPost = () => {
                   </div> */}
                   <textarea
                     onChange={(e) => setnewpostText(e.target.value)}
-                    value={newpostText}
+                    value={posttext}
                     name="new-post-text"
                     id="textarea"
                     placeholder="Type something..."
