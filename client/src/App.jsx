@@ -4,6 +4,7 @@ import LoginUser from "./componants/HomePage/LoginUserPage/LoginUser";
 import CommentSection from "./componants/CommentSection/CommentSection";
 import UserProfile from "./componants/UserProfile/UserProfile";
 import EditProfile from "./componants/HomePage/LoginUserPage/EditProfile.jsx";
+import EditPost from "./componants/EditPost/EditPost.jsx";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           element={<UserProfile />}
         />
         <Route path="edit-profile/:username" element={<EditProfile />} />        
+        <Route path="edit-post/:id" element={<EditPost />} />        
       </Routes>
     </BrowserRouter>
   );
