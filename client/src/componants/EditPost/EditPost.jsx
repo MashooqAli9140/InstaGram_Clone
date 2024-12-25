@@ -1,9 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
+
 
 const EditPost = () => {
-  const [newpostText, setnewpostText] = useState("");
-
+  const [newpostText, setnewpostText] = useState(""); 
+  const { posttext , id } = useParams();
+  setnewpostText(posttext);
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
   async function SendNewPost(e) {
@@ -48,7 +51,7 @@ const EditPost = () => {
                     ></i>{" "}
                   </button>
                   <div>
-                    <h2> New Post </h2>
+                    <h2> Edit Post </h2>
                   </div>
                   <button
                     onClick={(e) => SendNewPost(e)}
@@ -62,7 +65,7 @@ const EditPost = () => {
                     }}
                   >
                     {" "}
-                    Share{" "}
+                    Update{" "}
                   </button>
                 </div>
                 <div id="newpost-textarea">
