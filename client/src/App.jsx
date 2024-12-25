@@ -4,7 +4,6 @@ import LoginUser from "./componants/HomePage/LoginUserPage/LoginUser";
 import CommentSection from "./componants/CommentSection/CommentSection";
 import UserProfile from "./componants/UserProfile/UserProfile";
 import EditProfile from "./componants/HomePage/LoginUserPage/EditProfile.jsx";
-import VideoSection from "./componants/VideoSection/VideoSection.jsx";
 
 function App() {
   return (
@@ -20,10 +19,7 @@ function App() {
           path="user-profile-page/:username/:myname"
           element={<UserProfile />}
         />
-        <Route path="edit-profile/:username" element={<EditProfile />} />
-
-        <Route path="/reels/:username" element={<VideoSection />} />
-        
+        <Route path="edit-profile/:username" element={<EditProfile />} />        
       </Routes>
     </BrowserRouter>
   );
