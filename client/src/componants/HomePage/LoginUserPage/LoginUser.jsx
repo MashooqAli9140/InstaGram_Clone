@@ -251,7 +251,7 @@ const LoginUser = () => {
         <div style={{ display: `${opedashboard}` }}>
           <div id="dashboard-Navbar">
             <div id="navlogo">
-              <h1 style={{ fontFamily: "allura , cursive", fontSize: "36px" }}>
+              <h1 style={{ fontSize: "36px" }}>
                 Instagram
               </h1>
             </div>
