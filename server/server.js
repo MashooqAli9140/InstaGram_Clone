@@ -444,6 +444,32 @@ app.put("/edit-post" , async( req , res ) => {
 })
 
 
+//delete req comes
+app.delete("/delete-post/:id" , async( req , res ) => {
+  const{ id  } = req.params;
+
+  if( !id ) return res.status(404).json({"msge":" id not get"});
+
+  try {
+  //lets find the post by id
+  let findpost  = await newpost.findByIdAndDelete( id );
+ //  await findpost.save(); 
+  return res.status(200).json({"msge":"post deleted success" , editedpost: findpost })  
+  } catch (error) {
+    return res.status(400).json({msge:"something went wronmg when deleting" , error: error.message })
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
 // sending index.html file for all routes
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
