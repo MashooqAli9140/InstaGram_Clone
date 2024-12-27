@@ -34,6 +34,34 @@ const EditPost = () => {
   }
 
 
+    //send delete post re
+    async function  DeletePost(e,id) {
+      e.preventDefault();
+     
+      if(  !window.confirm("are you sure to delete this post ?") )
+      {
+         return;
+      }
+  
+  
+      try {
+        const response = await axios.delete(
+          `https://instagram-clone-by-faiz.onrender.com/delete-post/${id}`,
+          {
+            headers: {},
+          }
+        );
+        alert("Delete request sent and updated");
+        setnewpostText("");
+        navigate(`/${loginUser}`)
+        return response.status;
+      } catch (error) {
+       console.log( error.message )
+      }
+    }
+  
+
+
   return (
     <div style={{ padding:"20px 20px 20px 20px", maxWidth:"500px" , margin:" 0 auto 0"}} >
               <div
@@ -88,6 +116,10 @@ const EditPost = () => {
                   >
                     {" "}
                   </textarea>
+                </div>
+
+                <div style={{ width:"100%", padding:"10px 10px 10px 10px" , textAlign:"center", marginTop:"20px"}}>
+                <button onClick={ (e) => DeletePost(e , id ) } style={{ borderRadius:"25px", padding: "10px 30px 10px 30px", border:"none", outline: "none" , background:'red' , color:"white" , fontSize:"18px"}}> Delete Post </button>
                 </div>
       
               </div>
