@@ -92,7 +92,7 @@ const UserProfile = () => {
               
             <div id="profile-left">
                 <div id="profile-img-div">
-                       <img src= {DP} id="profile-img"  alt="profile-pic" />
+                <img src= {`https://instagram-clone-by-faiz.onrender.com${UserProfile}`} id="profile-img"  alt="profile-pic" />
                 </div>
             </div>
 
