@@ -21,7 +21,7 @@ function App() {
           element={<UserProfile />}
         />
         <Route path="edit-profile/:username" element={<EditProfile />} />        
-        <Route path="edit-post/:posttext/:id" element={<EditPost />} />        
+        <Route path="edit-post/:posttext/:id/:loginUser" element={<EditPost />} />        
       </Routes>
     </BrowserRouter>
   );
