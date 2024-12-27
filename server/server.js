@@ -20,35 +20,20 @@ connectDB();
 app.use(bodyparser.json());
 
 
+
 // Allow all origins
 app.use('/images', cors(), express.static('newpostuploads'));
 // // Enable CORS with specified origin for frontend communication
 // app.use(cors({ origin: "https://instagram-clone-by-faiz.onrender.com" }));
 
 
-
 // Secret key for JWT, stored in environment variables
 const JWT_SECRET = process.env.JWT_SECRET;
-
 
 // Serve static files from the `dist` directory
 app.use(express.static(path.join(__dirname, "dist" )));
 
 
-// // Set security headers
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"],
-//       fontSrc: [
-//         "'self'",
-//         "https://fonts.googleapis.com",
-//         "https://fonts.gstatic.com",
-//       ],
-//     },
-//   })
-// );
-// Set security headers
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -70,12 +55,10 @@ app.use(
 );
 
 
-
-
 //import new post uploads folder as stactic file for showing post images
 app.use(
   "/newpostuploads",
-  express.static(path.join(__dirname, "newpostuploads"))
+  cors(), express.static(path.join(__dirname, "newpostuploads"))
 );
 
 // Set up multer storage configuration
@@ -95,6 +78,7 @@ const upload = multer({ storage: storage });
 //import new post uploads folder as stactic file for showing post images
 app.use(
   "/newProfileuploads",
+  cors(),
   express.static(path.join(__dirname, "newProfileuploads"))
 );
 
@@ -439,6 +423,26 @@ app.post("/follow-req", async (req, res) => {
       });
   }
 });
+
+app.put("/edit-post" , async( req , res ) => {
+  const{ id , newpostText } = req.body;
+
+  if( !id || !newpostText ) return res.status(404).json({"msge":" id or edited text not get"});
+
+  try {
+  //lets find the post by id
+  let findpost  = await newpost.findById( id );
+  if( !findpost ) return res.status(404).json({"msge":"post not found for make edit req"});
+
+  //now if post is found then edit replace the new text with old text;
+  findpost.newpostText = newpostText;
+  await findpost.save(); 
+  return res.status(200).json({"msge":"post edited success" , editedpost: findpost })  
+  } catch (error) {
+    return res.status(400).json({msge:"something went wronmg when updating" , error: error.message })
+  }
+})
+
 
 // sending index.html file for all routes
 app.get("/*", (req, res) => {
