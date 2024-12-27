@@ -1,41 +1,47 @@
 import React from 'react'
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const EditPost = () => {
-  const { posttext , id } = useParams();
-  const [newpostText, setnewpostText] = useState(posttext); 
+  const { posttext , id , loginUser } = useParams();
+  const [newpostText, setnewpostText] = useState(posttext);
+  const navigate = useNavigate();
 
   //SEND NEW POST FUNCTION FOR SENDING NEW POST DATA TO BE INLCUDING IMAGE
-  async function SendNewPost(e) {
+  async function SendEditPost(e) {
     e.preventDefault();
+    const formdata = {
+          id,
+          newpostText
+    }
     try {
-      const response = await axios.post(
-        "https://instagram-clone-by-faiz.onrender.com/new-post",
-        formdata,
+      const response = await axios.put(
+        "https://instagram-clone-by-faiz.onrender.com/edit-post",formdata,
         {
           headers: {},
         }
       );
-      alert("new post uploaded");
+      alert("post updated");
       setnewpostText("");
-      window.location.reload();
+      navigate(`/${loginUser}`)
       return response.status;
     } catch (error) {
-      alert("error while sending new post please check console");
+     console.log( error.message )
     }
   }
 
 
   return (
-    <div>
+    <div style={{ padding:"20px 20px 20px 20px", maxWidth:"500px" , margin:" 0 auto 0"}} >
               <div
                 id="new-post-card"
-                style={{ height: "100vh"}}
+                style={{ height: "100vh" , border:"1px solid white" }}
               >
                 <div id="new-post-nav">
                   <button
+                    onClick={ () => navigate(`/${loginUser}`)}
                     style={{
                       cursor: "pointer",
                       background: "none",
@@ -53,7 +59,7 @@ const EditPost = () => {
                     <h2> Edit Post </h2>
                   </div>
                   <button
-                    onClick={(e) => SendNewPost(e)}
+                    onClick={(e) => SendEditPost(e)}
                     style={{
                       cursor: "pointer",
                       fontWeight: "600",
@@ -71,7 +77,8 @@ const EditPost = () => {
                   {/* <div id="storyprofile">
                     <img loading="lazy" id="storyprofile_img" src={ !userProfile ? img :  `https://instagram-clone-by-faiz.onrender.com${userProfile}` } alt="profile_img" />
                   </div> */}
-                  <textarea
+                  <textarea 
+                    style={{ borderBottom:"1px solid grey"}}
                     onChange={(e) => setnewpostText(e.target.value)}
                     value={newpostText}
                     name="new-post-text"
