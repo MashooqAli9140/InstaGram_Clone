@@ -9,6 +9,7 @@ const UserProfile = () => {
   const { username, myname } = useParams();
   const [userDetails, setuserDetails] = useState([]);
   const [followbtn, setfollowbtn] = useState(false);
+  const [ UserProfile , setuserprofile ] = useState("");
 
   //GETT USER DETAILS
   useEffect(() => {
@@ -21,6 +22,7 @@ const UserProfile = () => {
           response.data.SingleUser.followby
         );
         setuserDetails(response.data.SingleUser.followby);
+        setuserprofile( response.data.SingleUser.image ); 
         return response.status;
       } catch (error) {
         console.log("error while fetching single user details", error);
