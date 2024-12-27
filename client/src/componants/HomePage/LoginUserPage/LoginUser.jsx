@@ -95,6 +95,8 @@ const LoginUser = () => {
   function Postundo() {
     setopenDashboard("block");
     setopenNewpostCard("none");
+    setselectImage(null);
+    alert("cancel upload and image deselected")
   }
 
   //HANDLING NEW POST IMAGE SELECTION
@@ -102,6 +104,7 @@ const LoginUser = () => {
     setselectImage(e.target.files[0]);
     setopenNewpostCard("block");
     setopenDashboard("none");
+    alert("image selected")
   }
 
   //HANDLING PROFILE PICTURE SELECTION
